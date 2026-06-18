@@ -127,10 +127,12 @@
   #work_history { margin-top: -2px; }
   .row.work_experience { position: relative; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-1.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; --bs-gutter-x: 0 !important; display: flex !important; align-items: center !important; }
   /* ── Coco: adjust --coco-x (right offset), --coco-y (bottom offset), --coco-scale ── */
-  .coco-sit { --coco-x: -209px; --coco-y: -187px; --coco-scale: 0.5; position: absolute; bottom: var(--coco-y); right: var(--coco-x); transform: scale(var(--coco-scale)); transform-origin: bottom right; pointer-events: none; display: block; z-index: 2147483647; }
+  /* coco-sit: natural size 721×715px. --coco-scale adjusts rendered width; height auto preserves ratio. */
+  /* bottom: --coco-y pins the image's bottom edge below the row's inner bottom (negative = below). */
+  .coco-sit { --coco-x: -209px; --coco-y: -187px; --coco-scale: 0.5; width: calc(721px * var(--coco-scale)); height: auto; position: absolute; bottom: var(--coco-y); right: var(--coco-x); pointer-events: none; display: block; z-index: 2147483647; }
   .client_content.container_content { text-align: center; }
   .work_content.container_content { text-align: center; }
-  .client_list_inner h2 { color: #ffffff !important; }
+  .client_list_inner h2 { color: #ffffff !important; font-size: 2.15rem !important; }
   .client_list { width: 100%; }
   .row.client_info { --bs-gutter-x: 0 !important; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-2.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; overflow: hidden; display: flex !important; align-items: center !important; margin-bottom: -0.2vh; }
   .client_list { margin-top: 0 !important; }
