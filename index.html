@@ -80,6 +80,8 @@
   .motto_content_heading { font-size: 6.875rem !important; width: 100% !important; margin-left: 0 !important; }
   @media (min-width: 1200px) { .motto_content_heading { font-size: 8.75rem !important; } }
   .frame-mobile, #js-btn_clipPath, footer#js-footer, .js-masker { display: none !important; }
+  body { overflow-x: hidden; }
+  .row.work_experience, .container { overflow: visible !important; }
   .videoPlayer.js-videoPlayer { background-image: url('./assets/backgrounds/bg-1.png') !important; background-size: cover !important; background-position: center !important; }
   .heading-mask--blue .heading-mask_el__masking { background-color: #6895D1 !important; }
   .heading-mask--yellow .heading-mask_el__masking { background-color: #F9EB55 !important; }
@@ -252,7 +254,7 @@
   var span = document.getElementById('typewriter-role');
   var cursor = document.querySelector('.typewriter-cursor');
   if (!span) return;
-  fetch('./assets/typewriter-words.txt').then(function(r){return r.text();}).then(function(txt){
+  fetch('/assets/typewriter-words.txt').then(function(r){return r.text();}).then(function(txt){
   var words = txt.split(/\r?\n/).map(function(w){return w.trim();}).filter(Boolean);
   var colors = ['#ff6ed8','#6ef5ff','#ffe96e','#6eff9e','#ff8c6e','#c86eff','#6eb8ff','#ff6e6e','#6effc8','#ffc46e','#ff6eb8'];
   var wi = 0, ci = words[0].length, del = true, paused = 50;
