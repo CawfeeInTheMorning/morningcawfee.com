@@ -79,7 +79,7 @@
   .motto_content_inner { width: 100%; max-width: 100%; }
   .motto_content_heading { font-size: 6.875rem !important; width: 100% !important; margin-left: 0 !important; }
   @media (min-width: 1200px) { .motto_content_heading { font-size: 8.75rem !important; } }
-  .frame-mobile, #js-btn_clipPath { display: none !important; }
+  .frame-mobile, #js-btn_clipPath, footer#js-footer { display: none !important; }
   .videoPlayer.js-videoPlayer { background-image: url('./assets/backgrounds/bg-1.png') !important; background-size: cover !important; background-position: center !important; }
   .heading-mask--blue .heading-mask_el__masking { background-color: #6895D1 !important; }
   .heading-mask--yellow .heading-mask_el__masking { background-color: #F9EB55 !important; }
@@ -128,7 +128,7 @@
   .work_content.container_content { text-align: center; }
   .client_list_inner h2 { color: #ffffff !important; }
   .client_list { width: 100%; }
-  .row.client_info { --bs-gutter-x: 0 !important; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-2.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; overflow: hidden; display: flex !important; align-items: center !important; }
+  .row.client_info { --bs-gutter-x: 0 !important; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-2.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; overflow: hidden; display: flex !important; align-items: center !important; margin-bottom: -0.2vh; }
   .client_list { margin-top: 0 !important; }
   .hero_content_inner .hero-logo { height: auto; max-height: 16vh; width: auto; display: block; margin: 0 auto; }
   .header_menu_item.is-current .header_menu_item_link__deep { color: #E81215 !important; transition: color .3s ease; }
@@ -365,6 +365,18 @@
   window.addEventListener('scroll', updateActiveNav);
   window.addEventListener('resize', updateActiveNav);
   updateActiveNav();
+
+  // Trim extra page height so scroll stops at bottom of #contact
+  var _contactEl = document.querySelector('#contact.contact');
+  var _aboutEl = document.getElementById('about');
+  function trimScrollToContact() {
+    if (!_contactEl || !_aboutEl) return;
+    _aboutEl.style.marginBottom = '';
+    var extra = document.documentElement.scrollHeight - Math.round(_contactEl.getBoundingClientRect().bottom + window.scrollY);
+    if (extra > 0) _aboutEl.style.marginBottom = '-' + extra + 'px';
+  }
+  window.addEventListener('load', function() { setTimeout(trimScrollToContact, 400); });
+  window.addEventListener('resize', trimScrollToContact);
 
 })();
 </script>
