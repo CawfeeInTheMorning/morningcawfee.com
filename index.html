@@ -62,7 +62,8 @@
   html, body, .page-loading { background-color: #000000 !important; }
   html { font-size: 90% !important; }
   .text-dark { color: #000000 !important; }
-  :root { --screen-x: 10vw; }
+  :root { --screen-x: 14vw; }
+  .main-layer { position: relative !important; z-index: 1 !important; }
   .container { padding-left: var(--screen-x) !important; padding-right: var(--screen-x) !important; }
   .h1, h1 { font-size: 3.25rem !important; }
   @media (min-width: 768px) and (max-width: 1199.98px) { .h1, h1 { font-size: 4.25rem !important; } }
@@ -262,8 +263,8 @@
   var span = document.getElementById('typewriter-role');
   var cursor = document.querySelector('.typewriter-cursor');
   if (!span) return;
-  fetch(location.protocol==='file:'?'./assets/typewriter-words.txt':'/assets/typewriter-words.txt').then(function(r){return r.text();}).then(function(txt){
-  var words = txt.split(/\r?\n/).map(function(w){return w.trim();}).filter(Boolean);
+  var _twFallback = ['graphic designer','artist','ux designer','creative','ui designer','organizer','scrapper','pop enjoyer','content creator','coder','fidgeter'];
+  function _twStart(words) {
   var colors = ['#ff6ed8','#6ef5ff','#ffe96e','#6eff9e','#ff8c6e','#c86eff','#6eb8ff','#ff6e6e','#6effc8','#ffc46e','#ff6eb8'];
   var wi = 0, ci = words[0].length, del = true, paused = 50;
   function setColor(col) { span.style.color = col; if (cursor) cursor.style.color = col; }
@@ -275,7 +276,11 @@
     else { ci--; span.textContent = word.slice(0, ci); if (ci <= 0) { wi = (wi+1)%words.length; del = false; paused = 18; setColor(colors[wi]); } setTimeout(tick, 45); }
   }
   setTimeout(tick, 900);
-  });
+  }
+  fetch(location.protocol==='file:'?'./assets/typewriter-words.txt':'/assets/typewriter-words.txt')
+    .then(function(r){return r.text();})
+    .then(function(txt){var w=txt.split(/\r?\n/).map(function(s){return s.trim();}).filter(Boolean);_twStart(w.length?w:_twFallback);})
+    .catch(function(){_twStart(_twFallback);});
 })();
 </script>
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
