@@ -261,7 +261,7 @@
   var span = document.getElementById('typewriter-role');
   var cursor = document.querySelector('.typewriter-cursor');
   if (!span) return;
-  fetch('/assets/typewriter-words.txt').then(function(r){return r.text();}).then(function(txt){
+  fetch(location.protocol==='file:'?'./assets/typewriter-words.txt':'/assets/typewriter-words.txt').then(function(r){return r.text();}).then(function(txt){
   var words = txt.split(/\r?\n/).map(function(w){return w.trim();}).filter(Boolean);
   var colors = ['#ff6ed8','#6ef5ff','#ffe96e','#6eff9e','#ff8c6e','#c86eff','#6eb8ff','#ff6e6e','#6effc8','#ffc46e','#ff6eb8'];
   var wi = 0, ci = words[0].length, del = true, paused = 50;
