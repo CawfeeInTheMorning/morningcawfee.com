@@ -1,5 +1,5 @@
 graphic designer
-artist
+layout artist
 ux designer
 creative
 ui designer
