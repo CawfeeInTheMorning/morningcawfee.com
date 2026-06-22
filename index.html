@@ -94,12 +94,15 @@
   .scroll-paragraph-mask.is-masking .line { transform: translateY(0) !important; }
   .portfolio-chars { white-space: nowrap; overflow: visible; }
   .portfolio-chars .char { display: inline-block !important; transform: none !important; translate: none !important; }
-  .header { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0.75rem var(--screen-x) !important; width: 100% !important; background: transparent !important; box-sizing: border-box !important; height: auto !important; z-index: 9999 !important; mix-blend-mode: normal !important; }
-  .header-bar-bg { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: var(--header-bar-h, 5rem) !important; background: #0d0d0d !important; border-bottom: 1px solid rgba(255,255,255,0.18) !important; z-index: 9998 !important; pointer-events: none !important; mix-blend-mode: normal !important; }
-  .header_logo { position: static !important; left: auto !important; top: auto !important; margin: 0 !important; margin-top: 0.4rem !important; }
+  :root { --sidebar-w: 13rem; }
+  .header { display: flex !important; flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important; position: fixed !important; top: 0 !important; left: 0 !important; width: var(--sidebar-w) !important; height: 100vh !important; padding: 2rem 1.5rem !important; box-sizing: border-box !important; background: transparent !important; z-index: 9999 !important; mix-blend-mode: normal !important; }
+  .header-bar-bg { position: fixed !important; top: 0 !important; left: 0 !important; width: var(--sidebar-w) !important; height: 100vh !important; background: #0d0d0d !important; border-right: 1px solid rgba(255,255,255,0.18) !important; z-index: 9998 !important; pointer-events: none !important; mix-blend-mode: normal !important; }
+  .header_logo { position: static !important; left: auto !important; top: auto !important; margin: 0 0 2.5rem 0 !important; }
   .header_logo img { height: 3.5rem !important; width: auto !important; display: block !important; }
-  .header_menu { position: static !important; right: auto !important; top: auto !important; z-index: 501; }
-  .header_menu_list { display: flex !important; align-items: center !important; gap: 2rem !important; margin: 0 !important; padding: 0 !important; }
+  .header_menu { position: static !important; right: auto !important; top: auto !important; z-index: 501; width: 100% !important; }
+  .header_menu_list { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 0.6rem !important; margin: 0 !important; padding: 0 !important; }
+  .header_menu_item a { white-space: nowrap !important; }
+  .main-layer { margin-left: var(--sidebar-w) !important; }
   .socials.group {
     list-style: none;
     padding-left: 0;
@@ -394,15 +397,7 @@
   window.addEventListener('resize', updateActiveNav);
   updateActiveNav();
 
-  // Keep header-bar-bg height in sync with actual header height
-  var _headerEl = document.querySelector('.header');
-  function syncHeaderBar() {
-    if (!_headerEl) return;
-    document.documentElement.style.setProperty('--header-bar-h', _headerEl.offsetHeight + 'px');
-  }
-  window.addEventListener('load', syncHeaderBar);
-  window.addEventListener('resize', syncHeaderBar);
-  syncHeaderBar();
+  // Sidebar: no dynamic sync needed — bg uses 100vh via CSS
 
   // Trim extra page height so scroll stops at bottom of #contact
   var _contactEl = document.querySelector('#contact.contact');
