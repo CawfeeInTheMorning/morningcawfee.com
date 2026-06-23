@@ -128,7 +128,8 @@
   .header .sidebar-plus { font-size: 18px !important; font-weight: 700 !important; color: #ffffff; flex-shrink: 0; width: 1.5rem; display: inline-block; }
   .sidebar-title { font-size: 14px !important; font-weight: 700 !important; color: #ffffff; text-transform: uppercase; letter-spacing: 0.08em; }
   .sidebar-links-indent { padding-left: 1.5rem; }
-  .sidebar-socials { list-style: none !important; display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 0.5rem !important; margin: 0 !important; padding: 7px !important; }
+  .sidebar-socials { list-style: none !important; display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 0.5rem !important; margin: 0 !important; padding: 7px 7px 7px 0 !important; }
+  .sidebar-category--socials .sidebar-links-indent { padding-left: calc(1.5rem - 9px) !important; }
   .sidebar-social-item a { text-decoration: none !important; }
   .sidebar-social-item .header_menu_item_link { font-weight: 700 !important; text-transform: uppercase !important; }
   .sidebar-social-item .header_menu_item_link__deep { gap: 0.5rem !important; }
@@ -174,7 +175,7 @@
   .work { padding-bottom: 0 !important; }
   #work_history { margin-top: 50px; }
   /* ── Shared vars on parent so both coco-sit and crown-img can inherit them ── */
-  .row.work_experience { --coco-x: -36px; --coco-y: -150px; --coco-scale: 0.8; --crown-x: -80px; --crown-y: -150px; --crown-scale: 0.3; position: relative; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-1.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; --bs-gutter-x: 0 !important; display: flex !important; align-items: center !important; }
+  .row.work_experience { --coco-x: -36px; --coco-y: -150px; --coco-scale: 0.8; --crown-x: -80px; --crown-y: -120px; --crown-scale: 0.3; position: relative; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-1.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; --bs-gutter-x: 0 !important; display: flex !important; align-items: center !important; }
   .coco-sit { width: calc(721px * var(--coco-scale)); height: auto; position: absolute; bottom: var(--coco-y); right: var(--coco-x); pointer-events: none; display: block; z-index: 500; }
   /* crown: bottom anchored to coco top. +crown-y = up, +crown-x = right */
   .crown-img { --crown-rotation: 0deg; width: calc(400px * var(--crown-scale)); height: auto; position: absolute; bottom: calc(var(--coco-y) + 715px * var(--coco-scale) + var(--crown-y)); right: calc(var(--coco-x) + (721px * var(--coco-scale) - 400px * var(--crown-scale)) / 2 - var(--crown-x)); pointer-events: none; display: block; z-index: 501; animation: crown-float 2.5s ease-in-out infinite; }
