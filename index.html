@@ -106,10 +106,10 @@
   /* ── Nav item hover: red + sliding underline ── */
   .header_menu_item { overflow: visible !important; position: relative !important; }
   .header_menu_item:hover { z-index: 20 !important; }
-  .header_menu_item_inner { position: relative !important; display: block !important; line-height: 1.2 !important; }
+  .header_menu_item_inner { position: relative !important; display: block !important; line-height: 1.2 !important; clip-path: none !important; -webkit-clip-path: none !important; }
   .header_menu_item_link { font-size: 14px !important; font-weight: 400 !important; white-space: nowrap !important; }
   /* All sidebar text aligns with .sidebar-title left edge via sidebar-links-indent + --sidebar-text-offset */
-  :root { --sidebar-text-offset: 0px; }
+  :root { --sidebar-text-offset: 18px; }
   /* nav-num: absolute to the left; does NOT shift text */
   .header .nav-num { position: absolute !important; right: calc(100% + 0.35rem) !important; display: inline-flex !important; align-items: center !important; white-space: nowrap !important; }
   .header .nav-num .na, .header .nav-num .nh { font-family: sans-serif !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1 !important; }
