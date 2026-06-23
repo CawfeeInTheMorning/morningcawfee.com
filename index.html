@@ -122,6 +122,24 @@
   .sidebar-socials { list-style: none !important; display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 0.5rem !important; margin: 0 !important; padding: 7px !important; }
   .sidebar-social-item a { text-decoration: none !important; }
   .sidebar-social-item .header_menu_item_link { font-weight: 700 !important; text-transform: uppercase !important; }
+  /* ── Basement-style bordered chip items ── */
+  .header_menu_list li, .sidebar-socials li {
+    position: relative;
+    list-style: none !important;
+  }
+  .header_menu_list li::before, .sidebar-socials li::before {
+    content: '';
+    display: none;
+  }
+  .header_menu_item_link__deep, .sidebar-social-item .header_menu_item_link__deep {
+    display: inline-block !important;
+    border: 1px solid rgba(255,255,255,0.35) !important;
+    padding: 2px 7px !important;
+    line-height: 1.5 !important;
+  }
+  .header_menu_item:hover .header_menu_item_link__deep, .sidebar-social-item:hover .header_menu_item_link__deep {
+    border-color: rgba(255,255,255,0.7) !important;
+  }
   .sidebar-category-header { font-size: 14px; color: #ffffff; text-transform: uppercase; letter-spacing: 0.08em; }
   .main-layer { margin-left: var(--sidebar-w) !important; }
   .socials.group {
