@@ -88,6 +88,11 @@
   /* ── Cinnabuns: in footer/contact bottom. --cinnabuns-x/y offset, --cinnabuns-scale ── */
   .cinnabuns-img { --cinnabuns-x: 0px; --cinnabuns-y: 0px; --cinnabuns-scale: 0.5; width: calc(400px * var(--cinnabuns-scale)); height: auto; position: absolute; bottom: var(--cinnabuns-y); left: var(--cinnabuns-x); pointer-events: none; display: block; z-index: 2; }
   body { overflow-x: hidden; }
+  /* ── Scrollbar: target html (not body) so sticky is unaffected ── */
+  html::-webkit-scrollbar { width: 5px !important; display: block !important; }
+  html::-webkit-scrollbar-track { background: #000000 !important; }
+  html::-webkit-scrollbar-thumb { background: #E81215 !important; border-radius: 0 !important; }
+  html { scrollbar-width: thin !important; scrollbar-color: #E81215 #000000 !important; scrollbar-gutter: stable; }
   .row.work_experience, .container { overflow: visible !important; }
   .videoPlayer.js-videoPlayer { background-image: url('./assets/backgrounds/bg-1.png') !important; background-size: cover !important; background-position: center !important; }
   .heading-mask--blue .heading-mask_el__masking { background-color: #6895D1 !important; }
