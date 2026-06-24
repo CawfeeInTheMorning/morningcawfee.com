@@ -125,7 +125,7 @@
   .header_menu_item_link__deep::after { content: '' !important; position: absolute !important; bottom: 0 !important; left: 0 !important; width: 0 !important; height: 1px !important; background: #E81215 !important; transition: width 0.25s ease !important; }
   .header_menu_item:hover .header_menu_item_link__deep, .sidebar-social-item:hover .header_menu_item_link__deep { color: #E81215 !important; }
   .header_menu_item:hover .header_menu_item_link__deep::after, .sidebar-social-item:hover .header_menu_item_link__deep::after { width: 100% !important; }
-  .header_menu_item_link__active { display: block !important; position: absolute !important; top: calc(100% + 3px) !important; left: 0 !important; color: #ffffff !important; clip-path: inset(0 0 50% 0) !important; transform: translateY(-40%) !important; opacity: 0 !important; transition: transform 0.28s ease, opacity 0.2s ease !important; pointer-events: none !important; z-index: 10 !important; }
+  .header_menu_item_link__active { display: block !important; position: absolute !important; top: calc(100% + 3px) !important; left: 0 !important; color: #ffffff !important; clip-path: inset(50% 0 0 0) !important; transform: translateY(-40%) !important; opacity: 0 !important; transition: transform 0.28s ease, opacity 0.2s ease !important; pointer-events: none !important; z-index: 10 !important; }
   .header_menu_item:hover .header_menu_item_link__active { transform: translateY(0) !important; opacity: 1 !important; }
   /* sidebar category: + bullet + title row, links align with title */
   .sidebar-category { width: 100%; margin-bottom: 1.5rem; }
@@ -143,11 +143,11 @@
   .sidebar-social-item:hover .social-icon img { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg) brightness(0.9) !important; }
   footer#js-footer .social:hover img { filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg) brightness(0.9) !important; }
   .header_menu_list li, .sidebar-socials li { list-style: none !important; }
-  .main-layer { margin-left: 0 !important; flex: 1 !important; min-width: 0 !important; }
+  .main-layer { margin-left: 0 !important; flex: 1 !important; min-width: 0 !important; overflow-x: hidden !important; }
   /* ── Footer: full-width, flows after page-wrapper ── */
   footer#js-footer { display: block !important; position: relative !important; left: auto !important; bottom: auto !important; width: 100% !important; background: #000000 !important; border-top: 1px solid rgba(255,255,255,0.12) !important; mix-blend-mode: normal !important; }
   .footer-spacer { height: 100px !important; width: 100% !important; display: block !important; }
-  footer#js-footer .socials.group { position: relative !important; bottom: auto !important; left: auto !important; display: flex !important; flex-direction: row !important; justify-content: center !important; align-items: center !important; gap: 2rem !important; list-style: none !important; padding: 1.5rem !important; margin: 0 !important; }
+  footer#js-footer .socials.group { position: relative !important; bottom: auto !important; left: auto !important; display: flex !important; flex-direction: row !important; justify-content: center !important; align-items: center !important; gap: 2rem !important; list-style: none !important; padding: 4.5rem !important; margin: 0 !important; }
   footer#js-footer .socials.group img { width: 24px !important; height: 24px !important; }
   /* ── Fix desc item height matching social-label ── */
   .header_menu_item a { padding: 0 !important; line-height: 1 !important; }
@@ -189,7 +189,7 @@
   .work { padding-bottom: 0 !important; }
   #work_history { margin-top: 50px; }
   /* ── Shared vars on parent so both coco-sit and crown-img can inherit them ── */
-  .row.work_experience { --coco-x: -36px; --coco-y: -150px; --coco-scale: 0.8; --crown-x: -80px; --crown-y: -120px; --crown-scale: 0.3; position: relative; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-1.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; --bs-gutter-x: 0 !important; display: flex !important; align-items: center !important; }
+  .row.work_experience { --coco-x: 16px; --coco-y: -150px; --coco-scale: 0.8; --crown-x: -80px; --crown-y: -120px; --crown-scale: 0.3; position: relative; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-1.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; --bs-gutter-x: 0 !important; display: flex !important; align-items: center !important; }
   .coco-sit { width: calc(721px * var(--coco-scale)); height: auto; position: absolute; bottom: var(--coco-y); right: var(--coco-x); pointer-events: none; display: block; z-index: 500; }
   /* crown: bottom anchored to coco top. +crown-y = up, +crown-x = right */
   .crown-img { --crown-rotation: 0deg; width: calc(400px * var(--crown-scale)); height: auto; position: absolute; bottom: calc(var(--coco-y) + 715px * var(--coco-scale) + var(--crown-y)); right: calc(var(--coco-x) + (721px * var(--coco-scale) - 400px * var(--crown-scale)) / 2 - var(--crown-x)); pointer-events: none; display: block; z-index: 501; animation: crown-float 2.5s ease-in-out infinite; }
