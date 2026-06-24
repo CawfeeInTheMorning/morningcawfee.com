@@ -87,7 +87,8 @@
   .contact_link::before { background-image: none !important; }
   /* ── Cinnabuns: in footer/contact bottom. --cinnabuns-x/y offset, --cinnabuns-scale ── */
   .cinnabuns-img { --cinnabuns-x: 0px; --cinnabuns-y: 0px; --cinnabuns-scale: 0.5; width: calc(400px * var(--cinnabuns-scale)); height: auto; position: absolute; bottom: var(--cinnabuns-y); left: var(--cinnabuns-x); pointer-events: none; display: block; z-index: 2; }
-  body { overflow-x: hidden; }
+  html { max-width: 100%; }
+  body { max-width: 100%; overflow-x: hidden; }
   /* ── Fake scrollbar: fixed element, no overflow changes, sticky unaffected ── */
   #fake-scrollbar { position: fixed; right: 0; top: 0; width: 9px; height: 100vh; background: #000000; z-index: 2147483640; pointer-events: none; }
   #fake-scrollbar-thumb { position: absolute; width: 100%; background: #E81215; border-radius: 0; left: 0; }
