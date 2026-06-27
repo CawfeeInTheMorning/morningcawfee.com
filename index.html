@@ -189,21 +189,21 @@
   #work_history .heading-mask_el { padding-top: 1.875rem !important; padding-bottom: 1.875rem !important; }
   .row.work_heading.work_history_heading { margin-top: 2rem !important; }
   /* ── Shared vars on parent so both coco-sit and crown-img can inherit them ── */
-  /* container-type enables cqw units so coco/crown scale with the row */
-  .row.work_experience { container-type: inline-size; --coco-x: 16px; --coco-y: -150px; --coco-scale: 0.8; --crown-x: -80px; --crown-y: -120px; --crown-scale: 0.3; position: relative; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-1.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; --bs-gutter-x: 0 !important; display: flex !important; align-items: center !important; }
-  /* coco: 45.3cqw = 721px natural / 1590px reference row width */
+  /* All coco/crown vars in cqw so they scale with the row at every viewport size.
+     Reference: 1590px wide row, 894px tall (16:9).
+     px→cqw: x: px/1590*100, y: px/894*(9/16)*100 */
+  .row.work_experience { container-type: inline-size; --coco-x: 1.01cqw; --coco-y: -9.44cqw; --coco-scale: 0.8; --crown-x: -5.03cqw; --crown-y: -7.55cqw; --crown-scale: 0.3; position: relative; aspect-ratio: 16 / 9; background: url('./assets/backgrounds/bg-1.png') no-repeat center / contain !important; padding-top: 0 !important; padding-bottom: 0 !important; --bs-gutter-x: 0 !important; display: flex !important; align-items: center !important; }
   .coco-sit { width: calc(var(--coco-scale) * 45.3cqw); height: auto; position: absolute; bottom: var(--coco-y); right: var(--coco-x); pointer-events: none; display: block; z-index: 500; }
-  /* crown: 25.2cqw = 400px natural / 1590px reference; height tracks coco via 44.9cqw (715/1590) */
   .crown-img { --crown-rotation: 0deg; width: calc(var(--crown-scale) * 25.2cqw); height: auto; position: absolute; bottom: calc(var(--coco-y) + var(--coco-scale) * 44.9cqw + var(--crown-y)); right: calc(var(--coco-x) + (var(--coco-scale) * 45.3cqw - var(--crown-scale) * 25.2cqw) / 2 - var(--crown-x)); pointer-events: none; display: block; z-index: 501; animation: crown-float 2.5s ease-in-out infinite; }
   @keyframes crown-float { 0%, 100% { transform: rotate(var(--crown-rotation)) translateY(0px); } 50% { transform: rotate(var(--crown-rotation)) translateY(-8px); } }
-  .client_content.container_content { text-align: left !important; }
-  .row.client_info { align-items: flex-start !important; padding-top: 2rem !important; }
+  .client_content.container_content { text-align: left !important; position: relative; z-index: 1; }
+  .row.client_info { overflow: hidden !important; }
   .client_content_desc.h2 { font-size: 20px !important; }
   .client_content_desc.h2 * { font-size: 20px !important; }
   /* ── Client banner scroller ── */
   .client-banner-scroll { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; container-type: size; }
-  .client-banner-scroll img { position: absolute; height: 14cqh; width: auto; object-fit: contain; will-change: transform; }
-  @keyframes banner-scroll { from { transform: translateX(110cqw); } to { transform: translateX(-110cqw); } } to { transform: translateX(-120%) var(--banner-y); } }
+  .client-banner-scroll img { position: absolute; height: 9cqh; width: auto; object-fit: contain; will-change: transform; }
+    @keyframes banner-scroll { from { transform: translateX(110cqw); } to { transform: translateX(-110cqw); } }
   .work_content.container_content { text-align: center; }
   .client_list_inner h2 { color: #ffffff !important; font-size: 3.4rem !important; }
   .client_list_inner .heading-mask_el { padding-top: 1.875rem !important; padding-bottom: 1.875rem !important; }
