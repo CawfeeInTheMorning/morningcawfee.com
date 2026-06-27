@@ -202,10 +202,10 @@
   .client_content_desc.h2 * { font-size: 20px !important; }
   /* ── Client banner scroller ── */
   .client-banner-scroll { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0); pointer-events: none; z-index: 0; container-type: size; }
-  .client-banner-wrap { position: absolute; }
+  .client-banner-wrap { position: absolute; width: max-content; }
   .client-banner-inner { position: relative; display: inline-block; transition: transform 0.25s ease; cursor: pointer; pointer-events: auto; }
   .client-banner-shadow { position: absolute; top: 10px; left: -10px; width: 100%; height: 100%; background: #000000; z-index: 0; pointer-events: none; }
-  .client-banner-inner img { display: block; height: 14cqh; width: auto; position: relative; z-index: 1; pointer-events: none; }
+  .client-banner-inner img { display: block; height: 14cqh; width: calc(14cqh * 3); position: relative; z-index: 1; pointer-events: none; object-fit: cover; }
   @keyframes banner-scroll { from { transform: translateX(110cqw); } to { transform: translateX(-110cqw); } }
   .work_content.container_content { text-align: center; }
   .client_list_inner h2 { color: #ffffff !important; font-size: 3.4rem !important; }
@@ -459,7 +459,7 @@ var imgs=["akiroko","ardolf","cloud9","cottontail","fefe","fillian","fream","gri
 var lanes=[10,42,72];var base=70;
 imgs.forEach(function(n,i){
 var img=document.createElement("img");
-img.src="./assets/clients/scroll/"+n+".png";img.alt=n;
+img.src="./assets/clients/scroll/"+n+".png";img.alt=n;img.draggable=false;
 var lane=lanes[i%lanes.length];
 var jitter=Math.round(Math.random()*100-50);
 var dur=base+(i%5)*8;
@@ -487,7 +487,7 @@ var outer=document.createElement("div");
 outer.className="client-banner-wrap";
 outer.style.cssText="top:calc("+lane+"cqh + "+jitter+"px);left:0;animation:banner-scroll "+dur+"s "+delay.toFixed(1)+"s linear infinite;";
 var inner=document.createElement("div");
-inner.className="client-banner-inner";
+inner.className="client-banner-inner";inner.style.overflow="visible";
 var shadow=document.createElement("div");
 shadow.className="client-banner-shadow";
 var img=document.createElement("img");
