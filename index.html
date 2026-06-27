@@ -202,9 +202,11 @@
   .client_content_desc.h2 * { font-size: 20px !important; }
   /* ── Client banner scroller ── */
   .client-banner-scroll { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0); pointer-events: none; z-index: 0; container-type: size; }
-  .client-banner-scroll img { pointer-events: auto; }
-  .client-banner-scroll img { position: absolute; height: 14cqh; width: auto; object-fit: contain; will-change: transform; filter: drop-shadow(-6px 6px 10px #000000); cursor: grab; user-select: none; }
-    @keyframes banner-scroll { from { transform: translateX(110cqw) scale(var(--bs,1)); } to { transform: translateX(-110cqw) scale(var(--bs,1)); } }
+  .client-banner-wrap { position: absolute; }
+  .client-banner-inner { position: relative; display: inline-block; transition: transform 0.25s ease; cursor: pointer; pointer-events: auto; }
+  .client-banner-shadow { position: absolute; top: 10px; left: -10px; width: 100%; height: 100%; background: #000000; z-index: 0; pointer-events: none; }
+  .client-banner-inner img { display: block; height: 14cqh; width: auto; position: relative; z-index: 1; pointer-events: none; }
+  @keyframes banner-scroll { from { transform: translateX(110cqw); } to { transform: translateX(-110cqw); } }
   .work_content.container_content { text-align: center; }
   .client_list_inner h2 { color: #ffffff !important; font-size: 3.4rem !important; }
   .client_list_inner .heading-mask_el { padding-top: 1.875rem !important; padding-bottom: 1.875rem !important; }
@@ -471,38 +473,32 @@ ct.appendChild(img);
 </script>
 <script>
 (function(){
-function initBanners(){
 var ct=document.getElementById("client-banner-scroll");
 if(!ct)return;
-var imgs=ct.querySelectorAll("img");
-if(!imgs.length){setTimeout(initBanners,300);return;}
-imgs.forEach(function(img){
-img._drag=false;
-img.addEventListener("mouseenter",function(){
-if(!img._drag){img.style.setProperty("--bs","1.45");img.style.animationDuration="280s";img.style.zIndex="10";}
+var imgs=["akiroko","ardolf","cloud9","cottontail","fefe","fillian","fream","grim","hia","iridium","jessellum","jollz","keeoh","kuro","kwobus","limealicious","mari","mero","mystic","nishi","nyxi","obey","obnoctious","ohyaholla","otto","pedro","rebecca","shiro","sinder","sylvee","traid","woops"];
+var lanes=[10,42,72];var base=70;
+imgs.forEach(function(n,i){
+var lane=lanes[i%lanes.length];
+var jitter=Math.round(Math.random()*100-50);
+var rot=(Math.random()*8-4).toFixed(1);
+var dur=base+(i%5)*8;
+var delay=-(i*(base/imgs.length));
+var outer=document.createElement("div");
+outer.className="client-banner-wrap";
+outer.style.cssText="top:calc("+lane+"cqh + "+jitter+"px);left:0;animation:banner-scroll "+dur+"s "+delay.toFixed(1)+"s linear infinite;";
+var inner=document.createElement("div");
+inner.className="client-banner-inner";
+var shadow=document.createElement("div");
+shadow.className="client-banner-shadow";
+var img=document.createElement("img");
+img.src="./assets/clients/scroll/"+n+".png";img.alt=n;
+inner.addEventListener("mouseenter",function(){inner.style.transform="scale(1.18) rotate("+rot+"deg)";});
+inner.addEventListener("mouseleave",function(){inner.style.transform="";});
+inner.appendChild(shadow);
+inner.appendChild(img);
+outer.appendChild(inner);
+ct.appendChild(outer);
 });
-img.addEventListener("mouseleave",function(){
-if(!img._drag){img.style.removeProperty("--bs");img.style.animationDuration="";img.style.zIndex="";}
-});
-img.addEventListener("mousedown",function(e){
-if(e.button!==0)return;
-e.preventDefault();img._drag=true;
-var rect=img.getBoundingClientRect();var ctR=ct.getBoundingClientRect();
-var sx=e.clientX,sy=e.clientY,ix=rect.left-ctR.left,iy=rect.top-ctR.top;
-img.style.animation="none";img.style.left=ix+"px";img.style.top=iy+"px";
-img.style.transform="scale(1.5)";img.style.zIndex="20";img.style.cursor="grabbing";
-function onMove(e){var dx=e.clientX-sx,dy=e.clientY-sy;var ctR=ct.getBoundingClientRect();
-var iw=img.offsetWidth*1.5,ih=img.offsetHeight*1.5;
-var nx=Math.max(0,Math.min(ix+dx,ctR.width-iw));var ny=Math.max(0,Math.min(iy+dy,ctR.height-ih));
-img.style.left=nx+"px";img.style.top=ny+"px";}
-function onUp(){img._drag=false;img.style.cursor="grab";img.style.zIndex="10";
-img.style.removeProperty("--bs");document.removeEventListener("mousemove",onMove);document.removeEventListener("mouseup",onUp);}
-document.addEventListener("mousemove",onMove);document.addEventListener("mouseup",onUp);
-});
-});
-}
-if(document.readyState==="complete"){initBanners();}else{window.addEventListener("load",initBanners);}
-setTimeout(initBanners,800);
 })();
 </script>
 </body></html>
