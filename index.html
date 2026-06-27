@@ -202,7 +202,8 @@
   .client_content_desc.h2 * { font-size: 20px !important; }
   /* ── Client banner scroller ── */
   .client-banner-scroll { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0); pointer-events: none; z-index: 0; container-type: size; }
-  .client-banner-scroll img { position: absolute; height: 13cqh; width: auto; object-fit: contain; will-change: transform; filter: drop-shadow(-6px 6px 10px #000000); cursor: grab; user-select: none; }
+  .client-banner-scroll img { pointer-events: auto; }
+  .client-banner-scroll img { position: absolute; height: 14cqh; width: auto; object-fit: contain; will-change: transform; filter: drop-shadow(-6px 6px 10px #000000); cursor: grab; user-select: none; }
     @keyframes banner-scroll { from { transform: translateX(110cqw) scale(var(--bs,1)); } to { transform: translateX(-110cqw) scale(var(--bs,1)); } }
   .work_content.container_content { text-align: center; }
   .client_list_inner h2 { color: #ffffff !important; font-size: 3.4rem !important; }
@@ -458,7 +459,7 @@ imgs.forEach(function(n,i){
 var img=document.createElement("img");
 img.src="./assets/clients/scroll/"+n+".png";img.alt=n;
 var lane=lanes[i%lanes.length];
-var jitter=Math.round(Math.random()*70-35);
+var jitter=Math.round(Math.random()*100-50);
 var dur=base+(i%5)*8;
 var delay=-(i*(base/imgs.length));
 img.style.top="calc("+lane+"cqh + "+jitter+"px)";
