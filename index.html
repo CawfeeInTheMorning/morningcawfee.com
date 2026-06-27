@@ -199,8 +199,8 @@
   .client_content_desc.h2 * { font-size: 20px !important; }
   /* ── Client banner scroller ── */
   .client-banner-scroll { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-  .client-banner-scroll img { position: absolute; height: 80px; width: auto; object-fit: contain; will-change: transform; }
-  @keyframes banner-scroll { from { transform: translateX(110%) var(--banner-y); } to { transform: translateX(-120%) var(--banner-y); } }
+  .client-banner-scroll img { position: absolute; height: 110px; width: auto; object-fit: contain; will-change: transform; }
+  @keyframes banner-scroll { from { transform: translateX(100vw); } to { transform: translateX(calc(-100vw - 800px)); } } to { transform: translateX(-120%) var(--banner-y); } }
   .work_content.container_content { text-align: center; }
   .client_list_inner h2 { color: #ffffff !important; font-size: 3.4rem !important; }
   .client_list_inner .heading-mask_el { padding-top: 1.875rem !important; padding-bottom: 1.875rem !important; }
@@ -450,17 +450,17 @@
 var ct=document.getElementById("client-banner-scroll");
 if(!ct)return;
 var imgs=["akiroko","ardolf","cloud9","cottontail","fefe","fillian","fream","grim","hia","iridium","jessellum","jollz","keeoh","kuro","kwobus","limealicious","mari","mero","mystic","nishi","nyxi","obey","obnoctious","ohyaholla","otto","pedro","rebecca","shiro","sinder","sylvee","traid","woops"];
-var lanes=[5,18,32,48,62,76];
-var base=55;
+var lanes=[10,42,72];
+var base=70;
 imgs.forEach(function(n,i){
 var img=document.createElement("img");
 img.src="./assets/clients/scroll/"+n+".png";
 img.alt=n;
 var lane=lanes[i%lanes.length];
-var dur=base+(i%4)*8;
+var dur=base+(i%5)*8;
 var delay=-(i*(base/imgs.length));
-img.style.setProperty("--banner-y","translateY("+lane+"%)");
-img.style.top="0";
+img.style.top=lane+"%";
+img.style.left="0";
 img.style.animation="banner-scroll "+dur+"s "+delay.toFixed(1)+"s linear infinite";
 ct.appendChild(img);
 });
