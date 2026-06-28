@@ -202,11 +202,11 @@
   .client_content_desc.h2 * { font-size: 20px !important; }
   /* ── Client banner scroller ── */
   .client-banner-scroll { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0); pointer-events: none; z-index: 0; container-type: size; }
-  .client-banner-wrap { position: absolute; width: max-content; }
-  .client-banner-inner { position: relative; display: inline-block; transition: transform 0.25s ease; cursor: pointer; pointer-events: auto; }
+  .client-banner-wrap { position: absolute; pointer-events: auto; cursor: pointer; transition: none; }
+  .client-banner-inner { position: relative; display: inline-block; transition: transform 0.25s ease; pointer-events: none; }
   .client-banner-shadow { position: absolute; top: 10px; left: -10px; width: 100%; height: 100%; background: #000000; z-index: 0; pointer-events: none; }
-  .client-banner-inner img { display: block; height: 14cqh; width: calc(14cqh * 3); position: relative; z-index: 1; pointer-events: none; object-fit: cover; }
-  @keyframes banner-scroll { from { transform: translateX(110cqw); } to { transform: translateX(-110cqw); } }
+  .client-banner-inner img { display: block; position: relative; z-index: 1; pointer-events: none; object-fit: cover; }
+  @keyframes banner-scroll { from { left: 110%; } to { left: -40%; } }
   .work_content.container_content { text-align: center; }
   .client_list_inner h2 { color: #ffffff !important; font-size: 3.4rem !important; }
   .client_list_inner .heading-mask_el { padding-top: 1.875rem !important; padding-bottom: 1.875rem !important; }
@@ -457,26 +457,12 @@ var ct=document.getElementById("client-banner-scroll");
 if(!ct)return;
 var imgs=["akiroko","ardolf","cloud9","cottontail","fefe","fillian","fream","grim","hia","iridium","jessellum","jollz","keeoh","kuro","kwobus","limealicious","mari","mero","mystic","nishi","nyxi","obey","obnoctious","ohyaholla","otto","pedro","rebecca","shiro","sinder","sylvee","traid","woops"];
 var lanes=[10,42,72];var base=70;
-imgs.forEach(function(n,i){
-var img=document.createElement("img");
-img.src="./assets/clients/scroll/"+n+".png";img.alt=n;img.draggable=false;
-var lane=lanes[i%lanes.length];
-var jitter=Math.round(Math.random()*100-50);
-var dur=base+(i%5)*8;
-var delay=-(i*(base/imgs.length));
-img.style.top="calc("+lane+"cqh + "+jitter+"px)";
-img.style.left="0";
-img.style.animation="banner-scroll "+dur+"s "+delay.toFixed(1)+"s linear infinite";
-ct.appendChild(img);
-});
-})();
-</script>
-<script>
-(function(){
-var ct=document.getElementById("client-banner-scroll");
-if(!ct)return;
-var imgs=["akiroko","ardolf","cloud9","cottontail","fefe","fillian","fream","grim","hia","iridium","jessellum","jollz","keeoh","kuro","kwobus","limealicious","mari","mero","mystic","nishi","nyxi","obey","obnoctious","ohyaholla","otto","pedro","rebecca","shiro","sinder","sylvee","traid","woops"];
-var lanes=[10,42,72];var base=70;
+function build(){
+var ctH=ct.offsetHeight,ctW=ct.offsetWidth;
+if(!ctH||!ctW){setTimeout(build,200);return;}
+var imgH=Math.round(ctH*0.14);
+var imgW=imgH*3;
+var scrollDist=ctW+imgW;
 imgs.forEach(function(n,i){
 var lane=lanes[i%lanes.length];
 var jitter=Math.round(Math.random()*100-50);
@@ -485,20 +471,24 @@ var dur=base+(i%5)*8;
 var delay=-(i*(base/imgs.length));
 var outer=document.createElement("div");
 outer.className="client-banner-wrap";
-outer.style.cssText="top:calc("+lane+"cqh + "+jitter+"px);left:0;animation:banner-scroll "+dur+"s "+delay.toFixed(1)+"s linear infinite;";
+var topVal=Math.round(ctH*(lane/100))+jitter;
+outer.style.cssText="top:"+topVal+"px;width:"+imgW+"px;height:"+imgH+"px;animation:banner-scroll "+dur+"s "+delay.toFixed(1)+"s linear infinite;";
 var inner=document.createElement("div");
-inner.className="client-banner-inner";inner.style.overflow="visible";
+inner.className="client-banner-inner";
 var shadow=document.createElement("div");
 shadow.className="client-banner-shadow";
 var img=document.createElement("img");
-img.src="./assets/clients/scroll/"+n+".png";img.alt=n;
-inner.addEventListener("mouseenter",function(){inner.style.transform="scale(1.18) rotate("+rot+"deg)";});
-inner.addEventListener("mouseleave",function(){inner.style.transform="";});
+img.src="./assets/clients/scroll/"+n+".png";img.alt=n;img.draggable=false;
+img.style.cssText="width:"+imgW+"px;height:"+imgH+"px;";
 inner.appendChild(shadow);
 inner.appendChild(img);
 outer.appendChild(inner);
+outer.addEventListener("mouseenter",function(){inner.style.transform="scale(1.18) rotate("+rot+"deg)";outer.style.zIndex="10";});
+outer.addEventListener("mouseleave",function(){inner.style.transform="";outer.style.zIndex="";});
 ct.appendChild(outer);
 });
+}
+build();
 })();
 </script>
 </body></html>
