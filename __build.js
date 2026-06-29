@@ -27,14 +27,14 @@ body>div{padding-top:60px;}
 .framer-90o6xd>*{display:none!important;}
 
 /* Gallery - constrained to nav max-width */
-.mc-gallery-wrap{display:flex;flex-direction:column;gap:24px;width:100%;overflow:clip;border-radius:15px;}
-.mc-gallery-track{display:flex;gap:16px;width:max-content;}
-.mc-gallery-track.fwd{animation:gallery-fwd 40s linear infinite;}
-.mc-gallery-track.rev{animation:gallery-rev 40s linear infinite;}
+.banner-scroll{display:flex;flex-direction:column;gap:24px;width:100%;max-width:1200px;margin:0 auto;overflow:clip;border-radius:15px;}
+.banner-scroll-track{display:flex;gap:16px;width:max-content;}
+.banner-scroll-track.fwd{animation:gallery-fwd 40s linear infinite;}
+.banner-scroll-track.rev{animation:gallery-rev 40s linear infinite;}
 @keyframes gallery-fwd{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes gallery-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.mc-gallery-track img{height:200px;width:auto;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,0.5);transition:transform 0.3s ease;}
-.mc-gallery-track img:hover{transform:scale(1.04);}
+.banner-scroll-track img{height:200px;width:auto;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,0.5);transition:transform 0.3s ease;}
+.banner-scroll-track img:hover{transform:scale(1.04);}
 
 /* Copyright text */
 .mc-copyright{font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,0.4);white-space:nowrap;}
@@ -43,6 +43,15 @@ body>div{padding-top:60px;}
 .mc-social-link{display:flex;align-items:center;justify-content:center;opacity:0.6;transition:opacity 0.2s;}
 .mc-social-link:hover{opacity:1;}
 .mc-social-link img{width:18px;height:18px;filter:invert(1);display:block;}
+
+/* Remove cookie banner, footer nav */
+.framer-196faza-container,.framer-1pwa3xt,.framer-1xwpxoz-container,.framer-8a26wt-container{display:none!important;}
+/* Logo scroll section */
+#logo-scroll{display:block;}
+#logo-scroll img{height:90px;width:160px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+/* Shoutout box */
+#shoutout-box{display:block;}
+.mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;}
 </style>`;
 c = c.replace('</head>', css + '\n</head>');
 
@@ -73,14 +82,14 @@ const injectScript = `<script>
   function inject(){
     // ── Gallery ──────────────────────────────────────────────────────────
     var galSec = document.querySelector('.framer-1d2612y');
-    if(galSec && !galSec.querySelector('.mc-gallery-wrap')){
+    if(galSec && !galSec.querySelector('.banner-scroll')){
       var galHeader = galSec.querySelector('.framer-elqo2t');
       ['framer-dwe5cq','framer-1n2ksqx'].forEach(function(cls){
         var el=galSec.querySelector('.'+cls); if(el) el.style.display='none';
       });
       var gw = document.createElement('div');
-      gw.className = 'mc-gallery-wrap';
-      gw.innerHTML = '<div class="mc-gallery-track fwd">${fwd}</div><div class="mc-gallery-track rev">${rev}</div>';
+      gw.className = 'banner-scroll';
+      gw.innerHTML = '<div class="banner-scroll-track fwd">${fwd}</div><div class="banner-scroll-track rev">${rev}</div>';
       if(galHeader && galHeader.nextSibling){ galSec.insertBefore(gw, galHeader.nextSibling); }
       else { galSec.appendChild(gw); }
     }
@@ -120,6 +129,74 @@ const injectScript = `<script>
       noyr.innerHTML='<a href="mailto:morningcawfee@gmail.com" style="font-family:Inter,sans-serif;font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;">morningcawfee@gmail.com</a>';
     }
   }
+
+
+    // ── Persistent DOM overrides (re-apply after Framer hydration) ─────────
+    // H1 hero text
+    document.querySelectorAll('h1').forEach(function(h){
+      if(h.textContent.includes('Framer is the')||h.textContent.includes('AI website builder for standout sites')){
+        h.textContent='Heya! My Name is MorningCawfee and this is my portfolio';
+        h.dataset.mcOwned='1';
+      }
+    });
+    // H2 gallery title
+    document.querySelectorAll('h2').forEach(function(h){
+      if(h.textContent.trim()==='Shipped with Framer'){ h.textContent='Some of my work'; h.dataset.mcOwned='1'; }
+    });
+    // Hide elements
+    ['framer-1pwa3xt','framer-196faza-container','framer-1xwpxoz-container','framer-8a26wt-container'].forEach(function(cls){
+      var el=document.querySelector('.'+cls); if(el) el.style.display='none';
+    });
+    // Footer class
+    var fbar=document.querySelector('.framer-e0lfdf');
+    if(fbar) fbar.classList.add('footer');
+    // Logo scroll - resize images
+    var lsc=document.querySelector('.framer-1ifpqum-container');
+    if(lsc){
+      lsc.id='logo-scroll';
+      lsc.querySelectorAll('img').forEach(function(img){ img.style.cssText='height:90px;width:160px;object-fit:cover;border-radius:8px;flex-shrink:0;'; });
+    }
+    // Shoutout box + Notable Clients title
+    var sb=document.querySelector('.framer-1b24l6d-container');
+    if(sb){
+      sb.id='shoutout-box';
+      if(!document.querySelector('.mc-notable-title')){
+        var nt=document.createElement('h2'); nt.className='mc-notable-title'; nt.textContent='Notable Clients';
+        sb.parentElement.insertBefore(nt,sb);
+      }
+    }
+
+
+  // MutationObserver to re-apply changes when Framer re-renders
+  function applyPersistent(){
+    document.querySelectorAll('h1').forEach(function(h){
+      if(h.textContent.includes('Framer is the')||h.textContent.includes('AI website builder for standout sites'))
+        h.textContent='Heya! My Name is MorningCawfee and this is my portfolio';
+    });
+    document.querySelectorAll('h2').forEach(function(h){
+      if(h.textContent.trim()==='Shipped with Framer') h.textContent='Some of my work';
+    });
+    var fbar=document.querySelector('.framer-e0lfdf'); if(fbar) fbar.classList.add('footer');
+    var lsc=document.querySelector('.framer-1ifpqum-container');
+    if(lsc && lsc.id!=='logo-scroll'){
+      lsc.id='logo-scroll';
+      lsc.querySelectorAll('img').forEach(function(img){ img.style.cssText='height:90px;width:160px;object-fit:cover;border-radius:8px;flex-shrink:0;'; });
+    }
+    var sb=document.querySelector('.framer-1b24l6d-container');
+    if(sb && sb.id!=='shoutout-box'){
+      sb.id='shoutout-box';
+      if(!document.querySelector('.mc-notable-title')){
+        var nt=document.createElement('h2'); nt.className='mc-notable-title'; nt.textContent='Notable Clients';
+        sb.parentElement.insertBefore(nt,sb);
+      }
+    }
+  }
+  var _obs_active=false;
+  var observer = new MutationObserver(function(){
+    if(_obs_active) return; _obs_active=true;
+    requestAnimationFrame(function(){ applyPersistent(); _obs_active=false; });
+  });
+  observer.observe(document.body, {childList:true, subtree:true, characterData:true});
 
   var attempts=0;
   var timer=setInterval(function(){ attempts++; inject(); if(attempts>30) clearInterval(timer); }, 300);
