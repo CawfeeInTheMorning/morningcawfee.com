@@ -4235,7 +4235,7 @@ body>div{padding-top:60px;}
 
 /* Gallery - constrained to nav max-width */
 .banner-scroll{display:flex;flex-direction:column;gap:24px;width:100%;max-width:1200px;margin:0 auto;overflow:clip;border-radius:15px;position:relative;}.banner-scroll::before{content:"";position:absolute;top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom, #00000070 0%, #00000000 100%);z-index:2;pointer-events:none;border-radius:15px 15px 0 0;}
-.banner-scroll-track{display:flex;gap:16px;width:max-content;}
+.banner-scroll-track{display:flex;gap:24px;width:max-content;}
 .banner-scroll-track.fwd{animation:gallery-fwd 220s linear infinite;}
 .banner-scroll-track.rev{animation:gallery-rev 220s linear infinite;}
 /* Logo boxes */
@@ -4244,7 +4244,7 @@ body>div{padding-top:60px;}
 .mc-logo-row.fwd{animation:gallery-fwd 220s linear infinite;}
 .mc-logo-row.rev{animation:gallery-rev 220s linear infinite;}
 .mc-logo-box{width:450px;height:450px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
-.mc-logo-box img{max-width:70%;max-height:70%;object-fit:contain;}
+.mc-logo-box img{max-width:70%;max-height:70%;object-fit:contain;transition:transform 0.3s ease;}.mc-logo-box img:hover{transform:scale(1.04);}
 /* Hero cards overlay */
 .mc-card-overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:20;display:flex;align-items:center;justify-content:center;pointer-events:none;}
 .hero-card-pile{position:relative;width:min(600px,60vw);height:400px;}
@@ -4256,7 +4256,7 @@ body>div{padding-top:60px;}
 .framer-h0rvu4,[data-framer-name="Trust Link"]{display:none!important;}
 @keyframes gallery-fwd{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes gallery-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.banner-scroll-track img{height:200px;width:auto;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,0.5);transition:transform 0.3s ease;}
+.banner-scroll-track img{height:200px;width:auto;border-radius:15px;object-fit:cover;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,0.5);transition:transform 0.3s ease;}
 .banner-scroll-track img:hover{transform:scale(1.04);}
 
 /* Copyright text */
@@ -4269,9 +4269,19 @@ body>div{padding-top:60px;}
 
 /* Remove cookie banner, footer nav */
 .framer-196faza-container,.framer-1pwa3xt,.framer-1xwpxoz-container,.framer-8a26wt-container{display:none!important;}
+[data-framer-name="Sticky Agents"],.framer-4w0zd9{display:none!important;}
+.framer-126qlmq,.framer-7ubwi2,.framer-1f8w9k8-container{display:none!important;}
+#mc-nav ul li a.active{color:#E81215;}
+#mc-nav ul li a.active::after{width:100%;}
+.mc-contact-group{display:flex;align-items:center;gap:10px;}
+.mc-contact-label{color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;white-space:nowrap;}
+.mc-contact-btn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#fff;transition:background 0.2s ease,transform 0.2s ease;flex-shrink:0;}
+.mc-contact-btn:hover{background:#E81215;transform:scale(1.08);}
+.mc-contact-btn img{width:18px;height:18px;display:block;}
+.mc-contact-btn:hover img{filter:invert(1);}
 /* Notable clients section — moved down 150px */
 #notable-clients{margin-top:-100px!important;padding:0px 0 0px!important;position:relative;bottom:0px!important;}
-#notable-clients .framer-15v4oca{left:50%!important;right:auto!important;width:100vw!important;margin-left:-50vw!important;}
+#notable-clients .framer-15v4oca{left:0!important;right:0!important;width:100%!important;}
 .mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;position:relative;z-index:10;}
 #shoutout-box{margin:0 auto!important;display:flex!important;justify-content:center!important;}
 /* Hero container 16:9 aspect ratio */
@@ -4448,19 +4458,41 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
   // ── Nav ──────────────────────────────────────────────────────────────────
   var nav = document.createElement('nav');
   nav.id = 'mc-nav';
-  nav.innerHTML = '<div id="header"><a class="mc-logo" href="/"><img src="./assets/icons/icon-red.png" alt="MorningCawfee"></a><ul><li><a href="/about">About</a></li><li><a href="/about#skills">Skills</a></li><li><a href="/work#work_experience">Experience</a></li><li><a href="/work#work_history">History</a></li><li><a href="/clients">Clients</a></li><li><a href="/contact">Contact</a></li></ul></div>';
+  nav.innerHTML = '<div id="header"><a class="mc-logo" href="/"><img src="./assets/icons/icon-red.png" alt="MorningCawfee"></a><ul><li><a href="/about" data-section="about">About</a></li><li><a href="/about#skills" data-section="examples">Examples</a></li><li><a href="/work#work_experience" data-section="experience">Experience</a></li><li><a href="/work#work_history" data-section="history">History</a></li><li><a href="/clients" data-section="clients">Clients</a></li><li><a href="/contact" data-section="contact">Contact</a></li></ul></div>';
+  (function(){
+    var sectionMap=[{selector:'.framer-os8nm6',section:'about'}];
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var sec=entry.target.dataset.navSection;
+        var link=document.querySelector('#mc-nav a[data-section="'+sec+'"]');
+        if(!link)return;
+        if(entry.isIntersecting){link.classList.add('active');}else{link.classList.remove('active');}
+      });
+    },{threshold:0.15});
+    sectionMap.forEach(function(m){
+      var el=document.querySelector(m.selector);
+      if(el){el.dataset.navSection=m.section;observer.observe(el);}
+    });
+  })();
   document.body.insertBefore(nav, document.body.firstChild);
   document.title='MorningCawfee - Design Portfolio';
   var md=document.querySelector('meta[name="description"]');if(md)md.setAttribute('content','Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!');
 
   function inject(){
-    // ── Reorder: Sticky Agents before Features ──────────────────────────────
-    var stickyAgents = document.querySelector('[data-framer-name="Sticky Agents"]');
-    var featuresEl = document.querySelector('[data-framer-name="Features"]');
-    if (stickyAgents && featuresEl && stickyAgents.parentElement === featuresEl.parentElement) {
-      if (featuresEl.previousElementSibling !== stickyAgents) {
-        featuresEl.parentElement.insertBefore(stickyAgents, featuresEl);
-      }
+    
+
+        // Contact buttons in Button Group
+    var btnGroup=document.querySelector('[data-framer-name="Button Group"]');
+    if(btnGroup&&!btnGroup.querySelector('.mc-contact-group')){
+      var cg=document.createElement('div');
+      cg.className='mc-contact-group';
+      cg.innerHTML='<span class="mc-contact-label">Contact me</span>'+
+        '<a class="mc-contact-btn" href="https://x.com/morningcawfee" target="_blank" rel="noopener"><img src="./assets/symbols/x.svg" alt="X"></a>'+
+        '<a class="mc-contact-btn" href="https://www.twitch.tv/morningcawfee" target="_blank" rel="noopener"><img src="./assets/symbols/twitch.svg" alt="Twitch"></a>'+
+        '<a class="mc-contact-btn" href="https://github.com/CawfeeInTheMorning" target="_blank" rel="noopener"><img src="./assets/symbols/github.svg" alt="GitHub"></a>'+
+        '<a class="mc-contact-btn" href="https://www.behance.net/morningcawfee" target="_blank" rel="noopener"><img src="./assets/symbols/behance.svg" alt="Behance"></a>';
+      Array.from(btnGroup.children).forEach(function(c){c.style.display='none';});
+      btnGroup.appendChild(cg);
     }
 
     // ── Gallery ──────────────────────────────────────────────────────────
