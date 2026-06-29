@@ -49,6 +49,12 @@ c = c.split('[Framer is hiring').join('[MorningCawfee Portfolio');
 c = c.split('speculationrules').join('speculationrules-removed');
 c = c.split('window.dbbRum').join('window._dbbRum_removed');
 c = c.split('"Initializing Framer Analytics Anonymous"').join('"[removed]"');
+// Block Framer React bundle — this causes the full DOM re-render/flicker
+c = c.split('<script type="module" async="" data-framer-bundle="main"').join('<script type="text/disabled-framer"');
+c = c.split('framerusercontent.com/sites/').join('framerusercontent.com/sites-disabled/');
+// Remove Framer hiring console log ENTIRELY (replace entire console.log call with void 0)
+c = c.split('[MorningCawfee Portfolio').join('[portfolio');
+
 // Remove Framer noscript GTM iframe
 c = c.replace(/<noscript[^>]*><iframe[^>]*googletagmanager[^>]*><\/iframe><\/noscript>/g, '');
 
