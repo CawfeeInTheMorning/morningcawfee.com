@@ -4234,15 +4234,15 @@ body>div{padding-top:60px;}
 .framer-90o6xd>*{display:none!important;}
 
 /* Gallery - constrained to nav max-width */
-.banner-scroll{display:flex;flex-direction:column;gap:24px;width:100%;max-width:1200px;margin:0 auto;overflow:clip;border-radius:15px;}
+.banner-scroll{display:flex;flex-direction:column;gap:24px;width:100%;max-width:1200px;margin:0 auto;overflow:clip;border-radius:15px;position:relative;}.banner-scroll::before{content:"";position:absolute;top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#000 0%,transparent 100%);z-index:2;pointer-events:none;border-radius:15px 15px 0 0;}
 .banner-scroll-track{display:flex;gap:16px;width:max-content;}
-.banner-scroll-track.fwd{animation:gallery-fwd 80s linear infinite;}
-.banner-scroll-track.rev{animation:gallery-rev 80s linear infinite;}
+.banner-scroll-track.fwd{animation:gallery-fwd 220s linear infinite;}
+.banner-scroll-track.rev{animation:gallery-rev 220s linear infinite;}
 /* Logo boxes */
 #logo-scroll{overflow:hidden;}
 .mc-logo-row{display:flex;gap:20px;width:max-content;}
-.mc-logo-row.fwd{animation:gallery-fwd 80s linear infinite;}
-.mc-logo-row.rev{animation:gallery-rev 80s linear infinite;}
+.mc-logo-row.fwd{animation:gallery-fwd 220s linear infinite;}
+.mc-logo-row.rev{animation:gallery-rev 220s linear infinite;}
 .mc-logo-box{width:450px;height:450px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
 .mc-logo-box img{max-width:70%;max-height:70%;object-fit:contain;}
 /* Hero cards overlay */
@@ -4270,7 +4270,7 @@ body>div{padding-top:60px;}
 /* Remove cookie banner, footer nav */
 .framer-196faza-container,.framer-1pwa3xt,.framer-1xwpxoz-container,.framer-8a26wt-container{display:none!important;}
 /* Notable clients section — moved down 150px */
-#notable-clients{margin-top:180px!important;}
+#notable-clients{margin-top:180px!important;position:relative;bottom:-64px;}
 .mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;position:relative;z-index:10;}
 #shoutout-box{margin:0 auto!important;display:flex!important;justify-content:center!important;}
 /* Hero container 16:9 aspect ratio */
@@ -4499,7 +4499,7 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
     var noyr = document.querySelector('.framer-10nqoyr');
     if(noyr && !noyr.dataset.mcDone){
       noyr.dataset.mcDone='1';
-      noyr.innerHTML='<a href="mailto:morningcawfee@gmail.com" style="font-family:Inter,sans-serif;font-size:14px;color:rgba(255,255,255,0.6);text-decoration:none;">morningcawfee@gmail.com</a>';
+      noyr.innerHTML='<a href="mailto:morningcawfee@gmail.com" style="font-family:Inter,sans-serif;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;">morningcawfee@gmail.com</a>';
     }
   }
 
@@ -4549,7 +4549,58 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       var cards2=Array.from(pile.querySelectorAll('.hero-card'));
       cards2.forEach(function(card,i){card.style.transform='translateX(-150vw) rotate('+rots[i]+'deg)';});
       ov.appendChild(pile); f14.appendChild(ov);
-      setTimeout(function(){cards2.forEach(function(card,i){setTimeout(function(){card.style.transition='transform 1.4s cubic-bezier(0.06,0.85,0.15,1)';card.style.transform='rotate('+rots[i]+'deg)';},i*360);});},300);
+      setTimeout(function(){
+        cards2.forEach(function(card,i){
+          setTimeout(function(){
+            card.style.transition='transform 1.4s cubic-bezier(0.06,0.85,0.15,1)';
+            card.style.transform='rotate('+rots[i]+'deg)';
+          },i*360);
+        });
+        setTimeout(function(){
+          cards2.forEach(function(card,i){
+            var baseRot=rots[i];
+            card.style.transition='transform 0.25s ease,box-shadow 0.2s ease';
+            card.style.cursor='grab';
+            card.draggable=false;
+            card.addEventListener('mouseenter',function(){
+              if(!card._dragging){card.style.transform='rotate('+baseRot+'deg) scale(1.06)';}
+            });
+            card.addEventListener('mouseleave',function(){
+              if(!card._dragging){card.style.transform='rotate('+baseRot+'deg) scale(1)';}
+            });
+            card.addEventListener('mousedown',function(e){
+              e.preventDefault();
+              var maxZ=0;
+              cards2.forEach(function(cc){maxZ=Math.max(maxZ,parseInt(cc.style.zIndex)||0);});
+              card.style.zIndex=String(maxZ+1);
+              card.style.cursor='grabbing';
+              card._dragging=true;
+              card.style.transition='box-shadow 0.2s ease';
+              var pileRect=pile.getBoundingClientRect();
+              var startMouseX=e.clientX,startMouseY=e.clientY;
+              var startLeft=card.offsetLeft,startTop=card.offsetTop;
+              function onMove(ev){
+                var dx=ev.clientX-startMouseX,dy=ev.clientY-startMouseY;
+                var newLeft=Math.min(Math.max(0,startLeft+dx),pileRect.width-card.offsetWidth);
+                var newTop=Math.min(Math.max(0,startTop+dy),pileRect.height-card.offsetHeight);
+                card.style.left=newLeft+'px';
+                card.style.top=newTop+'px';
+                card.style.transform='rotate('+baseRot+'deg) scale(1.06)';
+              }
+              function onUp(){
+                card._dragging=false;
+                card.style.cursor='grab';
+                card.style.transition='transform 0.25s ease,box-shadow 0.2s ease';
+                card.style.transform='rotate('+baseRot+'deg) scale(1)';
+                document.removeEventListener('mousemove',onMove);
+                document.removeEventListener('mouseup',onUp);
+              }
+              document.addEventListener('mousemove',onMove);
+              document.addEventListener('mouseup',onUp);
+            });
+          });
+        },5*360+800);
+      },300);
     }
 
     // Rename framer-wc4wqf → #notable-clients
