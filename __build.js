@@ -1,12 +1,43 @@
 const fs = require('fs');
 let c = fs.readFileSync('__framer_base.html', 'utf8');
 
-// ── 1. Page title ─────────────────────────────────────────────────────────────
+// ── 1. Page title, meta cleanup, OG removal ───────────────────────────────────
 c = c.replace('<title>Framer: AI website builder for professional sites</title>', '<title>MorningCawfee - Design Portfolio</title>');
 c = c.replace(/<link[^>]+rel="icon"[^>]*>/g, '');
 c = c.replace('</title>', '</title><link rel="icon" href="./assets/icons/icon-red.png" type="image/png">');
-c = c.split("Create a professional website with Framer’s no-code AI website builder. Design freely, manage CMS content, optimize SEO, collaborate, and publish fast.").join("Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!");
+
+// Remove all OG/Twitter meta tags (Framer branding)
+c = c.replace(/<meta property="og:[^>]+">/g, '');
+c = c.replace(/<meta name="twitter:[^>]+">/g, '');
+c = c.replace(/<meta property="og:[^/]+\/>/g, '');
+
+// Remove Framer generator/author meta
+c = c.replace(/<meta name="generator"[^>]+>/g, '');
+c = c.replace(/<meta name="author"[^>]+>/g, '');
+
+// Replace description
 c = c.split("Create a professional website with Framer's no-code AI website builder. Design freely, manage CMS content, optimize SEO, collaborate, and publish fast.").join("Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!");
+
+// Replace canonical URL
+c = c.replace('href="https://www.framer.com/"', 'href="https://morningcawfee.com/"');
+c = c.split('"url": "https://www.framer.com"').join('"url": "https://morningcawfee.com"');
+c = c.split('https://www.framer.com/').join('https://morningcawfee.com/');
+c = c.split('www.framer.com/careers/').join('morningcawfee.com/');
+c = c.split('www.framer.community/c/support/').join('morningcawfee.com/');
+c = c.split('https://twitter.com/framer').join('https://x.com/morningcawfee');
+
+// Inject our clean OG tags
+const ourOG = [
+  '<meta property="og:type" content="website">',
+  '<meta property="og:title" content="MorningCawfee - Design Portfolio">',
+  '<meta property="og:description" content="Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!">',
+  '<meta property="og:url" content="https://morningcawfee.com/">',
+  '<meta property="og:site_name" content="MorningCawfee">',
+  '<meta name="twitter:card" content="summary_large_image">',
+  '<meta name="twitter:title" content="MorningCawfee - Design Portfolio">',
+  '<meta name="twitter:description" content="Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!">'
+].join('\n');
+c = c.replace('</title>', '</title>\n' + ourOG);
 
 // ── 2. CSS injections ─────────────────────────────────────────────────────────
 const css = `<style id="mc-custom">
@@ -31,13 +62,13 @@ body>div{padding-top:60px;}
 /* Gallery - constrained to nav max-width */
 .banner-scroll{display:flex;flex-direction:column;gap:24px;width:100%;max-width:1200px;margin:0 auto;overflow:clip;border-radius:15px;}
 .banner-scroll-track{display:flex;gap:16px;width:max-content;}
-.banner-scroll-track.fwd{animation:gallery-fwd 120s linear infinite;}
-.banner-scroll-track.rev{animation:gallery-rev 120s linear infinite;}
+.banner-scroll-track.fwd{animation:gallery-fwd 80s linear infinite;}
+.banner-scroll-track.rev{animation:gallery-rev 80s linear infinite;}
 /* Logo boxes */
 #logo-scroll{overflow:hidden;}
 .mc-logo-row{display:flex;gap:20px;width:max-content;}
-.mc-logo-row.fwd{animation:gallery-fwd 120s linear infinite;}
-.mc-logo-row.rev{animation:gallery-rev 120s linear infinite;}
+.mc-logo-row.fwd{animation:gallery-fwd 80s linear infinite;}
+.mc-logo-row.rev{animation:gallery-rev 80s linear infinite;}
 .mc-logo-box{width:450px;height:450px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
 .mc-logo-box img{max-width:70%;max-height:70%;object-fit:contain;}
 /* Hero cards overlay */
@@ -64,13 +95,15 @@ body>div{padding-top:60px;}
 
 /* Remove cookie banner, footer nav */
 .framer-196faza-container,.framer-1pwa3xt,.framer-1xwpxoz-container,.framer-8a26wt-container{display:none!important;}
-/* Notable clients section */
-#notable-clients{margin-top:30px!important;}
+/* Notable clients section — moved down 150px */
+#notable-clients{margin-top:180px!important;}
 .mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;position:relative;z-index:10;}
 #shoutout-box{margin:0 auto!important;display:flex!important;justify-content:center!important;}
-/* Banner slower */
-.banner-scroll-track.fwd{animation:gallery-fwd 120s linear infinite;}
-.banner-scroll-track.rev{animation:gallery-rev 120s linear infinite;}
+/* Hero container 16:9 aspect ratio */
+.framer-imW7Y.framer-1ut0con{width:100%!important;height:auto!important;aspect-ratio:16/9!important;}
+/* Social icons red on hover */
+.mc-social-link:hover img{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg)!important;}
+.framer-n5owxb .framer-t9b48k p{font-size:13px!important;}
 </style>`;
 c = c.replace('</head>', css + '\n</head>');
 
