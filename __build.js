@@ -3,6 +3,8 @@ let c = fs.readFileSync('__framer_base.html', 'utf8');
 
 // ── 1. Page title ─────────────────────────────────────────────────────────────
 c = c.replace('<title>Framer: AI website builder for professional sites</title>', '<title>MorningCawfee - Design Portfolio</title>');
+c = c.replace(/<link[^>]+rel="icon"[^>]*>/g, '');
+c = c.replace('</title>', '</title><link rel="icon" href="./assets/icons/icon-red.png" type="image/png">');
 c = c.split("Create a professional website with Framer’s no-code AI website builder. Design freely, manage CMS content, optimize SEO, collaborate, and publish fast.").join("Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!");
 c = c.split("Create a professional website with Framer's no-code AI website builder. Design freely, manage CMS content, optimize SEO, collaborate, and publish fast.").join("Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!");
 
@@ -29,8 +31,24 @@ body>div{padding-top:60px;}
 /* Gallery - constrained to nav max-width */
 .banner-scroll{display:flex;flex-direction:column;gap:24px;width:100%;max-width:1200px;margin:0 auto;overflow:clip;border-radius:15px;}
 .banner-scroll-track{display:flex;gap:16px;width:max-content;}
-.banner-scroll-track.fwd{animation:gallery-fwd 40s linear infinite;}
-.banner-scroll-track.rev{animation:gallery-rev 40s linear infinite;}
+.banner-scroll-track.fwd{animation:gallery-fwd 80s linear infinite;}
+.banner-scroll-track.rev{animation:gallery-rev 80s linear infinite;}
+/* Logo boxes */
+#logo-scroll{overflow:hidden;}
+.mc-logo-row{display:flex;gap:20px;width:max-content;}
+.mc-logo-row.fwd{animation:gallery-fwd 80s linear infinite;}
+.mc-logo-row.rev{animation:gallery-rev 80s linear infinite;}
+.mc-logo-box{width:450px;height:450px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.mc-logo-box img{max-width:70%;max-height:70%;object-fit:contain;}
+/* Hero cards overlay */
+.mc-card-overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:20;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.hero-card-pile{position:relative;width:min(600px,60vw);height:400px;}
+.hero-card{width:100%;height:auto;display:block;will-change:transform;box-shadow:0 8px 28px rgba(0,0,0,0.65);position:absolute;top:0;left:0;border-radius:8px;}
+/* Hide leftover framer elements */
+.framer-1fbk941-container,.framer-kpoerz{display:none!important;}
+/* Shoutout box */
+#shoutout-box{width:900px!important;max-width:900px!important;overflow:hidden!important;}
+.framer-h0rvu4,[data-framer-name="Trust Link"]{display:none!important;}
 @keyframes gallery-fwd{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes gallery-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .banner-scroll-track img{height:200px;width:auto;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,0.5);transition:transform 0.3s ease;}
@@ -46,16 +64,26 @@ body>div{padding-top:60px;}
 
 /* Remove cookie banner, footer nav */
 .framer-196faza-container,.framer-1pwa3xt,.framer-1xwpxoz-container,.framer-8a26wt-container{display:none!important;}
-/* Logo scroll section */
-#logo-scroll{display:block;}
-#logo-scroll img{height:90px;width:160px;object-fit:cover;border-radius:8px;flex-shrink:0;}
-/* Shoutout box */
-#shoutout-box{display:block;}
+/* Notable clients title */
 .mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;}
 </style>`;
 c = c.replace('</head>', css + '\n</head>');
 
-// ── 3. Deferred JS injections (run after Framer hydration) ────────────────────
+// ── 3. Build logo and notable client HTML ─────────────────────────────────────
+const logoFiles = require('fs').readdirSync('assets/logos').filter(f=>f.endsWith('.png')&&!f.startsWith('.'));
+const logoColors = ['#F97C94','#FC211B','#F19541','#0F5AF2'];
+const allLogoFiles = logoFiles.concat(logoFiles);
+const logoBoxHTML = allLogoFiles.map((f,i)=>{
+  const col=logoColors[i%logoColors.length];
+  return '<div class="mc-logo-box" style="background:'+col+'"><img src="./assets/logos/'+f.replace(/ /g,'%20')+'" alt="logo"></div>';
+}).join('');
+
+const notableFiles = require('fs').readdirSync('assets/logos/notable clients').filter(f=>f.endsWith('.png'));
+const notableBoxHTML = notableFiles.map(f=>{
+  return '<img src="./assets/logos/notable%20clients/'+f.replace(/ /g,'%20')+'" alt="client" style="object-fit:contain;width:100%;height:auto;">';
+}).join('');
+
+// ── 4. Deferred JS injections (run after Framer hydration) ───────────────────
 const bannerFiles=["akiroko","ardolf","cloud9","cottontail","fefe","fillian","fream","grim","hia","iridium","jessellum","jollz","keeoh","kuro","kwobus","limealicious","mari","mero","mystic","nishi","nyxi","obey","obnoctious","ohyaholla","otto","pedro","rebecca","shiro","sinder","sylvee","traid","woops"];
 const allImgs=[...bannerFiles,...bannerFiles];
 const fwd=allImgs.map(function(n){return '<img src="./assets/banners/'+n+'.png" alt="'+n+'">';}).join('');
@@ -150,20 +178,45 @@ const injectScript = `<script>
     // Footer class
     var fbar=document.querySelector('.framer-e0lfdf');
     if(fbar) fbar.classList.add('footer');
-    // Logo scroll - resize images
+    // Fix favicon
+    var favEl=document.querySelector('link[rel="icon"]');
+    if(favEl) favEl.href='./assets/icons/icon-red.png';
+
+    // Logo grid (450x450 boxes with logos)
     var lsc=document.querySelector('.framer-1ifpqum-container');
-    if(lsc){
-      lsc.id='logo-scroll';
-      lsc.querySelectorAll('img').forEach(function(img){ img.style.cssText='height:90px;width:160px;object-fit:cover;border-radius:8px;flex-shrink:0;'; });
+    if(lsc && !lsc.dataset.mcLogo){
+      lsc.dataset.mcLogo='1'; lsc.id='logo-scroll';
+      lsc.innerHTML='<div class="mc-logo-row fwd">${logoBoxHTML.replace(/\\/g,'\\\\')}</div>';
     }
-    // Shoutout box + Notable Clients title
-    var sb=document.querySelector('.framer-1b24l6d-container');
-    if(sb){
-      sb.id='shoutout-box';
-      if(!document.querySelector('.mc-notable-title')){
-        var nt=document.createElement('h2'); nt.className='mc-notable-title'; nt.textContent='Notable Clients';
-        sb.parentElement.insertBefore(nt,sb);
-      }
+
+    // Hero card overlay on framer-14tklpo
+    var f14=document.querySelector('.framer-14tklpo');
+    if(f14 && !f14.querySelector('.mc-card-overlay')){
+      f14.style.position='relative';
+      var ov=document.createElement('div'); ov.className='mc-card-overlay';
+      var pile=document.createElement('div'); pile.className='hero-card-pile';
+      pile.style.cssText='position:relative;width:min(600px,60vw);height:400px;';
+      var rots=[-12,-6,-2,4,10];
+      for(var ci=0;ci<5;ci++){var crd=document.createElement('img');crd.className='hero-card';crd.src='./assets/card-front.png';crd.style.zIndex=String(ci+1);pile.appendChild(crd);}
+      var cards2=Array.from(pile.querySelectorAll('.hero-card'));
+      cards2.forEach(function(card,i){card.style.transform='translateX(-150vw) rotate('+rots[i]+'deg)';});
+      ov.appendChild(pile); f14.appendChild(ov);
+      setTimeout(function(){cards2.forEach(function(card,i){setTimeout(function(){card.style.transition='transform 1.4s cubic-bezier(0.06,0.85,0.15,1)';card.style.transform='rotate('+rots[i]+'deg)';},i*360);});},300);
+      ['framer-1fbk941-container','framer-kpoerz'].forEach(function(cls){var el=f14.querySelector('.'+cls);if(el)el.style.display='none';});
+    }
+
+    // Remove Meet our customers hover
+    document.querySelectorAll('[data-framer-name="Trust Link"],.framer-h0rvu4').forEach(function(el){el.style.display='none';});
+
+    // Shoutout box with notable clients (3-col grid, 900x202)
+    var sb=document.querySelector('.framer-1b24l6d-container,#shoutout-box');
+    if(sb && !sb.dataset.mcShout){
+      sb.dataset.mcShout='1'; sb.id='shoutout-box';
+      sb.style.cssText='width:900px;max-width:900px;overflow:hidden;';
+      var grid2=sb.querySelector('[data-framer-name="Grid"]')||sb;
+      grid2.innerHTML='${notableBoxHTML}';
+      grid2.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:center;width:100%;height:202px;';
+      if(!document.querySelector('.mc-notable-title')){var nt=document.createElement('h2');nt.className='mc-notable-title';nt.textContent='Notable Clients';sb.parentElement.insertBefore(nt,sb);}
     }
 
 
@@ -177,11 +230,8 @@ const injectScript = `<script>
       if(h.textContent.trim()==='Shipped with Framer') h.textContent='Some of my work';
     });
     var fbar=document.querySelector('.framer-e0lfdf'); if(fbar) fbar.classList.add('footer');
-    var lsc=document.querySelector('.framer-1ifpqum-container');
-    if(lsc && lsc.id!=='logo-scroll'){
-      lsc.id='logo-scroll';
-      lsc.querySelectorAll('img').forEach(function(img){ img.style.cssText='height:90px;width:160px;object-fit:cover;border-radius:8px;flex-shrink:0;'; });
-    }
+    var lscP=document.querySelector('.framer-1ifpqum-container');
+    if(lscP && !lscP.dataset.mcLogo){ lscP.dataset.mcLogo='1'; lscP.id='logo-scroll'; lscP.innerHTML='<div class="mc-logo-row fwd">${logoBoxHTML.replace(/\\/g,"\\\\")}</div>'; }
     var sb=document.querySelector('.framer-1b24l6d-container');
     if(sb && sb.id!=='shoutout-box'){
       sb.id='shoutout-box';
