@@ -31,13 +31,13 @@ body>div{padding-top:60px;}
 /* Gallery - constrained to nav max-width */
 .banner-scroll{display:flex;flex-direction:column;gap:24px;width:100%;max-width:1200px;margin:0 auto;overflow:clip;border-radius:15px;}
 .banner-scroll-track{display:flex;gap:16px;width:max-content;}
-.banner-scroll-track.fwd{animation:gallery-fwd 80s linear infinite;}
-.banner-scroll-track.rev{animation:gallery-rev 80s linear infinite;}
+.banner-scroll-track.fwd{animation:gallery-fwd 120s linear infinite;}
+.banner-scroll-track.rev{animation:gallery-rev 120s linear infinite;}
 /* Logo boxes */
 #logo-scroll{overflow:hidden;}
 .mc-logo-row{display:flex;gap:20px;width:max-content;}
-.mc-logo-row.fwd{animation:gallery-fwd 80s linear infinite;}
-.mc-logo-row.rev{animation:gallery-rev 80s linear infinite;}
+.mc-logo-row.fwd{animation:gallery-fwd 120s linear infinite;}
+.mc-logo-row.rev{animation:gallery-rev 120s linear infinite;}
 .mc-logo-box{width:450px;height:450px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
 .mc-logo-box img{max-width:70%;max-height:70%;object-fit:contain;}
 /* Hero cards overlay */
@@ -64,8 +64,13 @@ body>div{padding-top:60px;}
 
 /* Remove cookie banner, footer nav */
 .framer-196faza-container,.framer-1pwa3xt,.framer-1xwpxoz-container,.framer-8a26wt-container{display:none!important;}
-/* Notable clients title */
-.mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;}
+/* Notable clients section */
+#notable-clients{margin-top:30px!important;}
+.mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;position:relative;z-index:10;}
+#shoutout-box{margin:0 auto!important;display:flex!important;justify-content:center!important;}
+/* Banner slower */
+.banner-scroll-track.fwd{animation:gallery-fwd 120s linear infinite;}
+.banner-scroll-track.rev{animation:gallery-rev 120s linear infinite;}
 </style>`;
 c = c.replace('</head>', css + '\n</head>');
 
@@ -182,17 +187,20 @@ const injectScript = `<script>
     var favEl=document.querySelector('link[rel="icon"]');
     if(favEl) favEl.href='./assets/icons/icon-red.png';
 
-    // Logo grid (450x450 boxes with logos)
+    // Logo grid — two rows (fwd + rev)
     var lsc=document.querySelector('.framer-1ifpqum-container');
     if(lsc && !lsc.dataset.mcLogo){
       lsc.dataset.mcLogo='1'; lsc.id='logo-scroll';
-      lsc.innerHTML='<div class="mc-logo-row fwd">${logoBoxHTML.replace(/\\/g,'\\\\')}</div>';
+      lsc.style.cssText='overflow:hidden;display:flex;flex-direction:column;gap:20px;';
+      lsc.innerHTML='<div class="mc-logo-row fwd">${logoBoxHTML.replace(/\\/g,'\\\\')}</div>'
+                  +'<div class="mc-logo-row rev">${logoBoxHTML.replace(/\\/g,'\\\\')}</div>';
     }
 
-    // Hero card overlay on framer-14tklpo
+    // Hero card overlay — always re-inject if missing (Framer re-renders)
     var f14=document.querySelector('.framer-14tklpo');
     if(f14 && !f14.querySelector('.mc-card-overlay')){
       f14.style.position='relative';
+      ['framer-1fbk941-container','framer-kpoerz'].forEach(function(cls){var el=f14.querySelector('.'+cls);if(el)el.style.display='none';});
       var ov=document.createElement('div'); ov.className='mc-card-overlay';
       var pile=document.createElement('div'); pile.className='hero-card-pile';
       pile.style.cssText='position:relative;width:min(600px,60vw);height:400px;';
@@ -202,26 +210,36 @@ const injectScript = `<script>
       cards2.forEach(function(card,i){card.style.transform='translateX(-150vw) rotate('+rots[i]+'deg)';});
       ov.appendChild(pile); f14.appendChild(ov);
       setTimeout(function(){cards2.forEach(function(card,i){setTimeout(function(){card.style.transition='transform 1.4s cubic-bezier(0.06,0.85,0.15,1)';card.style.transform='rotate('+rots[i]+'deg)';},i*360);});},300);
-      ['framer-1fbk941-container','framer-kpoerz'].forEach(function(cls){var el=f14.querySelector('.'+cls);if(el)el.style.display='none';});
     }
 
-    // Remove Meet our customers hover
+    // Rename framer-wc4wqf → #notable-clients
+    var wc4=document.querySelector('.framer-wc4wqf');
+    if(wc4 && wc4.id!=='notable-clients'){ wc4.id='notable-clients'; }
+
+    // Remove hover text on shoutout
     document.querySelectorAll('[data-framer-name="Trust Link"],.framer-h0rvu4').forEach(function(el){el.style.display='none';});
 
-    // Shoutout box with notable clients (3-col grid, 900x202)
+    // Shoutout box — replace all SVGs with logo images
     var sb=document.querySelector('.framer-1b24l6d-container,#shoutout-box');
     if(sb && !sb.dataset.mcShout){
       sb.dataset.mcShout='1'; sb.id='shoutout-box';
-      sb.style.cssText='width:900px;max-width:900px;overflow:hidden;';
-      var grid2=sb.querySelector('[data-framer-name="Grid"]')||sb;
+      sb.style.cssText='width:900px;max-width:900px;overflow:hidden;margin:0 auto;';
+      // Find and replace the grid content
+      var grid2=sb.querySelector('[data-framer-name="Grid"]')||sb.querySelector('ul')||sb;
+      // Replace all SVG elements with our logos
       grid2.innerHTML='${notableBoxHTML}';
       grid2.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:center;width:100%;height:202px;';
       if(!document.querySelector('.mc-notable-title')){var nt=document.createElement('h2');nt.className='mc-notable-title';nt.textContent='Notable Clients';sb.parentElement.insertBefore(nt,sb);}
     }
 
+  // Persistent title override (Framer resets title ~4s after load)
+  document.title='MorningCawfee - Design Portfolio';
+  var favEl2=document.querySelector('link[rel="icon"]');if(favEl2)favEl2.href='./assets/icons/icon-red.png';
 
-  // MutationObserver to re-apply changes when Framer re-renders
+  // MutationObserver — re-apply ALL changes when Framer re-renders
   function applyPersistent(){
+    // Title stays locked
+    if(document.title!=='MorningCawfee - Design Portfolio') document.title='MorningCawfee - Design Portfolio';
     document.querySelectorAll('h1').forEach(function(h){
       if(h.textContent.includes('Framer is the')||h.textContent.includes('AI website builder for standout sites'))
         h.textContent='Heya! My Name is MorningCawfee and this is my portfolio';
@@ -230,16 +248,22 @@ const injectScript = `<script>
       if(h.textContent.trim()==='Shipped with Framer') h.textContent='Some of my work';
     });
     var fbar=document.querySelector('.framer-e0lfdf'); if(fbar) fbar.classList.add('footer');
-    var lscP=document.querySelector('.framer-1ifpqum-container');
-    if(lscP && !lscP.dataset.mcLogo){ lscP.dataset.mcLogo='1'; lscP.id='logo-scroll'; lscP.innerHTML='<div class="mc-logo-row fwd">${logoBoxHTML.replace(/\\/g,"\\\\")}</div>'; }
-    var sb=document.querySelector('.framer-1b24l6d-container');
-    if(sb && sb.id!=='shoutout-box'){
-      sb.id='shoutout-box';
-      if(!document.querySelector('.mc-notable-title')){
-        var nt=document.createElement('h2'); nt.className='mc-notable-title'; nt.textContent='Notable Clients';
-        sb.parentElement.insertBefore(nt,sb);
-      }
+    var wc4P=document.querySelector('.framer-wc4wqf');if(wc4P&&wc4P.id!=='notable-clients')wc4P.id='notable-clients';
+    // Re-inject hero cards if Framer removed them
+    var f14P=document.querySelector('.framer-14tklpo');
+    if(f14P && !f14P.querySelector('.mc-card-overlay')){
+      ['framer-1fbk941-container','framer-kpoerz'].forEach(function(cls){var el=f14P.querySelector('.'+cls);if(el)el.style.display='none';});
+      var ov2=document.createElement('div');ov2.className='mc-card-overlay';
+      var pile2=document.createElement('div');pile2.className='hero-card-pile';pile2.style.cssText='position:relative;width:min(600px,60vw);height:400px;';
+      var rots2=[-12,-6,-2,4,10];
+      for(var ci2=0;ci2<5;ci2++){var c2=document.createElement('img');c2.className='hero-card';c2.src='./assets/card-front.png';c2.style.zIndex=String(ci2+1);pile2.appendChild(c2);}
+      Array.from(pile2.querySelectorAll('.hero-card')).forEach(function(card,i){card.style.transform='rotate('+rots2[i]+'deg)';});
+      ov2.appendChild(pile2);f14P.style.position='relative';f14P.appendChild(ov2);
     }
+    var lscP2=document.querySelector('.framer-1ifpqum-container');
+    if(lscP2 && !lscP2.dataset.mcLogo){ lscP2.dataset.mcLogo='1'; lscP2.id='logo-scroll'; lscP2.style.cssText='overflow:hidden;display:flex;flex-direction:column;gap:20px;'; lscP2.innerHTML='<div class="mc-logo-row fwd">${logoBoxHTML.replace(/\\/g,"\\\\")}</div><div class="mc-logo-row rev">${logoBoxHTML.replace(/\\/g,"\\\\")}</div>'; }
+    var sb2=document.querySelector('.framer-1b24l6d-container,#shoutout-box');
+    if(sb2&&!sb2.dataset.mcShout){ sb2.dataset.mcShout='1';sb2.id='shoutout-box';sb2.style.cssText='width:900px;max-width:900px;overflow:hidden;margin:0 auto;';(sb2.querySelector('[data-framer-name="Grid"]')||sb2).innerHTML='${notableBoxHTML}';(sb2.querySelector('[data-framer-name="Grid"]')||sb2).style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:center;width:100%;height:202px;';if(!document.querySelector('.mc-notable-title')){var nt2=document.createElement('h2');nt2.className='mc-notable-title';nt2.textContent='Notable Clients';sb2.parentElement.insertBefore(nt2,sb2);} }
   }
   var _obs_active=false;
   var observer = new MutationObserver(function(){
@@ -247,11 +271,13 @@ const injectScript = `<script>
     requestAnimationFrame(function(){ applyPersistent(); _obs_active=false; });
   });
   observer.observe(document.body, {childList:true, subtree:true, characterData:true});
+  // Also use setInterval to keep title locked (Framer uses async updates)
+  setInterval(function(){ if(document.title!=='MorningCawfee - Design Portfolio') document.title='MorningCawfee - Design Portfolio'; var f=document.querySelector('link[rel="icon"]');if(f&&f.href.includes('framer'))f.href='./assets/icons/icon-red.png'; }, 500);
 
   var attempts=0;
   var timer=setInterval(function(){ attempts++; inject(); if(attempts>30) clearInterval(timer); }, 300);
   document.addEventListener('DOMContentLoaded', inject);
-  window.addEventListener('load', function(){ setTimeout(inject,500); setTimeout(inject,1500); });
+  window.addEventListener('load', function(){ setTimeout(inject,500); setTimeout(inject,1500); setTimeout(inject,5000); });
 })();
 </script>`;
 c = c.replace('</body>', injectScript + '\n</body>');
