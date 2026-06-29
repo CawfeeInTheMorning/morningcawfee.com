@@ -334,10 +334,10 @@ const injectScript = `<script>
       var cards=Array.from(cardPile.querySelectorAll('.hero-card'));
       var maxZ=cards.length;
       cards.forEach(function(card,idx){
-        card.style.setProperty('--hcr', card.style.transform.match(/rotate(([^)]+))/)?.[1]||'0deg');
+        card.style.setProperty('--hcr', '0deg');
         // Hover: already handled by CSS, but set CSS var for rotate
         card.addEventListener('mouseenter',function(){
-          card.style.transform='scale(1.06) '+  (card.style.transform.match(/rotate[^)]+)/)?.[0]||'rotate(0deg)');
+          card.style.transform='scale(1.06)';
         });
         card.addEventListener('mouseleave',function(){
           if(!card._dragging) card.style.transform=card._baseTransform||'';
