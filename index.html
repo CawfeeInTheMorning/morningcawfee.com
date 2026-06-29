@@ -1067,9 +1067,8 @@ nav.framer-1gyv5v7,.framer-1gyv5v7[data-framer-name]{display:none!important;}
   });
   observer.observe(document.documentElement, { childList: true, subtree: true });
 
-  // Also run at DOMContentLoaded and load
-  document.addEventListener('DOMContentLoaded', applyAll);
-  window.addEventListener('load', applyAll);
+  // Do NOT run on DOMContentLoaded — wait for Framer hydration (first MutationObserver fire)
+  // The observer above catches the hydration re-render and applyAll reveals the page
 
   // Fallback: reveal after 6s even if Framer never fires
   setTimeout(function() {
