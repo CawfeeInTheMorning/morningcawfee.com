@@ -2,7 +2,9 @@ const fs = require('fs');
 let c = fs.readFileSync('__framer_base.html', 'utf8');
 
 // ── 1. Page title ─────────────────────────────────────────────────────────────
-c = c.replace('<title>Framer: AI website builder for professional sites</title>', '<title>MorningCawfee</title>');
+c = c.replace('<title>Framer: AI website builder for professional sites</title>', '<title>MorningCawfee - Design Portfolio</title>');
+c = c.split("Create a professional website with Framer’s no-code AI website builder. Design freely, manage CMS content, optimize SEO, collaborate, and publish fast.").join("Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!");
+c = c.split("Create a professional website with Framer's no-code AI website builder. Design freely, manage CMS content, optimize SEO, collaborate, and publish fast.").join("Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!");
 
 // ── 2. CSS injections ─────────────────────────────────────────────────────────
 const css = `<style id="mc-custom">
@@ -11,7 +13,7 @@ nav.framer-FygNn{display:none!important}
 
 /* Our nav */
 #mc-nav{position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;height:60px;border-bottom:1px solid rgba(255,255,255,0.08);}
-#mc-nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;padding:0 2rem;}
+#header{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;}
 #mc-nav .mc-logo img{height:32px;width:auto;display:block;}
 #mc-nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0;}
 #mc-nav ul li a{color:#fff;text-decoration:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;transition:color 0.2s ease;position:relative;}
@@ -25,7 +27,7 @@ body>div{padding-top:60px;}
 .framer-90o6xd>*{display:none!important;}
 
 /* Gallery - constrained to nav max-width */
-.mc-gallery-wrap{display:flex;flex-direction:column;gap:24px;width:100%;overflow:hidden;}
+.mc-gallery-wrap{display:flex;flex-direction:column;gap:24px;width:100%;overflow:clip;border-radius:15px;}
 .mc-gallery-track{display:flex;gap:16px;width:max-content;}
 .mc-gallery-track.fwd{animation:gallery-fwd 40s linear infinite;}
 .mc-gallery-track.rev{animation:gallery-rev 40s linear infinite;}
@@ -45,16 +47,10 @@ body>div{padding-top:60px;}
 c = c.replace('</head>', css + '\n</head>');
 
 // ── 3. Deferred JS injections (run after Framer hydration) ────────────────────
-const galImgs = [
-  './assets/backgrounds/bg-1.png','./assets/backgrounds/bg-2.png',
-  './assets/clients/fream.png','./assets/clients/cloud9.png',
-  './assets/clients/cottontailva.png','./assets/clients/grim.png',
-  './assets/clients/woops.png','./assets/clients/the-collective.png'
-];
-const allImgs = [...galImgs,...galImgs];
-const fwd = allImgs.map(s=>`<img src="${s}" alt="">`).join('');
-const rev = [...allImgs].reverse().map(s=>`<img src="${s}" alt="">`).join('');
-
+const bannerFiles=["akiroko","ardolf","cloud9","cottontail","fefe","fillian","fream","grim","hia","iridium","jessellum","jollz","keeoh","kuro","kwobus","limealicious","mari","mero","mystic","nishi","nyxi","obey","obnoctious","ohyaholla","otto","pedro","rebecca","shiro","sinder","sylvee","traid","woops"];
+const allImgs=[...bannerFiles,...bannerFiles];
+const fwd=allImgs.map(function(n){return '<img src="./assets/banners/'+n+'.png" alt="'+n+'">';}).join('');
+const rev=[...allImgs].reverse().map(function(n){return '<img src="./assets/banners/'+n+'.png" alt="'+n+'">';}).join('');
 // Social links for footer
 const socials = [
   {href:'https://x.com/morningcawfee', svg:'./assets/symbols/x.svg', label:'Twitter'},
@@ -69,8 +65,10 @@ const injectScript = `<script>
   // ── Nav ──────────────────────────────────────────────────────────────────
   var nav = document.createElement('nav');
   nav.id = 'mc-nav';
-  nav.innerHTML = '<div id="mc-nav-inner"><a class="mc-logo" href="/"><img src="./assets/logos/icon-red.png" alt="MorningCawfee"></a><ul><li><a href="/about">About</a></li><li><a href="/about#skills">Skills</a></li><li><a href="/work#work_experience">Experience</a></li><li><a href="/work#work_history">History</a></li><li><a href="/clients">Clients</a></li><li><a href="/contact">Contact</a></li></ul></div>';
+  nav.innerHTML = '<div id="header"><a class="mc-logo" href="/"><img src="./assets/icons/icon-red.png" alt="MorningCawfee"></a><ul><li><a href="/about">About</a></li><li><a href="/about#skills">Skills</a></li><li><a href="/work#work_experience">Experience</a></li><li><a href="/work#work_history">History</a></li><li><a href="/clients">Clients</a></li><li><a href="/contact">Contact</a></li></ul></div>';
   document.body.insertBefore(nav, document.body.firstChild);
+  document.title='MorningCawfee - Design Portfolio';
+  var md=document.querySelector('meta[name="description"]');if(md)md.setAttribute('content','Graphic Designer and UI/UX Designer with a heart for vibrance, contrast, and a little bit of fun!');
 
   function inject(){
     // ── Gallery ──────────────────────────────────────────────────────────
