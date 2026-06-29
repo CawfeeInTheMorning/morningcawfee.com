@@ -39,6 +39,23 @@ const ourOG = [
 ].join('\n');
 c = c.replace('</title>', '</title>\n' + ourOG);
 
+// ── Remove tracking, login, consent scripts ────────────────────────────────────
+c = c.replace(/<meta name="google-site-verification"[^>]+>/g, '');
+c = c.replace(/<script[^>]*src="https:\/\/www\.googletagmanager[^"]*"[^>]*><\/script>/g, '');
+c = c.replace(/<script[^>]*>window\.dataLayer[^<]*<\/script>/g, '');
+c = c.split('window.__framerLoginFetch = fetch(').join('window.__framerLoginFetch_REMOVED = false && fetch(');
+c = c.replace(/<script[^>]*src="https:\/\/events\.framer\.com[^"]*"[^>]*><\/script>/g, '');
+c = c.split('[Framer is hiring').join('[MorningCawfee Portfolio');
+c = c.split('speculationrules').join('speculationrules-removed');
+c = c.split('window.dbbRum').join('window._dbbRum_removed');
+c = c.split('"Initializing Framer Analytics Anonymous"').join('"[removed]"');
+// Remove Framer noscript GTM iframe
+c = c.replace(/<noscript[^>]*><iframe[^>]*googletagmanager[^>]*><\/iframe><\/noscript>/g, '');
+
+// ── Add title-lock script as first thing in <head> ────────────────────────────
+const titleLock = '<script>(function(){var _t="MorningCawfee - Design Portfolio";try{Object.defineProperty(document,"title",{get:function(){return _t;},set:function(v){if(v&&!v.includes("MorningCawfee"))return;_t=v||_t;},configurable:true});}catch(e){}var _ce=console.error;console.error=function(){var a=Array.from(arguments).join(" ");if(a.includes("Hydration")||a.includes("#418")||a.includes("#422"))return;_ce.apply(console,arguments);};})();<\/script>';
+c = c.replace('<head>', '<head>\n' + titleLock);
+
 // ── 2. CSS injections ─────────────────────────────────────────────────────────
 const css = `<style id="mc-custom">
 /* Hide Framer nav */
@@ -104,6 +121,30 @@ body>div{padding-top:60px;}
 /* Social icons red on hover */
 .mc-social-link:hover img{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg)!important;}
 .framer-n5owxb .framer-t9b48k p{font-size:13px!important;}
+
+/* 220s scroll speed */
+.mc-logo-row.fwd{animation:gallery-fwd 220s linear infinite!important;}
+.mc-logo-row.rev{animation:gallery-rev 220s linear infinite!important;}
+.banner-scroll-track.fwd{animation:gallery-fwd 220s linear infinite!important;}
+.banner-scroll-track.rev{animation:gallery-rev 220s linear infinite!important;}
+/* notable-clients position */
+#notable-clients{bottom:-64px!important;margin-top:0!important;}
+/* Email link in footer */
+.framer-10nqoyr a{font-size:13px!important;}
+/* Hero card draggable */
+.hero-card{cursor:grab!important;transition:transform 0.2s ease,box-shadow 0.2s ease!important;}
+.hero-card:hover{transform:scale(1.06) rotate(var(--hcr,0deg))!important;box-shadow:0 16px 40px rgba(0,0,0,0.8)!important;}
+.hero-card.dragging{cursor:grabbing!important;}
+/* Nav logo 58px */
+#mc-nav .mc-logo img{height:58px!important;}
+/* Banner gradient top */
+.banner-scroll-gradient-top{position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,#000 0%,rgba(0,0,0,0) 100%);z-index:1;pointer-events:none;}
+/* Social buttons nav */
+.mc-nav-socials{display:flex;align-items:center;gap:12px;}
+.mc-nav-socials a{display:flex;align-items:center;justify-content:center;opacity:0.7;transition:opacity 0.2s;}
+.mc-nav-socials a:hover{opacity:1;}
+.mc-nav-socials img{width:18px;height:18px;filter:invert(1);}
+.mc-contact-text{font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,0.8);margin-right:8px;}
 </style>`;
 c = c.replace('</head>', css + '\n</head>');
 
@@ -245,9 +286,84 @@ const injectScript = `<script>
       setTimeout(function(){cards2.forEach(function(card,i){setTimeout(function(){card.style.transition='transform 1.4s cubic-bezier(0.06,0.85,0.15,1)';card.style.transform='rotate('+rots[i]+'deg)';},i*360);});},300);
     }
 
-    // Rename framer-wc4wqf → #notable-clients
+    // Rename framer-wc4wqf -> #notable-clients
     var wc4=document.querySelector('.framer-wc4wqf');
-    if(wc4 && wc4.id!=='notable-clients'){ wc4.id='notable-clients'; }
+    if(wc4 && wc4.id!=='notable-clients'){ wc4.id='notable-clients'; wc4.style.bottom='-64px'; wc4.style.position='absolute'; }
+
+    // Add gradient to top of banner-scroll section
+    var galSec2=document.querySelector('.framer-1d2612y');
+    if(galSec2 && !galSec2.querySelector('.banner-scroll-gradient-top')){
+      galSec2.style.position='relative';
+      var grad=document.createElement('div'); grad.className='banner-scroll-gradient-top';
+      galSec2.insertBefore(grad,galSec2.firstChild);
+    }
+
+    // Replace Download app button + add Contact me + social buttons
+    document.querySelectorAll('p,div,span').forEach(function(el){
+      if(el.textContent.trim()==='Download app' && !el.dataset.mcReplaced){
+        el.dataset.mcReplaced='1';
+        var container=el.closest('a')||el.closest('[data-reset="button"]');
+        if(container){
+          var parent=container.parentElement;
+          // Add "Contact me" text before
+          var contactText=document.createElement('span');contactText.className='mc-contact-text';contactText.textContent='Contact me';
+          parent.insertBefore(contactText,container);
+          // Replace container with social icon buttons
+          var socDiv=document.createElement('div');socDiv.className='mc-nav-socials';
+          [['https://x.com/morningcawfee','./assets/symbols/x.svg','Twitter'],
+           ['https://www.twitch.tv/morningcawfee','./assets/symbols/twitch.svg','Twitch'],
+           ['https://github.com/CawfeeInTheMorning','./assets/symbols/github.svg','GitHub'],
+           ['https://www.behance.net/morningcawfee','./assets/symbols/behance.svg','Behance']
+          ].forEach(function(s){var a=document.createElement('a');a.href=s[0];a.target='_blank';a.rel='noopener';a.setAttribute('aria-label',s[2]);var img=document.createElement('img');img.src=s[1];img.alt=s[2];a.appendChild(img);socDiv.appendChild(a);});
+          parent.replaceChild(socDiv,container);
+        }
+      }
+    });
+
+    // Move Sticky Agents to left of Features
+    var stickyEl=document.querySelector('[data-framer-name="Sticky Agents"]');
+    var featEl=document.querySelector('[data-framer-name="Features"]');
+    if(stickyEl&&featEl&&stickyEl.parentElement===featEl.parentElement&&stickyEl!==featEl.previousElementSibling){
+      featEl.parentElement.insertBefore(stickyEl,featEl);
+    }
+
+    // Hero card drag interaction
+    var cardPile=document.querySelector('.hero-card-pile');
+    if(cardPile && !cardPile.dataset.mcDrag){
+      cardPile.dataset.mcDrag='1';
+      var cards=Array.from(cardPile.querySelectorAll('.hero-card'));
+      var maxZ=cards.length;
+      cards.forEach(function(card,idx){
+        card.style.setProperty('--hcr', card.style.transform.match(/rotate(([^)]+))/)?.[1]||'0deg');
+        // Hover: already handled by CSS, but set CSS var for rotate
+        card.addEventListener('mouseenter',function(){
+          card.style.transform='scale(1.06) '+  (card.style.transform.match(/rotate[^)]+)/)?.[0]||'rotate(0deg)');
+        });
+        card.addEventListener('mouseleave',function(){
+          if(!card._dragging) card.style.transform=card._baseTransform||'';
+        });
+        card.addEventListener('mousedown',function(e){
+          if(e.button!==0)return;
+          // Bring to front
+          maxZ++;card.style.zIndex=maxZ;
+          card._dragging=true;card.style.cursor='grabbing';
+          var startX=e.clientX,startY=e.clientY;
+          var startL=parseInt(card.style.left||0,10)||0;
+          var startT=parseInt(card.style.top||0,10)||0;
+          card.style.position='absolute';
+          function onMove(e2){
+            var dx=e2.clientX-startX,dy=e2.clientY-startY;
+            card.style.left=(startL+dx)+'px';card.style.top=(startT+dy)+'px';
+          }
+          function onUp(){
+            card._dragging=false;card.style.cursor='grab';
+            document.removeEventListener('mousemove',onMove);document.removeEventListener('mouseup',onUp);
+          }
+          document.addEventListener('mousemove',onMove);document.addEventListener('mouseup',onUp);
+          e.preventDefault();
+        });
+      });
+    }
 
     // Remove hover text on shoutout
     document.querySelectorAll('[data-framer-name="Trust Link"],.framer-h0rvu4').forEach(function(el){el.style.display='none';});
@@ -273,6 +389,14 @@ const injectScript = `<script>
   function applyPersistent(){
     // Title stays locked
     if(document.title!=='MorningCawfee - Design Portfolio') document.title='MorningCawfee - Design Portfolio';
+    // Rename framer-wc4wqf → #notable-clients and position it
+    var wc4=document.querySelector('.framer-wc4wqf');if(wc4&&wc4.id!=='notable-clients'){wc4.id='notable-clients';wc4.style.bottom='-64px';wc4.style.position='absolute';}
+    // Move Sticky Agents left of Features
+    var sticky=document.querySelector('[data-framer-name="Sticky Agents"]');
+    var features=document.querySelector('[data-framer-name="Features"]');
+    if(sticky&&features&&sticky.parentElement===features.parentElement&&sticky!==features.previousElementSibling){
+      features.parentElement.insertBefore(sticky,features);
+    }
     document.querySelectorAll('h1').forEach(function(h){
       if(h.textContent.includes('Framer is the')||h.textContent.includes('AI website builder for standout sites'))
         h.textContent='Heya! My Name is MorningCawfee and this is my portfolio';
