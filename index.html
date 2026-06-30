@@ -4303,16 +4303,12 @@ body>div{padding-top:60px;}
 .mc-work-box img{max-width:70%;max-height:70%;object-fit:contain;transition:max-width 0.3s ease,max-height 0.3s ease;}
 .mc-work-box:hover img{max-width:100%;max-height:100%;}
 /* Vertical pinwheel banner scroll */
-.mc-banner-vert{display:flex;flex-direction:row;gap:10px;width:100%;height:100%;overflow:hidden;padding:10px;box-sizing:border-box;}
-.mc-banner-col{display:flex;flex-direction:column;flex:1;overflow:hidden;}
-.mc-banner-col-track{display:flex;flex-direction:column;gap:10px;width:100%;}
-.mc-banner-col-track.up{animation:banner-col-up 28s linear infinite;}
-.mc-banner-col-track.down{animation:banner-col-down 28s linear infinite;}
-.mc-banner-item{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
-.mc-banner-item img{width:100%;height:auto;border-radius:8px;object-fit:cover;display:block;}
-.mc-banner-label{background:rgba(255,255,255,0.08);border-radius:5px;padding:4px 8px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:rgba(255,255,255,0.6);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.03em;text-transform:uppercase;}
-@keyframes banner-col-up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
-@keyframes banner-col-down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+/* Vertical scroll wheel (framer-17cygph) */
+.mc-pw-wheel{position:relative;width:100%;height:100%;overflow:hidden;cursor:grab;}
+.mc-pw-wheel:active{cursor:grabbing;}
+.mc-pw-item{position:absolute;left:50%;width:85%;transform-origin:center top;}
+.mc-pw-item img{width:100%;border-radius:10px;display:block;pointer-events:none;}
+.mc-pw-label{display:inline-block;width:fit-content;background:rgba(255,255,255,0.1);border-radius:5px;padding:3px 10px;margin-top:5px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:rgba(255,255,255,0.65);white-space:nowrap;letter-spacing:0.04em;text-transform:uppercase;}
 </style>
 </head>
 <body>
@@ -4505,70 +4501,129 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
   function inject(){
     
 
-    // Vertical pinwheel banner scroll in framer-17cygph
+    // Vertical scroll wheel in framer-17cygph
     (function(){
       var pw=document.querySelector('.framer-17cygph');
       if(!pw||pw.dataset.mcPinwheel) return;
       pw.dataset.mcPinwheel='1';
       // ── Edit labels here ────────────────────────────────────────────────
-      var cols=[
-        { dir:'up', items:[
-          {src:'akiroko',label:'Akiroko'},
-          {src:'ardolf',label:'Ardolf'},
-          {src:'cloud9',label:'Cloud9'},
-          {src:'cottontail',label:'CottontailVA'},
-          {src:'fefe',label:'Fefe'},
-          {src:'fillian',label:'Fillian'},
-          {src:'fream',label:'Fream'},
-          {src:'grim',label:'GrimAcid'},
-        ]},
-        { dir:'down', items:[
-          {src:'hia',label:'Hia'},
-          {src:'iridium',label:'Iridium'},
-          {src:'jessellum',label:'Jessellum'},
-          {src:'jollz',label:'Jollz'},
-          {src:'keeoh',label:'Keeoh'},
-          {src:'kuro',label:'Kuro'},
-          {src:'kwobus',label:'Kwobus'},
-          {src:'limealicious',label:'Limealicious'},
-        ]},
-        { dir:'up', items:[
-          {src:'mari',label:'Mari'},
-          {src:'mero',label:'Mero'},
-          {src:'mystic',label:'Mystic'},
-          {src:'nishi',label:'Nishi'},
-          {src:'nyxi',label:'Nyxi'},
-          {src:'obey',label:'Obey Alliance'},
-          {src:'obnoctious',label:'Obnoctious'},
-          {src:'ohyaholla',label:'OhYaHolla'},
-        ]},
-        { dir:'down', items:[
-          {src:'otto',label:'Otto'},
-          {src:'pedro',label:'Pedro'},
-          {src:'rebecca',label:'Rebecca'},
-          {src:'shiro',label:'Shiro'},
-          {src:'sinder',label:'Sinder'},
-          {src:'sylvee',label:'Sylvee'},
-          {src:'traid',label:'Traid'},
-          {src:'woops',label:'Woops'},
-        ]},
+      var items=[
+        {src:'akiroko',label:'Akiroko'},
+        {src:'ardolf',label:'Ardolf'},
+        {src:'cloud9',label:'Cloud9'},
+        {src:'cottontail',label:'CottontailVA'},
+        {src:'fefe',label:'Fefe'},
+        {src:'fillian',label:'Fillian'},
+        {src:'fream',label:'Fream'},
+        {src:'grim',label:'GrimAcid'},
+        {src:'hia',label:'Hia'},
+        {src:'iridium',label:'Iridium'},
+        {src:'jessellum',label:'Jessellum'},
+        {src:'jollz',label:'Jollz'},
+        {src:'keeoh',label:'Keeoh'},
+        {src:'kuro',label:'Kuro'},
+        {src:'kwobus',label:'Kwobus'},
+        {src:'limealicious',label:'Limealicious'},
+        {src:'mari',label:'Mari'},
+        {src:'mero',label:'Mero'},
+        {src:'mystic',label:'Mystic'},
+        {src:'nishi',label:'Nishi'},
+        {src:'nyxi',label:'Nyxi'},
+        {src:'obey',label:'Obey Alliance'},
+        {src:'obnoctious',label:'Obnoctious'},
+        {src:'ohyaholla',label:'OhYaHolla'},
+        {src:'otto',label:'Otto'},
+        {src:'pedro',label:'Pedro'},
+        {src:'rebecca',label:'Rebecca'},
+        {src:'shiro',label:'Shiro'},
+        {src:'sinder',label:'Sinder'},
+        {src:'sylvee',label:'Sylvee'},
+        {src:'traid',label:'Traid'},
+        {src:'woops',label:'Woops'},
       ];
-      // ── Build HTML ───────────────────────────────────────────────────────
-      function buildItem(it){
-        return '<div class="mc-banner-item">'
-          +'<img src="./assets/banners/'+it.src+'.png" alt="'+it.label+'">'
-          +'<div class="mc-banner-label">'+it.label+'</div>'
-          +'</div>';
-      }
-      var html='<div class="mc-banner-vert">';
-      cols.forEach(function(col){
-        var inner=col.items.map(buildItem).join('');
-        html+='<div class="mc-banner-col"><div class="mc-banner-col-track '+col.dir+'">'
-          +inner+inner  // doubled for seamless loop
-          +'</div></div>';
+      var n=items.length;
+      var SPACING=0; // calculated dynamically
+      var offset=0, targetOffset=0, raf=null;
+
+      // Build wrapper + one element per item
+      var wrapper=document.createElement('div');
+      wrapper.className='mc-pw-wheel';
+      pw.innerHTML=''; pw.appendChild(wrapper);
+
+      var els=items.map(function(it){
+        var el=document.createElement('div');
+        el.className='mc-pw-item';
+        var img=document.createElement('img');
+        img.src='./assets/banners/'+it.src+'.png';
+        img.alt=it.label;
+        var lbl=document.createElement('div');
+        lbl.className='mc-pw-label';
+        lbl.textContent=it.label;
+        el.appendChild(img); el.appendChild(lbl);
+        wrapper.appendChild(el);
+        return el;
       });
-      html+='</div>';
-      pw.innerHTML=html;
+
+      function render(){
+        var wh=wrapper.offsetHeight||400;
+        var cy=wh/2;
+        // measure item height once
+        if(!SPACING && els[0].offsetHeight) SPACING=els[0].offsetHeight+12;
+        var sp=SPACING||120;
+        var FADE=3; // items visible on each side
+        els.forEach(function(el,i){
+          // circular distance: shortest path around the wheel
+          var raw=((i-offset)%n+n)%n;
+          if(raw>n/2) raw-=n;
+          var dist=raw;
+          var abs=Math.abs(dist);
+          if(abs>FADE+0.5){el.style.visibility='hidden';return;}
+          el.style.visibility='';
+          var y=cy+dist*sp;
+          var scale=Math.max(0.35,1-abs*0.22);
+          var opacity=Math.max(0,1-abs*0.33);
+          var bright=Math.max(0.1,1-abs*0.3);
+          el.style.transform='translateX(-50%) translateY('+y+'px) scale('+scale+')';
+          el.style.opacity=String(opacity);
+          el.style.filter='brightness('+bright+')';
+          el.style.zIndex=String(100-Math.round(abs*10));
+        });
+      }
+
+      function tick(){
+        offset+=(targetOffset-offset)*0.13;
+        render();
+        if(Math.abs(targetOffset-offset)>0.001){
+          raf=requestAnimationFrame(tick);
+        } else {
+          offset=targetOffset; render(); raf=null;
+        }
+      }
+
+      function scroll(dy){
+        targetOffset+=dy/((SPACING||120)*0.8);
+        // keep targetOffset in [0,n) range smoothly (modular)
+        if(raf) cancelAnimationFrame(raf);
+        raf=requestAnimationFrame(tick);
+      }
+
+      wrapper.addEventListener('wheel',function(e){
+        e.preventDefault(); e.stopPropagation();
+        scroll(e.deltaY);
+      },{passive:false});
+
+      var ty=0;
+      wrapper.addEventListener('touchstart',function(e){ty=e.touches[0].clientY;},{passive:true});
+      wrapper.addEventListener('touchmove',function(e){
+        e.preventDefault();
+        var dy=ty-e.touches[0].clientY; ty=e.touches[0].clientY;
+        scroll(dy*2);
+      },{passive:false});
+
+      render();
+      // re-render once images load to get correct SPACING
+      setTimeout(function(){ SPACING=0; render(); },400);
+      window.addEventListener('resize',function(){ SPACING=0; render(); });
     })();
 
         // Logo grid in Visual Desktop (framer-1g1ma8g)
