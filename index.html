@@ -4302,6 +4302,17 @@ body>div{padding-top:60px;}
 .mc-work-box{width:100%;aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .mc-work-box img{max-width:70%;max-height:70%;object-fit:contain;transition:max-width 0.3s ease,max-height 0.3s ease;}
 .mc-work-box:hover img{max-width:100%;max-height:100%;}
+/* Vertical pinwheel banner scroll */
+.mc-banner-vert{display:flex;flex-direction:row;gap:10px;width:100%;height:100%;overflow:hidden;padding:10px;box-sizing:border-box;}
+.mc-banner-col{display:flex;flex-direction:column;flex:1;overflow:hidden;}
+.mc-banner-col-track{display:flex;flex-direction:column;gap:10px;width:100%;}
+.mc-banner-col-track.up{animation:banner-col-up 28s linear infinite;}
+.mc-banner-col-track.down{animation:banner-col-down 28s linear infinite;}
+.mc-banner-item{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.mc-banner-item img{width:100%;height:auto;border-radius:8px;object-fit:cover;display:block;}
+.mc-banner-label{background:rgba(255,255,255,0.08);border-radius:5px;padding:4px 8px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:rgba(255,255,255,0.6);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.03em;text-transform:uppercase;}
+@keyframes banner-col-up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes banner-col-down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -4493,6 +4504,72 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
 
   function inject(){
     
+
+    // Vertical pinwheel banner scroll in framer-17cygph
+    (function(){
+      var pw=document.querySelector('.framer-17cygph');
+      if(!pw||pw.dataset.mcPinwheel) return;
+      pw.dataset.mcPinwheel='1';
+      // ── Edit labels here ────────────────────────────────────────────────
+      var cols=[
+        { dir:'up', items:[
+          {src:'akiroko',label:'Akiroko'},
+          {src:'ardolf',label:'Ardolf'},
+          {src:'cloud9',label:'Cloud9'},
+          {src:'cottontail',label:'CottontailVA'},
+          {src:'fefe',label:'Fefe'},
+          {src:'fillian',label:'Fillian'},
+          {src:'fream',label:'Fream'},
+          {src:'grim',label:'GrimAcid'},
+        ]},
+        { dir:'down', items:[
+          {src:'hia',label:'Hia'},
+          {src:'iridium',label:'Iridium'},
+          {src:'jessellum',label:'Jessellum'},
+          {src:'jollz',label:'Jollz'},
+          {src:'keeoh',label:'Keeoh'},
+          {src:'kuro',label:'Kuro'},
+          {src:'kwobus',label:'Kwobus'},
+          {src:'limealicious',label:'Limealicious'},
+        ]},
+        { dir:'up', items:[
+          {src:'mari',label:'Mari'},
+          {src:'mero',label:'Mero'},
+          {src:'mystic',label:'Mystic'},
+          {src:'nishi',label:'Nishi'},
+          {src:'nyxi',label:'Nyxi'},
+          {src:'obey',label:'Obey Alliance'},
+          {src:'obnoctious',label:'Obnoctious'},
+          {src:'ohyaholla',label:'OhYaHolla'},
+        ]},
+        { dir:'down', items:[
+          {src:'otto',label:'Otto'},
+          {src:'pedro',label:'Pedro'},
+          {src:'rebecca',label:'Rebecca'},
+          {src:'shiro',label:'Shiro'},
+          {src:'sinder',label:'Sinder'},
+          {src:'sylvee',label:'Sylvee'},
+          {src:'traid',label:'Traid'},
+          {src:'woops',label:'Woops'},
+        ]},
+      ];
+      // ── Build HTML ───────────────────────────────────────────────────────
+      function buildItem(it){
+        return '<div class="mc-banner-item">'
+          +'<img src="./assets/banners/'+it.src+'.png" alt="'+it.label+'">'
+          +'<div class="mc-banner-label">'+it.label+'</div>'
+          +'</div>';
+      }
+      var html='<div class="mc-banner-vert">';
+      cols.forEach(function(col){
+        var inner=col.items.map(buildItem).join('');
+        html+='<div class="mc-banner-col"><div class="mc-banner-col-track '+col.dir+'">'
+          +inner+inner  // doubled for seamless loop
+          +'</div></div>';
+      });
+      html+='</div>';
+      pw.innerHTML=html;
+    })();
 
         // Logo grid in Visual Desktop (framer-1g1ma8g)
     var vd=document.querySelector('.framer-1g1ma8g');
