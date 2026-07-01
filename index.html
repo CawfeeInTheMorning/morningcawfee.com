@@ -4315,7 +4315,13 @@ body>div{padding-top:60px;}
 /* Work category grid */
 .mc-work-cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;height:100%;box-sizing:border-box;}
 .mc-work-cat-box{background:#000;border-radius:25px;border:1px solid rgba(255,255,255,0.1);position:relative;min-height:200px;display:flex;align-items:flex-end;padding:24px;overflow:hidden;}
-.mc-work-cat-label{font-family:'RMMono',monospace;font-size:44px;font-weight:500;color:#fff;line-height:1.1;}
+.mc-work-cat-label{font-family:'RMMono',monospace;font-size:44px;font-weight:500;color:#fff;line-height:1.1;position:relative;z-index:2;}
+.mc-work-cat-box{transition:transform 0.25s ease;}
+.mc-work-cat-box:hover{transform:scale(1.03);}
+.mc-crown-icon{position:absolute;top:16px;left:16px;width:48px;height:48px;object-fit:contain;transform:rotate(-20deg) translateY(0);opacity:0;transition:opacity 0.2s ease;animation:crown-float 2.2s ease-in-out infinite;animation-play-state:paused;pointer-events:none;z-index:3;}
+.mc-work-cat-box:hover .mc-crown-icon{opacity:1;animation-play-state:running;}
+@keyframes crown-float{0%,100%{transform:rotate(-20deg) translateY(0)}50%{transform:rotate(-20deg) translateY(-7px)}}
+.mc-cat-wrap{width:100%;}
 </style>
 </head>
 <body>
@@ -4643,18 +4649,23 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       window.addEventListener('resize',function(){ SPACING=0; render(); });
     })();
 
-    // "All my projects" title + category grid in framer-nv2ev6
+    // "All my projects" title + category grid — moved to top of framer-1psahvp
     (function(){
       var nv=document.querySelector('.framer-nv2ev6');
-      if(!nv||nv.dataset.mcCatGrid) return;
+      var psahvp=document.querySelector('.framer-1psahvp');
+      var bc5yxf=document.querySelector('.framer-bc5yxf');
+      if(!nv||!psahvp||!bc5yxf||nv.dataset.mcCatGrid) return;
       nv.dataset.mcCatGrid='1';
-      // Title outside framer-nv2ev6, before it in the DOM
-      if(!nv.parentElement.querySelector('.mc-section-title-cat')){
-        var t=document.createElement('p');
-        t.className='mc-section-title mc-section-title-cat';
-        t.textContent='All my projects';
-        nv.parentElement.insertBefore(t,nv);
-      }
+      // Hide nv2ev6 in its original location
+      nv.style.display='none';
+      // Build wrapper to inject before framer-bc5yxf
+      var wrap=document.createElement('div');
+      wrap.className='mc-cat-wrap';
+      // Title
+      var t=document.createElement('p');
+      t.className='mc-section-title mc-section-title-cat';
+      t.textContent='All my projects';
+      wrap.appendChild(t);
       // 6 category boxes in 3-col grid
       var cats=['Posters','Overlays','UI/UX','Branding','Business Cards','Other Graphics'];
       var grid=document.createElement('div');
@@ -4662,14 +4673,20 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       cats.forEach(function(name){
         var box=document.createElement('div');
         box.className='mc-work-cat-box';
+        // Crown icon (shown on hover via CSS)
+        var crown=document.createElement('img');
+        crown.src='./assets/icons/icon-crown.png';
+        crown.className='mc-crown-icon';
+        crown.alt='';
+        box.appendChild(crown);
         var lbl=document.createElement('span');
         lbl.className='mc-work-cat-label';
         lbl.textContent=name;
         box.appendChild(lbl);
         grid.appendChild(box);
       });
-      nv.innerHTML='';
-      nv.appendChild(grid);
+      wrap.appendChild(grid);
+      psahvp.insertBefore(wrap,bc5yxf);
     })();
 
         // Logo grid in Visual Desktop (framer-1g1ma8g)
