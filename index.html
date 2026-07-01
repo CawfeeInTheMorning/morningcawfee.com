@@ -4310,6 +4310,12 @@ body>div{padding-top:60px;}
 .mc-pw-item img{width:100%;border-radius:10px;display:block;pointer-events:none;}
 .mc-pw-label{display:inline-block;width:fit-content;background:rgba(255,255,255,0.1);border-radius:5px;padding:3px 10px;margin-top:8px;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;color:rgba(255,255,255,0.75);white-space:nowrap;letter-spacing:0.04em;text-transform:uppercase;}
 .mc-section-desc{font-family:'Inter',sans-serif;font-size:18px;font-weight:500;color:#fff;text-align:center;margin-bottom:20px;position:relative;z-index:10;line-height:1.5;max-width:680px;margin-left:auto;margin-right:auto;}
+.mc-section-title{font-family:'RMMono',monospace;font-size:44px;font-weight:500;color:#fff;text-align:left;margin-bottom:16px;line-height:1.1;}
+.framer-17cygph{padding:45px 45px 0px 45px!important;}
+/* Work category grid */
+.mc-work-cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;height:100%;box-sizing:border-box;}
+.mc-work-cat-box{background:#000;border-radius:25px;border:1px solid rgba(255,255,255,0.1);position:relative;min-height:200px;display:flex;align-items:flex-end;padding:24px;overflow:hidden;}
+.mc-work-cat-label{font-family:'RMMono',monospace;font-size:44px;font-weight:500;color:#fff;line-height:1.1;}
 </style>
 </head>
 <body>
@@ -4548,11 +4554,12 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
 
       // Build wrapper + one element per item
       // Title above the wheel
-      if(!pw.parentElement.querySelector('.mc-section-desc')){
+      // Title outside framer-11596mk (pw.parentElement), inserted before it
+      if(!pw.parentElement.parentElement.querySelector('.mc-section-title')){
         var title=document.createElement('p');
-        title.className='mc-section-desc';
+        title.className='mc-section-title';
         title.textContent='Social Media designing is one of my favorite things to do. Here\'s some of the headers I\'ve made';
-        pw.parentElement.insertBefore(title,pw);
+        pw.parentElement.parentElement.insertBefore(title,pw.parentElement);
       }
       var wrapper=document.createElement('div');
       wrapper.className='mc-pw-wheel';
@@ -4634,6 +4641,35 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       // re-render once images load to get correct SPACING
       setTimeout(function(){ SPACING=0; render(); },400);
       window.addEventListener('resize',function(){ SPACING=0; render(); });
+    })();
+
+    // "All my projects" title + category grid in framer-nv2ev6
+    (function(){
+      var nv=document.querySelector('.framer-nv2ev6');
+      if(!nv||nv.dataset.mcCatGrid) return;
+      nv.dataset.mcCatGrid='1';
+      // Title outside framer-nv2ev6, before it in the DOM
+      if(!nv.parentElement.querySelector('.mc-section-title-cat')){
+        var t=document.createElement('p');
+        t.className='mc-section-title mc-section-title-cat';
+        t.textContent='All my projects';
+        nv.parentElement.insertBefore(t,nv);
+      }
+      // 6 category boxes in 3-col grid
+      var cats=['Posters','Overlays','UI/UX','Branding','Business Cards','Other Graphics'];
+      var grid=document.createElement('div');
+      grid.className='mc-work-cat-grid';
+      cats.forEach(function(name){
+        var box=document.createElement('div');
+        box.className='mc-work-cat-box';
+        var lbl=document.createElement('span');
+        lbl.className='mc-work-cat-label';
+        lbl.textContent=name;
+        box.appendChild(lbl);
+        grid.appendChild(box);
+      });
+      nv.innerHTML='';
+      nv.appendChild(grid);
     })();
 
         // Logo grid in Visual Desktop (framer-1g1ma8g)
