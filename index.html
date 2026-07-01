@@ -4285,7 +4285,15 @@ body>div{padding-top:60px;}
 .mc-contact-btn img{width:18px;height:18px;display:block;}
 .mc-contact-btn:hover img{filter:invert(1);}
 /* Notable clients section — moved down 150px */
-#notable-clients{margin-top:-100px!important;padding:0px 0 0px!important;position:relative;bottom:0px!important;}
+#notable-clients{display:none!important;}
+.framer-bb1ihd,.framer-fd1hfd{display:none!important;}
+/* Notable client ticker cards */
+.mc-client-card{width:280px;height:400px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);background-color:#000;position:relative;overflow:hidden;cursor:pointer;flex-shrink:0;}
+.mc-client-card::before{content:'';position:absolute;inset:0;background-image:var(--hover-img);background-size:cover;background-position:center;opacity:0;transition:opacity 0.4s ease;}
+.mc-client-card:hover::before{opacity:1;}
+.mc-client-logo{position:absolute;bottom:70px;left:50%;transform:translateX(-50%);max-width:65%;max-height:90px;object-fit:contain;z-index:2;pointer-events:none;}
+.mc-client-footer{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;z-index:2;}
+.mc-client-socials{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.06em;}
 
 .mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;position:relative;z-index:10;}
 .framer-15v4oca{mask:none!important;-webkit-mask:none!important;background:transparent!important;}
@@ -4725,6 +4733,48 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       +'</div></div>';
     }
 
+    // Notable clients in framer-psyzf0
+    (function(){
+      var psyzf0=document.querySelector('.framer-psyzf0');
+      if(!psyzf0||psyzf0.dataset.mcClients) return;
+      psyzf0.dataset.mcClients='1';
+      var ul=psyzf0.querySelector('ul');
+      if(!ul) return;
+      ul.style.opacity='1';
+      ul.style.transform='none';
+      var base='./assets/logos/notable clients/notable - ';
+      var clients=[
+        {key:'chris',name:'Chris'},
+        {key:'cotton',name:'CottontailVA'},
+        {key:'grim',name:'GrimAcid'},
+        {key:'natt',name:'Natt'},
+        {key:'shiro',name:'Shiro'},
+      ];
+      ul.innerHTML='';
+      clients.forEach(function(c){
+        var li=document.createElement('li');
+        li.className='ticker-item mc-ticker-item';
+        li.style.cssText='flex-grow:0;flex-shrink:0;position:relative;';
+        var card=document.createElement('div');
+        card.className='mc-client-card';
+        card.style.setProperty('--hover-img','url("'+base+c.key+' (img).png")');
+        var logo=document.createElement('img');
+        logo.src=base+c.key+'.png';
+        logo.alt=c.name;
+        logo.className='mc-client-logo';
+        var footer=document.createElement('div');
+        footer.className='mc-client-footer';
+        var socials=document.createElement('span');
+        socials.className='mc-client-socials';
+        socials.textContent='Their Socials';
+        footer.appendChild(socials);
+        card.appendChild(logo);
+        card.appendChild(footer);
+        li.appendChild(card);
+        ul.appendChild(li);
+      });
+    })();
+
     // Contact buttons in Button Group
     var btnGroup=document.querySelector('[data-framer-name="Button Group"]');
     if(btnGroup&&!btnGroup.querySelector('.mc-contact-group')){
@@ -4932,6 +4982,7 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
     });
     document.querySelectorAll('h2').forEach(function(h){
       if(h.textContent.trim()==='Shipped with Framer') h.textContent='I\'m a Graphic Designer and UI/UX specializing in social media graphics';
+      if(h.textContent.trim()==='Trusted by teams shipping big sites') h.textContent='Awesome people I\'ve worked with';
     });
     var fbar=document.querySelector('.framer-e0lfdf'); if(fbar) fbar.classList.add('footer');
     var wc4P=document.querySelector('.framer-wc4wqf');if(wc4P&&wc4P.id!=='notable-clients')wc4P.id='notable-clients';
