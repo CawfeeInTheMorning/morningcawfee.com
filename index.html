@@ -4995,8 +4995,27 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       var ov2=document.createElement('div');ov2.className='mc-card-overlay';
       var pile2=document.createElement('div');pile2.className='hero-card-pile';pile2.style.cssText='position:relative;width:min(600px,60vw);height:400px;';
       var rots2=[-12,-6,-2,4,10];
-      for(var ci2=0;ci2<5;ci2++){var c2=document.createElement('img');c2.className='hero-card';c2.src='./assets/card-front.png';c2.style.zIndex=String(ci2+1);pile2.appendChild(c2);}
-      Array.from(pile2.querySelectorAll('.hero-card')).forEach(function(card,i){card.style.transform='rotate('+rots2[i]+'deg)';});
+      for(var ci2=0;ci2<5;ci2++){var c2=document.createElement('img');c2.className='hero-card';c2.src='./assets/card-front.png';c2.draggable=false;c2.style.zIndex=String(ci2+1);pile2.appendChild(c2);}
+      var cards3=Array.from(pile2.querySelectorAll('.hero-card'));
+      cards3.forEach(function(card,i){
+        var baseRot=rots2[i];
+        card.style.transform='rotate('+baseRot+'deg)';
+        card.style.transition='transform 0.25s ease,box-shadow 0.2s ease';
+        card.style.cursor='grab';
+        card.addEventListener('mouseenter',function(){if(!card._dragging)card.style.transform='rotate('+baseRot+'deg) scale(1.06)';});
+        card.addEventListener('mouseleave',function(){if(!card._dragging)card.style.transform='rotate('+baseRot+'deg) scale(1)';});
+        card.addEventListener('dragstart',function(e){e.preventDefault();});
+        card.addEventListener('mousedown',function(e){
+          e.preventDefault();
+          var maxZ=0;cards3.forEach(function(cc){maxZ=Math.max(maxZ,parseInt(cc.style.zIndex)||0);});
+          card.style.zIndex=String(maxZ+1);card.style.cursor='grabbing';card._dragging=true;
+          card.style.transition='box-shadow 0.2s ease';
+          var sx=e.clientX,sy=e.clientY,sl=card.offsetLeft,st=card.offsetTop;
+          function mv(ev){var dx=ev.clientX-sx,dy=ev.clientY-sy;card.style.left=(sl+dx)+'px';card.style.top=(st+dy)+'px';card.style.transform='rotate('+(baseRot+dx*0.04)+'deg) scale(1.06)';}
+          function up(){card._dragging=false;card.style.cursor='grab';card.style.transition='transform 0.25s ease,box-shadow 0.2s ease';card.style.transform='rotate('+baseRot+'deg) scale(1)';document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);}
+          document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);
+        });
+      });
       ov2.appendChild(pile2);f14P.style.position='relative';f14P.appendChild(ov2);
     }
     var lscP2=document.querySelector('.framer-1ifpqum-container');
