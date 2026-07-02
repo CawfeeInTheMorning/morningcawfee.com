@@ -4338,11 +4338,19 @@ nav.framer-FygNn{display:none!important}
 .mc-cat-wrap{width:100%;max-width:1200px;margin-bottom:100px;}
 .mc-section-title-cat{margin-bottom:70px!important;}
 
-/* Footer full-bleed via JS */
-.framer-3wgpx{overflow:visible!important;}
-.framer-zprce9{overflow-x:visible!important;}
-body{overflow-x:hidden;}
-.framer-e0lfdf{overflow:visible!important;}
+/* Hide Framer footer — replaced by static #mc-footer */
+.framer-e0lfdf{display:none!important;}
+
+/* Static footer */
+#mc-footer{width:100%;background:#000;border-top:1px solid rgba(255,255,255,0.1);font-family:'Inter',sans-serif;}
+#mc-footer-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 40px;height:58px;}
+.mc-footer-left{display:flex;align-items:center;gap:12px;}
+.mc-footer-follow{font-size:13px;color:rgba(255,255,255,0.4);white-space:nowrap;}
+.mc-footer-social{display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);transition:color 0.2s;}
+.mc-footer-social:hover{color:#fff;}
+.mc-footer-center a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s;}
+.mc-footer-center a:hover{color:#fff;}
+.mc-footer-right{font-size:13px;color:rgba(255,255,255,0.4);white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -4889,17 +4897,7 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       var el=document.querySelector('.'+cls); if(el) el.style.display='none';
     });
     // Footer class
-    var fbar=document.querySelector('.framer-e0lfdf');
-    if(fbar){
-      fbar.classList.add('footer');
-      var vw=window.innerWidth;
-      var fbarLeft=fbar.getBoundingClientRect().left;
-      var pad=Math.max(20,fbarLeft)+'px';
-      var sid='mc-footer-width';
-      var sel=document.getElementById(sid);
-      if(!sel){sel=document.createElement('style');sel.id=sid;document.head.appendChild(sel);}
-      sel.textContent='.framer-e0lfdf{width:'+vw+'px!important;margin-left:'+(-fbarLeft)+'px!important;max-width:none!important;box-sizing:border-box!important;padding-left:'+pad+'!important;padding-right:'+pad+'!important;}';
-    }
+    
     // Fix favicon
     var favEl=document.querySelector('link[rel="icon"]');
     if(favEl) favEl.href='./assets/icons/icon-red.png';
@@ -5065,4 +5063,29 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
   window.addEventListener('load', function(){ setTimeout(inject,500); setTimeout(inject,1500); setTimeout(inject,5000); });
 })();
 </script>
+<footer id="mc-footer">
+  <div id="mc-footer-inner">
+    <div class="mc-footer-left">
+      <span class="mc-footer-follow">Follow me</span>
+      <a class="mc-footer-social" href="https://x.com/morningcawfee" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a class="mc-footer-social" href="https://www.twitch.tv/immorningcawfee" target="_blank" rel="noopener" aria-label="Twitch">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      </a>
+      <a class="mc-footer-social" href="https://github.com/CawfeeInTheMorning/morningcawfee.com" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <a class="mc-footer-social" href="https://www.behance.net/morningcawfee" target="_blank" rel="noopener" aria-label="Behance">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.938 4.503c.702 0 1.34.06 1.92.188.577.13 1.07.33 1.485.61.41.28.733.65.96 1.12.225.47.34 1.05.34 1.73 0 .74-.17 1.36-.507 1.86-.338.49-.837.9-1.502 1.22.906.26 1.576.72 2.022 1.37.448.66.665 1.45.665 2.36 0 .75-.13 1.39-.41 1.93-.28.55-.67 1-.155 1.35-.486.36-1.048.63-1.68.8-.63.17-1.297.25-1.99.25H0V4.51h6.938zM16.94 7.725h-5.02V6.04h5.02v1.686zM12.84 13.1c.362 0 .67-.04.93-.12.262-.08.48-.2.655-.36.176-.16.308-.36.395-.6.09-.24.135-.52.135-.84 0-.65-.19-1.13-.573-1.45-.383-.32-.91-.48-1.582-.48H3.667V13.1h9.172zm-.27 4.972c.712 0 1.284-.17 1.714-.51.43-.34.645-.876.645-1.607 0-.388-.068-.712-.206-.97-.136-.26-.326-.47-.566-.63-.24-.16-.52-.27-.836-.33-.315-.06-.65-.09-1.002-.09H3.667v4.137h8.903zm9.43-1.556c.383.373.934.56 1.652.56.515 0 .957-.13 1.328-.39.37-.26.597-.54.68-.84h2.54c-.406 1.26-1.03 2.16-1.872 2.7-.84.54-1.857.81-3.048.81-.826 0-1.57-.13-2.232-.4-.66-.27-1.22-.65-1.68-1.15-.46-.5-.813-1.1-1.058-1.8-.246-.7-.37-1.47-.37-2.31 0-.816.13-1.573.39-2.27.262-.7.633-1.3 1.112-1.8.48-.5 1.05-.9 1.714-1.18.662-.28 1.4-.42 2.21-.42.9 0 1.69.17 2.37.52.68.35 1.236.82 1.67 1.41.434.59.744 1.27.93 2.04.186.77.256 1.58.21 2.43h-7.575c.044.84.303 1.476.686 1.85zm2.895-5.06c-.3-.33-.79-.497-1.47-.497-.43 0-.787.073-1.073.217-.285.145-.517.326-.696.543-.18.217-.308.45-.385.7-.077.25-.12.49-.13.714h4.376c-.1-.74-.32-1.348-.62-1.677z"/></svg>
+      </a>
+    </div>
+    <div class="mc-footer-center">
+      <a href="mailto:morningcawfee@gmail.com">morningcawfee@gmail.com</a>
+    </div>
+    <div class="mc-footer-right">
+      &copy; 2026 MorningCawfee
+    </div>
+  </div>
+</footer>
 </body></html>
