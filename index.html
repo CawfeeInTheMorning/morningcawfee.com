@@ -799,7 +799,8 @@
 @font-face { font-family: "Azeret Mono Variable Placeholder"; src: local("Arial"); ascent-override: 65.78%; descent-override: 16.15%; line-gap-override: 0.00%; size-adjust: 142.45% }
 .framer-bb1ihd{display:none!important;}
 .framer-fd1hfd{display:none!important;}
-.framer-wc4wqf{display:none!important;}</style>
+.framer-wc4wqf{display:none!important;}
+.framer-nod97n{display:none!important;}</style>
 	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
 	
@@ -4283,23 +4284,24 @@ body>div{padding-top:60px;}
 #mc-nav ul li a.active::after{width:100%;}
 .mc-contact-group{display:flex;align-items:center;gap:10px;}
 .mc-contact-label{color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;white-space:nowrap;}
-.mc-contact-btn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#fff;transition:background 0.2s ease,transform 0.2s ease;flex-shrink:0;}
+.mc-contact-btn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#0248aa;transition:background 0.2s ease,transform 0.2s ease;flex-shrink:0;}
 .mc-contact-btn:hover{background:#E81215;transform:scale(1.08);}
-.mc-contact-btn img{width:18px;height:18px;display:block;}
+.mc-contact-btn img{width:18px;height:18px;display:block;filter:invert(1);}
 .mc-contact-btn:hover img{filter:invert(1);}
 /* Notable clients section — moved down 150px */
 #notable-clients{display:none!important;}
 .framer-bb1ihd,.framer-fd1hfd{display:none!important;}
 /* Notable client ticker cards */
-.mc-client-card{width:360px;height:460px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);background-color:#000;position:relative;overflow:hidden;cursor:pointer;flex-shrink:0;}
+.mc-client-card{width:360px;height:460px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);background-color:#000;position:relative;overflow:hidden;cursor:pointer;flex-shrink:0;transition:transform 0.25s ease,border-color 0.25s ease,margin 0.25s ease;}
+.mc-client-card:hover{transform:scale(1.04);border-color:#E81215;margin-inline:14px;}
 .framer-psyzf0 .ticker-item:not(.mc-ticker-item){display:none!important;}
 .mc-client-card::before{content:'';position:absolute;inset:0;background-image:var(--hover-img);background-size:cover;background-position:center;opacity:0;transition:opacity 0.4s ease;}
 .mc-client-card:hover::before{opacity:1;}
-.mc-client-logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:85%;object-fit:contain;z-index:2;pointer-events:none;}
+.mc-client-logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:85%;object-fit:contain;z-index:2;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.8));pointer-events:none;}
 .mc-client-footer{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;z-index:2;}
 .mc-client-socials{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.06em;}
 
-.mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin-bottom:24px;position:relative;z-index:10;}
+.mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin:48px 0;position:relative;z-index:10;}
 .framer-15v4oca{mask:none!important;-webkit-mask:none!important;background:transparent!important;}
 #logo-scroll{position:relative;}
 #logo-scroll::after{content:'';position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,transparent 0%,#000000c7 100%);pointer-events:none;z-index:5;}
@@ -4746,6 +4748,9 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       if(!ul) return;
       ul.style.opacity='1';
       ul.style.transform='none';
+      ul.style.gap='30px';
+      ul.style.overflow='clip';
+      ul.style.padding='20px 0';
       var base='./assets/logos/notable clients/notable - ';
       var clients=[
         {key:'chris',name:'Chris'},
@@ -4926,11 +4931,10 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
               var startLeft=card.offsetLeft,startTop=card.offsetTop;
               function onMove(ev){
                 var dx=ev.clientX-startMouseX,dy=ev.clientY-startMouseY;
-                var newLeft=Math.min(Math.max(0,startLeft+dx),pileRect.width-card.offsetWidth);
-                var newTop=Math.min(Math.max(0,startTop+dy),pileRect.height-card.offsetHeight);
-                card.style.left=newLeft+'px';
-                card.style.top=newTop+'px';
-                card.style.transform='rotate('+baseRot+'deg) scale(1.06)';
+                card.style.left=(startLeft+dx)+'px';
+                card.style.top=(startTop+dy)+'px';
+                var dynRot=baseRot+dx*0.04;
+                card.style.transform='rotate('+dynRot+'deg) scale(1.06)';
               }
               function onUp(){
                 card._dragging=false;
