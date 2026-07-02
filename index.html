@@ -805,7 +805,6 @@
 .framer-1ic9yvz,.framer-1j2gvch,.framer-vx0zoi{display:none!important;}
 .framer-1ifpqum-container{display:none!important;}
 .framer-nv2ev6{display:none!important;}
-.framer-1ixlec7{display:none!important;}
 .framer-nod97n{display:none!important;}</style>
 	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
@@ -4341,8 +4340,8 @@ nav.framer-FygNn{display:none!important}
 .mc-work-cat-box:hover .mc-crown-icon{opacity:1;animation-play-state:running;}
 @keyframes crown-float{0%,100%{transform:rotate(-20deg) translateY(0)}50%{transform:rotate(-20deg) translateY(-7px)}}
 .mc-cat-wrap{width:100%;max-width:1200px;margin:0 auto 100px;}
-.framer-1d2612y{padding-bottom:0!important;}
-#mc-logo-scroll{max-width:1200px;margin:0 auto;}
+.framer-1d2612y{padding:0 0 160px!important;}
+#mc-logo-scroll{max-width:1200px;margin:24px auto 0;}
 .mc-section-title-cat{margin-bottom:70px!important;}
 
 /* Hide Framer footer — replaced by static #mc-footer */
@@ -4744,6 +4743,12 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
     }
 
 
+
+    // Hero title — replace Framer placeholder quickly
+    document.querySelectorAll('h1').forEach(function(h){
+      if(h.textContent.includes('Framer is the')||h.textContent.includes('AI website builder'))
+        h.textContent='Heya! My Name is MorningCawfee and this is my portfolio';
+    });
 
     // Contact buttons in Button Group
     var btnGroup=document.querySelector('[data-framer-name="Button Group"]');
