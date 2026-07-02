@@ -796,7 +796,10 @@
 @font-face { font-family: "Chillax Placeholder"; src: local("Arial"); ascent-override: 88.04%; descent-override: 29.64%; line-gap-override: 8.08%; size-adjust: 111.32% }
 @font-face { font-family: "Panchang Placeholder"; src: local("Arial"); ascent-override: 59.10%; descent-override: 15.84%; line-gap-override: 5.48%; size-adjust: 164.13% }
 @font-face { font-family: "Manrope Placeholder"; src: local("Arial"); ascent-override: 102.74%; descent-override: 28.91%; line-gap-override: 0.00%; size-adjust: 103.76% }
-@font-face { font-family: "Azeret Mono Variable Placeholder"; src: local("Arial"); ascent-override: 65.78%; descent-override: 16.15%; line-gap-override: 0.00%; size-adjust: 142.45% }</style>
+@font-face { font-family: "Azeret Mono Variable Placeholder"; src: local("Arial"); ascent-override: 65.78%; descent-override: 16.15%; line-gap-override: 0.00%; size-adjust: 142.45% }
+.framer-bb1ihd{display:none!important;}
+.framer-fd1hfd{display:none!important;}
+.framer-wc4wqf{display:none!important;}</style>
 	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
 	
@@ -4751,6 +4754,9 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
         {key:'shiro',name:'Shiro'},
       ];
       ul.innerHTML='';
+      // Hide fZRHu button
+      var fzrhu=psyzf0.querySelector('.framer-fZRHu,.framer-qkzqfa,.framer-lt5xhr');
+      if(fzrhu) fzrhu.style.display='none';
       clients.forEach(function(c){
         var li=document.createElement('li');
         li.className='ticker-item mc-ticker-item';
@@ -4762,14 +4768,7 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
         logo.src=base+c.key+'.png';
         logo.alt=c.name;
         logo.className='mc-client-logo';
-        var footer=document.createElement('div');
-        footer.className='mc-client-footer';
-        var socials=document.createElement('span');
-        socials.className='mc-client-socials';
-        socials.textContent='Their Socials';
-        footer.appendChild(socials);
         card.appendChild(logo);
-        card.appendChild(footer);
         li.appendChild(card);
         ul.appendChild(li);
       });
@@ -4948,9 +4947,6 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
       },300);
     }
 
-    // Rename framer-wc4wqf → #notable-clients
-    var wc4=document.querySelector('.framer-wc4wqf');
-    if(wc4 && wc4.id!=='notable-clients'){ wc4.id='notable-clients'; }
 
     // Remove hover text on shoutout
     document.querySelectorAll('[data-framer-name="Trust Link"],.framer-h0rvu4').forEach(function(el){el.style.display='none';});
