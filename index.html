@@ -828,7 +828,7 @@
 #mc-work-header{display:flex;flex-direction:row;align-items:flex-end;justify-content:space-between;width:100%;}
 #mc-work-header h2{font-family:'RMMono',monospace;font-size:42px;font-weight:500;color:#fff;margin:0;}
 #mc-work-design{width:100%;}
-#mc-logo-wheel-box{background:#111;border-radius:25px;border:1px solid rgba(255,255,255,0.1);width:100%;height:480px;overflow:hidden;position:relative;cursor:grab;}
+#mc-logo-wheel-box{background:#000;border-radius:25px;border:1px solid rgba(255,255,255,0.1);width:100%;height:480px;overflow:hidden;position:relative;cursor:grab;}
 #mc-logo-wheel-box:active{cursor:grabbing;}
 #mc-logo-wheel{position:absolute;inset:0;}
 .mc-lw-item{position:absolute;transform-origin:center center;pointer-events:none;}
@@ -1150,7 +1150,7 @@ nav.framer-FygNn{display:none!important}
     // Wheel is a large circle; its center is below the box so the top arc of the wheel
     // passes through the center of the box — that top point is the "selected" position.
     var R=Math.max(W,H)*0.7;
-    var wheelCy=cy+R; // wheel center, below box center
+    var wheelCx=cx+R; // wheel center, right of box center
     var ANGLE_STEP=(2*Math.PI)/n;
     var FADE=Math.floor(n/4);
     els.forEach(function(el,i){
@@ -1159,10 +1159,10 @@ nav.framer-FygNn{display:none!important}
       var dist=raw, abs=Math.abs(dist);
       if(abs>FADE+0.5){el.style.visibility="hidden";return;}
       el.style.visibility="";
-      // angle: -PI/2 = top of circle = selected position
-      var angle=-Math.PI/2+dist*ANGLE_STEP;
-      var x=cx+R*Math.cos(angle);
-      var y=wheelCy+R*Math.sin(angle);
+      // angle: PI = leftmost point of circle = selected position (box center)
+      var angle=Math.PI+dist*ANGLE_STEP;
+      var x=wheelCx+R*Math.cos(angle);
+      var y=cy+R*Math.sin(angle);
       var scale=Math.max(0.2,1-abs*0.2);
       var fade=Math.max(0,abs-0.4);
       var opacity=Math.max(0,1-fade*0.5);
