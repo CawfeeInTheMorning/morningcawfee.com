@@ -965,6 +965,27 @@ nav.framer-FygNn{display:none!important}
 .mc-notable-wrap{overflow-x:clip;overflow-y:visible;padding-block:20px;width:100%;}
 .mc-notable-track{display:flex;gap:30px;width:max-content;animation:notable-scroll 25s linear infinite;}
 @keyframes notable-scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 15px))}}
+
+/* Work folder tabs */
+#mc-work-folder{min-width:0;}
+#mc-work-tabs{display:flex;flex-direction:row;gap:0;padding:0 0 0 4px;align-items:flex-end;}
+.mc-tab{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.15);border-bottom:none;border-radius:10px 10px 0 0;padding:10px 24px;font-family:'RMMono',monospace;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.35);cursor:pointer;transition:background 0.2s,color 0.2s;position:relative;bottom:-1px;z-index:1;margin-right:4px;}
+.mc-tab:hover{background:rgba(255,255,255,0.10);color:rgba(255,255,255,0.75);}
+.mc-tab.active{background:#111;color:#fff;border-color:rgba(255,255,255,0.15);border-bottom:1px solid #111;z-index:3;}
+#mc-work-folder-body{background:#111;border:1px solid rgba(255,255,255,0.15);border-radius:0 12px 12px 12px;padding:32px;position:relative;z-index:2;overflow:hidden;box-sizing:border-box;}
+.mc-tab-panel{display:none;}
+.mc-tab-panel.active{display:block;}
+.mc-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.mc-work-box{width:100%;aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.2s ease;}
+.mc-work-box:hover{transform:scale(1.04);}
+.mc-work-box img{max-width:70%;max-height:70%;object-fit:contain;}
+.mc-folder-banner-scroll{overflow-x:auto;padding-bottom:8px;}
+.mc-folder-banner-scroll::-webkit-scrollbar{height:4px;}
+.mc-folder-banner-scroll::-webkit-scrollbar-track{background:transparent;}
+.mc-folder-banner-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px;}
+.mc-folder-banner-track{display:flex;gap:12px;width:max-content;}
+.mc-folder-banner-track img{height:200px;width:auto;border-radius:10px;object-fit:cover;flex-shrink:0;transition:transform 0.2s ease;}
+.mc-folder-banner-track img:hover{transform:scale(1.03);}
 </style>
 </head>
 <body>
@@ -1620,26 +1641,4 @@ var dbpr=100;if(Math.random()*100>100-dbpr){var d="dbbRum",w=window,o=document,a
     </div>
   </div>
 </footer>
-</body></html
-/* Work folder tabs */
-#mc-work-folder{min-width:0;}
-#mc-work-tabs{display:flex;flex-direction:row;gap:6px;padding:0;align-items:flex-end;width:100%;max-width:100%;}
-.mc-tab{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-bottom:none;border-radius:12px 12px 0 0;padding:12px 28px;font-family:'RMMono',monospace;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.45);cursor:pointer;transition:background 0.2s ease,color 0.2s ease;position:relative;bottom:-1px;z-index:1;}
-.mc-tab:hover{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);}
-.mc-tab.active{background:#111;color:#fff;border-bottom:1px solid #111;z-index:3;}
-#mc-work-folder-body{background:#111;border:1px solid rgba(255,255,255,0.12);border-radius:0 12px 12px 12px;padding:32px;position:relative;z-index:2;overflow:hidden;width:100%;max-width:100%;box-sizing:border-box;}
-.mc-tab-panel{display:none;}
-.mc-tab-panel.active{display:block;}
-.mc-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-.mc-work-box{width:100%;aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.2s ease;}
-.mc-work-box:hover{transform:scale(1.04);}
-.mc-work-box img{max-width:70%;max-height:70%;object-fit:contain;}
-.mc-folder-banner-scroll{overflow-x:auto;padding-bottom:8px;width:100%;}
-.mc-folder-banner-scroll::-webkit-scrollbar{height:4px;}
-.mc-folder-banner-scroll::-webkit-scrollbar-track{background:transparent;}
-.mc-folder-banner-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px;}
-.mc-folder-banner-track{display:flex;gap:12px;width:max-content;}
-.mc-folder-banner-track img{height:180px;width:auto;border-radius:10px;object-fit:cover;flex-shrink:0;transition:transform 0.2s ease;}
-.mc-folder-banner-track img:hover{transform:scale(1.03);}
-
->
+</body></html>
