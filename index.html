@@ -967,18 +967,19 @@ nav.framer-FygNn{display:none!important}
 @keyframes notable-scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 15px))}}
 
 /* Work folder tabs */
-#mc-work-folder{min-width:0;}
-#mc-work-tab-row{display:flex;align-items:flex-end;position:relative;z-index:4;overflow:visible;}
-.mc-tab-slot{display:flex;align-items:flex-end;position:relative;top:8px;transition:top 0.15s;}
-.mc-tab-slot.tab-active{top:0;z-index:3;}
-.mc-folder-tab{position:relative;display:inline-flex;align-items:center;background:none;border:none;padding:0;cursor:pointer;bottom:0;z-index:2;overflow:visible;}
+#mc-work-folder{min-width:0;position:relative;padding-top:90px;}
+.mc-folder-layer{position:absolute;top:0;left:0;width:100%;z-index:1;}
+.mc-folder-layer.active{position:relative;z-index:3;}
+.mc-folder-tab-area{padding-left:200px;}
+.mc-folder-layer.active .mc-folder-tab-area{padding-left:0;}
+.mc-folder-tab{position:relative;display:inline-flex;align-items:center;background:none;border:none;padding:0;cursor:pointer;z-index:2;overflow:visible;}
 .mc-tab-img{display:block;width:485px;height:40px;object-fit:fill;}
-.mc-tab-label{position:absolute;left:35px;top:50%;transform:translateY(-50%);font-family:'RMMono',monospace;font-size:14px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.4);white-space:nowrap;pointer-events:none;z-index:3;transition:color 0.2s;}
+.mc-tab-label{position:absolute;left:35px;top:50%;transform:translateY(-50%);font-family:'RMMono',monospace;font-size:14px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.3);white-space:nowrap;pointer-events:none;z-index:3;transition:color 0.2s;}
 .mc-folder-tab.active .mc-tab-label{color:#fff;}
-.mc-folder-tab:hover .mc-tab-label{color:rgba(255,255,255,0.75);}
-#mc-folder-stack{position:relative;z-index:1;}
-.mc-folder-body{background:#0d0d0d;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:32px;box-sizing:border-box;position:absolute;top:0;left:0;width:100%;bottom:0;z-index:1;overflow:hidden;pointer-events:none;}
-.mc-folder-body.active{position:relative;bottom:auto;background:#111;border-color:rgba(255,255,255,0.15);z-index:3;pointer-events:auto;}
+.mc-folder-tab:hover .mc-tab-label{color:rgba(255,255,255,0.7);}
+.mc-folder-body{background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:32px;box-sizing:border-box;overflow:hidden;}
+.mc-folder-layer.active .mc-folder-body{border-color:rgba(255,255,255,0.15);border-radius:0 12px 12px 12px;}
+.mc-folder-layer:not(.active) .mc-folder-body>*{visibility:hidden;}
 .mc-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .mc-work-box{width:100%;aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.2s ease;}
 .mc-work-box:hover{transform:scale(1.04);}
@@ -1115,42 +1116,46 @@ nav.framer-FygNn{display:none!important}
       <h2>My Work</h2>
     </header>
     <div id="mc-work-folder">
-      <div id="mc-work-tab-row">
-        <div class="mc-tab-slot" data-for="logos" data-radius="0 12px 12px 12px"><button class="mc-folder-tab active"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-selected.png" alt=""><span class="mc-tab-label">Logo Design</span></button></div>
-        <div class="mc-tab-slot" data-for="banners" data-radius="12px"><button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Social Media</span></button></div>
-      </div>
-      <div id="mc-folder-stack">
-        <div class="mc-folder-body active" id="mc-panel-logos"><div class="mc-work-grid"><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20akiroko.png" alt="akiroko"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20ardolf.png" alt="ardolf"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20bam.png" alt="bam"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20bluskys.png" alt="bluskys"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20eggwick.png" alt="eggwick"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20femtanyl.png" alt="femtanyl"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20filian.png" alt="filian"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20fream.png" alt="fream"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20frizk.png" alt="frizk"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20grim.png" alt="grim"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20hexloom.png" alt="hexloom"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20jadey.png" alt="jadey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20kuro.png" alt="kuro"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20kwobus.png" alt="kwobus"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20limealicious.png" alt="limealicious"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20mikki.png" alt="mikki"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20natt.png" alt="natt"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20nishi.png" alt="nishi"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20nyxifox.png" alt="nyxifox"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20obey.png" alt="obey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20obnoctious.png" alt="obnoctious"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20rebecca.png" alt="rebecca"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20shiro.png" alt="shiro"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20signalvortex.png" alt="signalvortex"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20sylvee.png" alt="sylvee"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20traid.png" alt="traid"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20voidtag.png" alt="voidtag"></div></div></div>
+      <div class="mc-folder-layer" data-tab="banners">
+        <div class="mc-folder-tab-area">
+          <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Social Media</span></button>
+        </div>
         <div class="mc-folder-body" id="mc-panel-banners"><div class="mc-folder-banner-scroll">
             <div class="mc-folder-banner-track"><img src="./assets/banners/akiroko.png" alt="akiroko"><img src="./assets/banners/ardolf.png" alt="ardolf"><img src="./assets/banners/cloud9.png" alt="cloud9"><img src="./assets/banners/cottontail.png" alt="cottontail"><img src="./assets/banners/fefe.png" alt="fefe"><img src="./assets/banners/fillian.png" alt="fillian"><img src="./assets/banners/fream.png" alt="fream"><img src="./assets/banners/grim.png" alt="grim"><img src="./assets/banners/hia.png" alt="hia"><img src="./assets/banners/iridium.png" alt="iridium"><img src="./assets/banners/jessellum.png" alt="jessellum"><img src="./assets/banners/jollz.png" alt="jollz"><img src="./assets/banners/keeoh.png" alt="keeoh"><img src="./assets/banners/kuro.png" alt="kuro"><img src="./assets/banners/kwobus.png" alt="kwobus"><img src="./assets/banners/limealicious.png" alt="limealicious"><img src="./assets/banners/mari.png" alt="mari"><img src="./assets/banners/mero.png" alt="mero"><img src="./assets/banners/mystic.png" alt="mystic"><img src="./assets/banners/nishi.png" alt="nishi"><img src="./assets/banners/nyxi.png" alt="nyxi"><img src="./assets/banners/obey.png" alt="obey"><img src="./assets/banners/obnoctious.png" alt="obnoctious"><img src="./assets/banners/ohyaholla.png" alt="ohyaholla"><img src="./assets/banners/otto.png" alt="otto"><img src="./assets/banners/pedro.png" alt="pedro"><img src="./assets/banners/rebecca.png" alt="rebecca"><img src="./assets/banners/shiro.png" alt="shiro"><img src="./assets/banners/sinder.png" alt="sinder"><img src="./assets/banners/sylvee.png" alt="sylvee"><img src="./assets/banners/traid.png" alt="traid"><img src="./assets/banners/woops.png" alt="woops"></div>
           </div></div>
+      </div>
+      <div class="mc-folder-layer active" data-tab="logos">
+        <div class="mc-folder-tab-area">
+          <button class="mc-folder-tab active"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-selected.png" alt=""><span class="mc-tab-label">Logo Design</span></button>
+        </div>
+        <div class="mc-folder-body" id="mc-panel-logos"><div class="mc-work-grid"><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20akiroko.png" alt="akiroko"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20ardolf.png" alt="ardolf"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20bam.png" alt="bam"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20bluskys.png" alt="bluskys"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20eggwick.png" alt="eggwick"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20femtanyl.png" alt="femtanyl"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20filian.png" alt="filian"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20fream.png" alt="fream"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20frizk.png" alt="frizk"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20grim.png" alt="grim"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20hexloom.png" alt="hexloom"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20jadey.png" alt="jadey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20kuro.png" alt="kuro"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20kwobus.png" alt="kwobus"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20limealicious.png" alt="limealicious"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20mikki.png" alt="mikki"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20natt.png" alt="natt"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20nishi.png" alt="nishi"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20nyxifox.png" alt="nyxifox"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20obey.png" alt="obey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20obnoctious.png" alt="obnoctious"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20rebecca.png" alt="rebecca"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20shiro.png" alt="shiro"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20signalvortex.png" alt="signalvortex"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20sylvee.png" alt="sylvee"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20traid.png" alt="traid"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20voidtag.png" alt="voidtag"></div></div></div>
       </div>
     </div>
   </div>
 </section>
 <script>
 (function(){
-  var tabs=document.querySelectorAll(".mc-folder-tab");
-  var panels=document.querySelectorAll(".mc-folder-body");
-  var slots=document.querySelectorAll(".mc-tab-slot");
-  function activate(slot){
-    var targetId=slot.dataset.for;
-    tabs.forEach(function(t){t.classList.remove("active");});
-    panels.forEach(function(p){p.classList.remove("active");p.style.borderRadius="";});
-    slots.forEach(function(s){s.classList.remove("tab-active");});
-    slot.classList.add("tab-active");
-    slot.querySelector(".mc-folder-tab").classList.add("active");
-    var panel=document.getElementById("mc-panel-"+targetId);
-    if(panel){panel.classList.add("active");panel.style.borderRadius=slot.dataset.radius||"12px";}
-    document.querySelectorAll(".mc-folder-tab").forEach(function(t){
-      var img=t.querySelector(".mc-tab-img");
-      if(img) img.src=t.classList.contains("active")?"./assets/folder-menu/folder-tab-selected.png":"./assets/folder-menu/folder-tab-unselected.png";
+  var layers=document.querySelectorAll(".mc-folder-layer");
+  function activate(layer){
+    layers.forEach(function(l){
+      l.classList.remove("active");
+      var tab=l.querySelector(".mc-folder-tab");
+      var img=tab&&tab.querySelector(".mc-tab-img");
+      if(tab) tab.classList.remove("active");
+      if(img) img.src="./assets/folder-menu/folder-tab-unselected.png";
     });
+    layer.classList.add("active");
+    var tab=layer.querySelector(".mc-folder-tab");
+    var img=tab&&tab.querySelector(".mc-tab-img");
+    if(tab) tab.classList.add("active");
+    if(img) img.src="./assets/folder-menu/folder-tab-selected.png";
   }
-  var initSlot=document.querySelector(".mc-tab-slot:first-child");
-  if(initSlot) activate(initSlot);
-  tabs.forEach(function(tab){
-    tab.addEventListener("click",function(){activate(tab.closest(".mc-tab-slot"));});
+  // Init: activate logos layer
+  var init=document.querySelector(".mc-folder-layer[data-tab=\"logos\"]");
+  if(init) activate(init);
+  layers.forEach(function(layer){
+    var tab=layer.querySelector(".mc-folder-tab");
+    if(tab) tab.addEventListener("click",function(){activate(layer);});
   });
 })();
 </script>
