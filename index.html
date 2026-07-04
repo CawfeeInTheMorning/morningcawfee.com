@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- Made in Framer · framer.com ✨ --><!-- Published Jun 27, 2026, 11:38 AM UTC --><html lang="en" data-redirect-timezone="1"><head>
+<!DOCTYPE html><html lang="en" data-redirect-timezone="1"><head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	
@@ -53,20 +53,20 @@
 #mc-hero{background-color:#000;width:100%;}
 #mc-hero-head{display:flex;flex-direction:column;align-items:center;padding:100px 20px 60px;}
 #mc-hero-content{display:flex;flex-direction:row;align-items:flex-end;gap:30px;width:100%;max-width:1200px;}
-.mc-hero-title{flex:1 0 0;}
-#mc-hero h1{font-family:'RMMono',monospace;font-size:54px;font-weight:500;color:#fff;line-height:1.1;margin:0;}
+.mc-hero-title{flex:1 0 0;padding-right:400px;box-sizing:border-box;}
+#mc-hero h1{font-family:'RMMono',monospace;font-size:40px;font-weight:500;color:#fff;line-height:1.1;margin:0;}
 #mc-hero-visual{display:flex;flex-direction:column;align-items:center;padding:0 20px 160px;width:100%;box-sizing:border-box;}
-#mc-hero-card{background:url('./assets/backgrounds/bg-1.png') center/cover no-repeat;border-radius:18px;min-height:500px;width:100%;max-width:1200px;position:relative;}
+#mc-hero-card{background:url('./assets/backgrounds/bg-1.png') center/cover no-repeat;border-radius:18px;min-height:675px;width:100%;max-width:1200px;position:relative;}
 
 /* Banner title */
-#mc-banner-title{width:100%;max-width:1200px;margin:0 auto;padding:0 20px 40px;box-sizing:border-box;padding-right:50px;}
-#mc-banner-title h2{font-family:'RMMono',monospace;font-size:42px;font-weight:500;color:#fff;margin:0;line-height:1.1;}
+#mc-banner-title{width:100%;max-width:1200px;margin:0 auto;padding:0 20px 40px;box-sizing:border-box;padding-right:600px;}
+#mc-banner-title h2{font-family:'RMMono',monospace;font-size:40px;font-weight:500;color:#fff;margin:0;line-height:1.1;}
 
 /* Work section */
 #mc-work{width:100%;background:#1773d8;}
 #mc-work-inner{display:flex;flex-direction:column;align-items:stretch;gap:60px;width:100%;max-width:1200px;margin:0 auto;padding:100px 20px;box-sizing:border-box;}
 #mc-work-header{display:flex;flex-direction:row;align-items:flex-end;justify-content:space-between;width:100%;}
-#mc-work-header h2{font-family:'RMMono',monospace;font-size:42px;font-weight:800;color:#fff;margin:0;}
+#mc-work-header h2{font-family:'RMMono',monospace;font-size:40px;font-weight:800;color:#fff;margin:0;}
 
 /* Hide Framer nav */
 nav.framer-FygNn{display:none!important}
@@ -101,7 +101,7 @@ nav.framer-FygNn{display:none!important}
 /* Hero cards overlay */
 .mc-card-overlay{position:absolute;top:0;left:0;width:100%;height:100%;z-index:20;display:flex;align-items:center;justify-content:center;pointer-events:none;}
 .hero-card-pile{position:relative;width:min(600px,60vw);height:400px;}
-.hero-card{width:100%;height:auto;display:block;will-change:transform;box-shadow:0 8px 28px rgba(0,0,0,0.65);position:absolute;top:0;left:0;border-radius:8px;pointer-events:auto;-webkit-user-drag:none;user-select:none;cursor:grab;}
+.hero-card{width:100%;height:auto;display:block;will-change:transform;box-shadow:0 12px 28px rgb(0 0 0 / 60%);position:absolute;top:0;left:0;border-radius:8px;pointer-events:auto;-webkit-user-drag:none;user-select:none;cursor:grab;}
 /* Hide leftover framer elements */
 .framer-1fbk941-container,.framer-kpoerz{display:none!important;}
 /* Shoutout box */
@@ -145,7 +145,7 @@ nav.framer-FygNn{display:none!important}
 .mc-client-footer{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;z-index:2;}
 .mc-client-socials{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.06em;}
 
-.mc-notable-title{font-family:'Inter',sans-serif;font-size:32px;font-weight:700;color:#fff;text-align:center;margin:48px 0;position:relative;z-index:10;}
+.mc-notable-title{font-family:'RMMono',monospace;font-size:40px;font-weight:500;color:#fff;text-align:center;margin:48px 0;position:relative;z-index:10;}
 .framer-15v4oca{mask:none!important;-webkit-mask:none!important;background:transparent!important;}
 #logo-scroll{position:relative;}
 #logo-scroll::after{content:'';position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,transparent 0%,#000000c7 100%);pointer-events:none;z-index:5;}
@@ -156,7 +156,8 @@ nav.framer-FygNn{display:none!important}
 .mc-social-link:hover img{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg)!important;}
 .framer-n5owxb .framer-t9b48k p{font-size:13px!important;}
 .mc-work-grid-wrap{width:100%;height:100%;overflow-y:auto;padding:0;box-sizing:border-box;}
-.mc-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;overflow-y:auto;max-height:563px;}
+.mc-logos-scroll{overflow-y:auto;max-height:563px;}
+.mc-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .mc-work-box{width:100%;aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .mc-work-box img{max-width:70%;max-height:70%;object-fit:contain;transition:max-width 0.3s ease,max-height 0.3s ease;}
 .mc-work-box:hover img{max-width:100%;max-height:100%;}
@@ -201,7 +202,7 @@ nav.framer-FygNn{display:none!important}
 .mc-footer-right{font-size:13px;color:rgba(255,255,255,0.4);white-space:nowrap;}
 
 /* Notable clients — static section */
-#mc-notable-clients{width:100%;padding:0 0 160px;}
+#mc-notable-clients{width:100%;padding:40px 0 160px;}
 .mc-notable-wrap{overflow-x:clip;overflow-y:visible;padding-block:20px;width:100%;}
 .mc-notable-track{display:flex;gap:30px;width:max-content;animation:notable-scroll 25s linear infinite;}
 @keyframes notable-scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 15px))}}
@@ -218,22 +219,28 @@ nav.framer-FygNn{display:none!important}
 .mc-folder-body{flex:1;background:#000;border:1px solid rgb(49 49 49);border-radius:12px;padding:32px;box-sizing:border-box;overflow:hidden;}
 .mc-folder-layer.active .mc-folder-body{background:#111;border-color:rgba(255,255,255,0.15);}
 .mc-folder-layer:not(.active) .mc-folder-body>*{visibility:hidden;}
-.mc-folder-layer:not(.active):hover{transform:scale(1.01);transform-origin:bottom left;transition:top 0.35s cubic-bezier(0.4,0,0.2,1),transform 0.2s ease;}
+.mc-folder-layer:not(.active):hover{transform:scale(1.005);transform-origin:center;transition:top 0.35s cubic-bezier(0.4,0,0.2,1),transform 0.2s ease;}
 .mc-folder-layer:not(.active):hover .mc-tab-label{color:red!important;}
+#mc-work-desc{font-family:'Inter',sans-serif;font-size:18px;color:rgba(255,255,255,0.55);margin:0;line-height:1.6;}
+.mc-logos-hint{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:16px;}
+.mc-logos-hint-text{font-family:'RMMono',monospace;font-size:16px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#ffc557;}
+.mc-logos-hint-arrow{width:30px;height:30px;filter:invert(1);}
+.mc-back-top{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:16px;cursor:pointer;padding:8px 0;}
+.mc-arrow-up{transform:rotate(180deg);}
 .mc-folder-placeholder{font-family:'RMMono',monospace;font-size:14px;color:rgba(255,255,255,0.3);margin:0;}
 .mc-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .mc-work-box{width:100%;aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.2s ease;}
 .mc-work-box:hover{transform:scale(1.04);}
 .mc-work-box img{max-width:70%;max-height:70%;object-fit:contain;}
-.mc-folder-banner-scroll{overflow-x:auto;padding-bottom:8px;}
-.mc-folder-banner-scroll::-webkit-scrollbar{height:4px;}
-.mc-folder-banner-scroll::-webkit-scrollbar-track{background:transparent;}
-.mc-folder-banner-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px;}
-.mc-folder-banner-track{display:flex;gap:12px;width:max-content;}
-.mc-folder-banner-track img{height:200px;width:auto;border-radius:10px;object-fit:cover;flex-shrink:0;transition:transform 0.2s ease;}
+.mc-folder-banner-scroll{overflow-y:auto;height:900px;}
+.mc-folder-banner-scroll::-webkit-scrollbar{width:6px;}
+.mc-folder-banner-scroll::-webkit-scrollbar-track{background:black;}
+.mc-folder-banner-scroll::-webkit-scrollbar-thumb{background:rgb(255 0 0);border-radius:2px;}
+.mc-folder-banner-track{display:flex;flex-direction:column;gap:12px;width:90%;margin:0 auto;}
+.mc-folder-banner-track img{width:100%;height:auto;border-radius:10px;object-fit:cover;transition:transform 0.2s ease;}
 .mc-folder-banner-track img:hover{transform:scale(1.03);}
 
-html,body{background:#000;min-height:100%;}
+html,body{background:#000;min-height:100%;scroll-behavior:smooth;}
 </style>
 </head>
 <body>
@@ -246,17 +253,14 @@ html,body{background:#000;min-height:100%;}
     <a class="mc-logo" href="/"><img src="./assets/icons/icon-red.png" alt="MorningCawfee"></a>
     <ul>
       <li><a href="/about" data-section="about">About</a></li>
-      <li><a href="/about#skills" data-section="examples">Examples</a></li>
-      <li><a href="/work#work_experience" data-section="experience">Experience</a></li>
-      <li><a href="/work#work_history" data-section="history">History</a></li>
-      <li><a href="/clients" data-section="clients">Clients</a></li>
-      <li><a href="/contact" data-section="contact">Contact</a></li>
+      <li><a href="#mc-work" data-section="mywork" class="mc-scroll-link">My Work</a></li>
+      <li><a href="#mc-notable-clients" data-section="clients" class="mc-scroll-link">Clients</a></li>
     </ul>
   </div>
 </nav>
 <script>
 document.addEventListener("DOMContentLoaded",function(){
-  var STEP=62, BACK_AREA=496, TAB_H=40;
+  var STEP=62, BACK_AREA=434, TAB_H=40;
   var folder=document.getElementById("mc-work-folder");
   var layers=document.querySelectorAll(".mc-folder-layer");
   // homeMap: each layer fixed resting position (DOM index * STEP)
@@ -317,6 +321,12 @@ document.addEventListener("DOMContentLoaded",function(){
     setTimeout(updateHeight,400);
   });
   window.addEventListener("resize",updateHeight);
+  document.addEventListener("click",function(e){
+    if(e.target.closest(".mc-back-top")){
+      var scroll=e.target.closest(".mc-folder-banner-scroll");
+      if(scroll) scroll.scrollTo({top:0,behavior:"smooth"});
+    }
+  });
 });
 </script>
 <section id="mc-hero">
@@ -386,7 +396,7 @@ document.addEventListener("DOMContentLoaded",function(){
 })();
 </script>
 <div id="mc-banner-title">
-  <h2>I'm a Graphic Designer&nbsp; specializing in social media graphics, posters, and logos in the v-tubing space.</h2>
+  <h2>I'm a Graphic Designer  specializing in social media graphics, posters, and expressive logos.</h2>
 </div>
 <section id="mc-banner-scroll">
   <div class="banner-scroll">
@@ -402,6 +412,7 @@ document.addEventListener("DOMContentLoaded",function(){
     <header id="mc-work-header">
       <h2>My Work</h2>
     </header>
+    <p id="mc-work-desc">I've been a graphic designer for a long, long time. Maybe even half of my life at this point. In that time I've experimented with lots of different styles and designs, some of which I'm insanely proud of and some of which I want to disappear from reality. Anyways, through all the struggle, sweat, and room-pacing at 3am, here's a bundle of my works that I'm proud to show.</p>
     <div id="mc-work-folder">
       <div class="mc-folder-layer" data-tab="othergraphics" data-y="0" style="top:0px;z-index:1">
         <div class="mc-folder-tab-area" style="padding-left:20px">
@@ -443,21 +454,22 @@ document.addEventListener("DOMContentLoaded",function(){
         <div class="mc-folder-tab-area" style="padding-left:60px">
           <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Banners</span></button>
         </div>
-        <div class="mc-folder-body" id="mc-panel-banners"><div class="mc-folder-banner-scroll">
+        <div class="mc-folder-body" id="mc-panel-banners"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-folder-banner-scroll">
             <div class="mc-folder-banner-track"><img src="./assets/banners/akiroko.png" alt="akiroko"><img src="./assets/banners/ardolf.png" alt="ardolf"><img src="./assets/banners/cloud9.png" alt="cloud9"><img src="./assets/banners/cottontail.png" alt="cottontail"><img src="./assets/banners/fefe.png" alt="fefe"><img src="./assets/banners/fillian.png" alt="fillian"><img src="./assets/banners/fream.png" alt="fream"><img src="./assets/banners/grim.png" alt="grim"><img src="./assets/banners/hia.png" alt="hia"><img src="./assets/banners/iridium.png" alt="iridium"><img src="./assets/banners/jessellum.png" alt="jessellum"><img src="./assets/banners/jollz.png" alt="jollz"><img src="./assets/banners/keeoh.png" alt="keeoh"><img src="./assets/banners/kuro.png" alt="kuro"><img src="./assets/banners/kwobus.png" alt="kwobus"><img src="./assets/banners/limealicious.png" alt="limealicious"><img src="./assets/banners/mari.png" alt="mari"><img src="./assets/banners/mero.png" alt="mero"><img src="./assets/banners/mystic.png" alt="mystic"><img src="./assets/banners/nishi.png" alt="nishi"><img src="./assets/banners/nyxi.png" alt="nyxi"><img src="./assets/banners/obey.png" alt="obey"><img src="./assets/banners/obnoctious.png" alt="obnoctious"><img src="./assets/banners/ohyaholla.png" alt="ohyaholla"><img src="./assets/banners/otto.png" alt="otto"><img src="./assets/banners/pedro.png" alt="pedro"><img src="./assets/banners/rebecca.png" alt="rebecca"><img src="./assets/banners/shiro.png" alt="shiro"><img src="./assets/banners/sinder.png" alt="sinder"><img src="./assets/banners/sylvee.png" alt="sylvee"><img src="./assets/banners/traid.png" alt="traid"><img src="./assets/banners/woops.png" alt="woops"></div>
+          <div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div>
           </div></div>
       </div>
-      <div class="mc-folder-layer active" data-tab="logos" data-y="496" style="top:496px;z-index:9">
+      <div class="mc-folder-layer active" data-tab="logos" data-y="434" style="top:434px;z-index:8">
         <div class="mc-folder-tab-area" style="padding-left:140px">
           <button class="mc-folder-tab active"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-selected.png" alt=""><span class="mc-tab-label">Logos</span></button>
         </div>
-        <div class="mc-folder-body" id="mc-panel-logos"><div class="mc-work-grid"><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20akiroko.png" alt="akiroko"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20ardolf.png" alt="ardolf"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20bam.png" alt="bam"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20bluskys.png" alt="bluskys"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20eggwick.png" alt="eggwick"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20femtanyl.png" alt="femtanyl"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20filian.png" alt="filian"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20fream.png" alt="fream"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20frizk.png" alt="frizk"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20grim.png" alt="grim"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20hexloom.png" alt="hexloom"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20jadey.png" alt="jadey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20kuro.png" alt="kuro"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20kwobus.png" alt="kwobus"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20limealicious.png" alt="limealicious"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20mikki.png" alt="mikki"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20natt.png" alt="natt"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20nishi.png" alt="nishi"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20nyxifox.png" alt="nyxifox"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20obey.png" alt="obey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20obnoctious.png" alt="obnoctious"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20rebecca.png" alt="rebecca"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20shiro.png" alt="shiro"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20signalvortex.png" alt="signalvortex"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20sylvee.png" alt="sylvee"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20traid.png" alt="traid"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20voidtag.png" alt="voidtag"></div></div></div>
+        <div class="mc-folder-body" id="mc-panel-logos"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-logos-scroll"><div class="mc-work-grid"><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20akiroko.png" alt="akiroko"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20ardolf.png" alt="ardolf"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20bam.png" alt="bam"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20bluskys.png" alt="bluskys"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20eggwick.png" alt="eggwick"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20femtanyl.png" alt="femtanyl"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20filian.png" alt="filian"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20fream.png" alt="fream"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20frizk.png" alt="frizk"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20grim.png" alt="grim"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20hexloom.png" alt="hexloom"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20jadey.png" alt="jadey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20kuro.png" alt="kuro"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20kwobus.png" alt="kwobus"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20limealicious.png" alt="limealicious"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20mikki.png" alt="mikki"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20natt.png" alt="natt"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20nishi.png" alt="nishi"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20nyxifox.png" alt="nyxifox"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20obey.png" alt="obey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20obnoctious.png" alt="obnoctious"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20rebecca.png" alt="rebecca"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20shiro.png" alt="shiro"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20signalvortex.png" alt="signalvortex"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20sylvee.png" alt="sylvee"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20traid.png" alt="traid"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20voidtag.png" alt="voidtag"></div></div></div></div>
       </div>
     </div>
   </div>
 </section>
 			
-	                                		<link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/react.BVdpDLbl.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/rolldown-runtime.Xs2hCXNk.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/motion.5VdCNgdH.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/framer.BYQa1Fuz.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/i5eOVfIN4.DG_1b9nE.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/CDJx3T4nQ.Ccvq4T7c.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Input_Loops.4cszyghz.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/IxjuC5c7L.C3jjbhJ4.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/vvG68NbwN.Dkn7anma.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/shared.KOnVQwv7.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/SkhmktRtS.B6kc7HGe.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/locales.ha8anPlP.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/T5by8F5Qe.D3Xfg6Y7.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/LSJRyGpDd.BaE-SrKN.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/FYtNM2koB.BBJ009NR.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/t00aQv672.DC6K-ZJt.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Navigation.CM2FubvJ.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Ty4AVVMtk.D3SzLlJ0.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/npZl8B6co.DrKKpZCq.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Fhlycn1G2.bOHBAfRv.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/P0K9uVDju.DAvMjV1W.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/opnE6P6z1.Bu_CTDDb.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/q8_oY7uRM.CsdLOVZ3.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Debug.BtGgka-1.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/JDcRNvJlD.Cfg3BKgH.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Cookies.B3uf_v1H.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/lnu7QQiiE.BnkwmoQQ.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/yTPvnODzX.59F8Aulz.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Time.Chu9nkcD.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/OSbzEQyh8.BNC8pu5s.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/DO838nOLM.BBlOeeb4.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/ODUaX7miG.3pGMhma9.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Jbk47Kb7T.HogZPuDf.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/uWazKwr4_.BvLPv5Ps.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/NoTranslate.BYf6bluM.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/KsxdqjKwX.Bes8XnWe.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/ZN14weCOL.OE-t2j-z.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/E_0f9mL03.sNxVUY2s.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/rPRBE2iVS.BDWTJpqY.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/VEYYSsBte.CYT8inQa.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Tracking.BbKAH6px.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/xLCwjgk49.xR39_6PU.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/uexyNUZEC.2J2_8--q.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/ButtonDownloadOSOverride_2.DoEHSgyA.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/TJbrQa1j4.CpIPHaB-.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/B1QiriXZa.CACwJhlr.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/YNPdRdSpx.BmhdADau.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/jiOIQtacr.DtzaPGIW.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/AaN8oZOpy.e0JuKCNU.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/fpJV3zp1q.BrxxEC8F.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/MDOM4IKdA.Cwth6EeS.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/vR3lnQudq.DnjlzLuE.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/h59NUQSP8.BIUVGgZh.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Video.D56Iyn4X.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/propUtils.louXIfNw.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/OIjZRBmWDcIE2B6qgG1j.DkWOWSlG.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/bsl7RRJJl.eK80eQhS.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/f_FsVR8Zd.C-MFACB5.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/dwcmpE4JD.DCHuBSpU.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/9tV4ugm_ZCEuTMKTd1K9jJObSNcfSuaFpPswNMWLg3Q.CrtbVOF_.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/ImageWheel.C8rsmpkQ.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Ihf91buQp.CUMUIDGc.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/tuIvtf_ry.Dl-YlcMy.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/hRq5PIcWh.BOx9nd_Q.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/HZGOHC838.DornZWRU.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/ieh7ppIaH.B08T3NZn.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/OI7mqGvF6.C7V8884P.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/QQWLk4zld.DveFupr-.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/sGVDGHnNr.t7yaNdc1.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/UerhIinlb.D7VHYOZK.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/N43zor67g.5wRVi0hC.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/iiM8azk8z.RruF93Hu.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/IhVSFlkP7.BJfJOGWq.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/cgTzI7Z3G.BClYKIMi.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/YpBHtYzmG.CfH8Sa3f.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Clipboard.D2bbXqC5.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/default-utils.js@_0.45.C3HDmnbC.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/bAcxehDSp.CS6oAaxR.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Kw9SjQtDu.CAI6Fvmk.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/GenBorder.BPieUY3_.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/sP1RMFzI9.hVagSjJ3.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/rdfV9x9hV.DmJycHNu.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/ProTypewriter.CXXPAdnn.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/GrAfmmwVH.BUAzCnKe.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/mAa5xIuUC.DkCk-LQ6.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/DpKqSD7Ms.Djy8MbV2.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/wOQW2qkUB.DGHotBqw.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/lnCXEeFtv.CLykhXnA.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/MFJabYpQp.BvBhreXx.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/uFjj6zRm4.BND_2vuT.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/cCVuCWlF_.DJIr1om4.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/D3zb3AjRu.BiRaLgP-.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Ls0tBJryR.DMg4j9UB.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/gMALrY6wX.DL65Ss-k.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/M8z52uvts.BxXCp7jY.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/mjBKgzTIu.Dr6OM8Mj.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/CMQSU3nD_.CpHjv-Lp.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/qRN7MgZKk.CRPSAJVf.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/vqW0dhUPm.zl9YfKqC.mjs"><link rel="modulepreload" fetchpriority="low" href="https://framerusercontent.com/sites/3BJ9zINIeWtEEVRMAcoTL8/Random_Count.DKnbUFpH.mjs"><div id="svg-templates" style="position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict" aria-hidden="true">
+	                                		<div id="svg-templates" style="position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict" aria-hidden="true">
 <svg viewBox="0 0 14 14" id="svg10231122378"><path d="M 1.75 6.417 C 1.75 3.839 3.839 1.75 6.417 1.75 C 8.994 1.75 11.083 3.839 11.083 6.417 C 11.083 8.994 8.994 11.083 6.417 11.083 C 3.839 11.083 1.75 8.994 1.75 6.417 Z M 12.25 12.25 L 9.713 9.713" fill="transparent" stroke-width="1.4" stroke="var(--token-6fff741a-90b6-438e-9423-1f7c07944681, rgb(255, 255, 255))" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 <svg viewBox="0 0 10 16" id="svg12320550327"><path d="M 10 1 L 10 6 L 5 6 L 0 1 Z M 0 6 L 5 6 L 10 11 L 5 11 L 5 16 L 0 11 Z" fill="var(--token-1ff51228-9678-411c-9a08-00381f0fc70b, rgb(255, 255, 255)) /* {&quot;name&quot;:&quot;Icon 100&quot;} */"></path></svg>
 <svg viewBox="0 0 8 8" id="svg11045117364"><path d="M 0 6 L 2.293 3.707 C 2.683 3.317 2.683 2.683 2.293 2.293 L 0 0" transform="translate(2.5 1) rotate(90 1.5 3)" fill="transparent" stroke-width="1.5" stroke="var(--token-8015ce2b-ef6f-4fe0-944b-b61f872d0501, rgb(135, 135, 135)) /* {&quot;name&quot;:&quot;Icon 53&quot;} */" stroke-linecap="round" stroke-linejoin="round"></path></svg>
