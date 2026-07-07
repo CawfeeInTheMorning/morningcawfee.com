@@ -194,6 +194,8 @@ nav.framer-FygNn{display:none!important}
 .framer-e0lfdf{display:none!important;}
 
 /* Static footer */
+#mc-cinnabuns{position:absolute;left:var(--cin-x,0px);bottom:var(--cin-y,0px);transform:scale(var(--cin-scale,1));transform-origin:bottom right;pointer-events:none;z-index:10;}
+#mc-cinnabuns-img{display:block;width:120px;height:auto;}
 #mc-footer{width:100%;background:#000;border-top:1px solid rgba(255,255,255,0.1);font-family:'Inter',sans-serif;}
 #mc-footer-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 40px;height:58px;}
 .mc-footer-left{display:flex;align-items:center;gap:12px;}
@@ -219,15 +221,33 @@ nav.framer-FygNn{display:none!important}
 .mc-folder-layer{position:absolute;left:0;width:100%;bottom:0;display:flex;flex-direction:column;transition:top 0.35s cubic-bezier(0.4,0,0.2,1);}
 .mc-folder-tab-area{flex-shrink:0;margin-bottom:-5px;}
 .mc-folder-tab{position:relative;display:inline-flex;align-items:center;background:none;border:none;padding:0;cursor:pointer;z-index:2;overflow:visible;}
-.mc-tab-img{display:block;width:485px;height:40px;object-fit:fill;}
-.mc-tab-label{position:absolute;left:35px;top:50%;transform:translateY(-50%);font-family:'RMMono',monospace;font-size:20px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);white-space:nowrap;pointer-events:none;z-index:3;transition:color 0.2s;}
+.mc-tab-svg{display:block;width:485px;height:40px;overflow:visible;}
+.mc-tab-fill{fill:var(--tab-bg,#888);transition:fill 0.2s;}
+.mc-tab-stroke{fill:none;stroke:none;}
+.mc-folder-tab.active .mc-tab-fill{fill:#000;}
+.mc-folder-tab.active .mc-tab-stroke{stroke:rgba(255,255,255,0.2);}
+.mc-folder-layer:not(.active):hover .mc-tab-fill{filter:brightness(1.18);}
+
+.mc-tab-label{position:absolute;left:35px;top:50%;transform:translateY(-50%);font-family:'RMMono',monospace;font-size:20px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fff;white-space:nowrap;pointer-events:none;z-index:3;transition:color 0.2s;}
 .mc-folder-tab.active .mc-tab-label{color:#fff;}
+.mc-folder-layer:not(.active):hover .mc-tab-label{color:#000;}
 .mc-folder-tab:hover .mc-tab-label{color:rgba(255,255,255,0.65);}
-.mc-folder-body{flex:1;background:#000;border:1px solid rgb(49 49 49);border-radius:12px;padding:32px;box-sizing:border-box;overflow:hidden;}
-.mc-folder-layer.active .mc-folder-body{background:#111;border-color:rgba(255,255,255,0.15);}
+[data-tab=othergraphics]{--tab-bg:#9445e1;--tab-border:#6a2fa8;}
+[data-tab=businesscards]{--tab-bg:#219eee;--tab-border:#1578b5;}
+[data-tab=branding]{--tab-bg:#ff8d00;--tab-border:#c86f00;}
+[data-tab=uiux]{--tab-bg:#e95f7a;--tab-border:#c0395b;}
+[data-tab=overlays]{--tab-bg:#e32446;--tab-border:#b01a35;}
+[data-tab=posters]{--tab-bg:#206cdc;--tab-border:#1550a8;}
+[data-tab=banners]{--tab-bg:#4641a5;--tab-border:#332f7e;}
+[data-tab=logos]{--tab-bg:#16a5a2;--tab-border:#0e7a78;}
+.mc-folder-body{flex:1;border-radius:12px;padding:32px;box-sizing:border-box;overflow:hidden;}
+.mc-folder-layer:not(.active) .mc-folder-body{background:var(--tab-bg,#888);border:none;}
+.mc-folder-layer:not(.active):hover .mc-folder-body{filter:brightness(1.18);}
+.mc-folder-layer.active{transform:scale(1.03);transform-origin:center;}
+.mc-folder-layer.active .mc-folder-body{background:#000;border:none;}
 .mc-folder-layer:not(.active) .mc-folder-body>*{visibility:hidden;}
-.mc-folder-layer:not(.active):hover{transform:scale(1.005);transform-origin:center;transition:top 0.35s cubic-bezier(0.4,0,0.2,1),transform 0.2s ease;}
-.mc-folder-layer:not(.active):hover .mc-tab-label{color:red!important;}
+.mc-folder-layer:not(.active):hover{transform:scale(1.03);transform-origin:center;transition:top 0.35s cubic-bezier(0.4,0,0.2,1),transform 0.2s ease;}
+
 #mc-work-desc{font-family:'Inter',sans-serif;font-size:18px;color:rgba(255,255,255,0.55);margin:0;line-height:1.6;}
 .mc-logos-hint{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:16px;}
 .mc-logos-hint-text{font-family:'RMMono',monospace;font-size:16px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#ffc557;}
@@ -239,6 +259,32 @@ nav.framer-FygNn{display:none!important}
 .mc-bizcard-list::-webkit-scrollbar-track{background:black;}
 .mc-bizcard-list::-webkit-scrollbar-thumb{background:rgb(255 0 0);border-radius:2px;}
 .mc-bizcard-img{width:100%;height:auto;border-radius:10px;display:block;}
+.mc-poster-scroll{overflow-y:auto;max-height:563px;}
+.mc-poster-scroll::-webkit-scrollbar{width:12px;}
+.mc-poster-scroll::-webkit-scrollbar-track{background:black;}
+.mc-poster-scroll::-webkit-scrollbar-thumb{background:rgb(255 0 0);border-radius:2px;}
+.mc-poster-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-bottom:8px;}
+.mc-poster-item{overflow:hidden;border-radius:8px;cursor:pointer;}
+.mc-poster-thumb{display:block;width:100%;height:auto;transition:transform 0.2s ease;}
+.mc-poster-item:hover .mc-poster-thumb{transform:scale(1.04);}
+.mc-poster-lightbox{position:fixed;z-index:10000;display:flex;flex-direction:column;width:600px;max-width:90vw;cursor:default;user-select:none;}
+.mc-lightbox-handle{flex-shrink:0;margin-bottom:-5px;padding-left:20px;cursor:grab;}
+.mc-lightbox-handle.dragging{cursor:grabbing;}
+.mc-lightbox-handle .mc-folder-tab{display:inline-flex;align-items:center;background:none;border:none;padding:0;position:relative;}
+.mc-lightbox-handle .mc-tab-img{display:block;width:200px;height:40px;object-fit:fill;}
+.mc-lightbox-handle .mc-tab-label{position:absolute;left:35px;top:50%;transform:translateY(-50%);font-family:'RMMono',monospace;font-size:14px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fff;white-space:nowrap;pointer-events:none;}
+.mc-lightbox-body{background:#1550a8;border:none;border-radius:12px;padding:30px;box-sizing:border-box;overflow:hidden;cursor:default;}
+.mc-lightbox-body img{display:block;width:100%;height:auto;border-radius:6px;cursor:zoom-in;transition:transform 0.15s ease;transform-origin:center center;}
+.mc-lightbox-body img.zoomed{cursor:zoom-out;}
+.mc-lightbox-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;padding:4px;cursor:pointer;display:flex;align-items:center;z-index:3;}
+.mc-lightbox-handle .mc-tab-fill{fill:#1550a8;}
+.mc-lightbox-close img{width:18px;height:18px;filter:invert(1);opacity:0.7;transition:opacity 0.2s;}
+.mc-lightbox-close:hover img{opacity:1;}
+.mc-uiux-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.mc-uiux-item{display:flex;flex-direction:column;gap:8px;text-decoration:none;border-radius:10px;overflow:hidden;transition:transform 0.2s ease;}
+.mc-uiux-item:hover{transform:scale(1.03);}
+.mc-uiux-item img{display:block;width:100%;height:auto;border-radius:8px;}
+.mc-uiux-label{font-family:'RMMono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#fff;text-align:center;padding:4px 0;}
 .mc-folder-placeholder{font-family:'RMMono',monospace;font-size:14px;color:rgba(255,255,255,0.3);margin:0;}
 .mc-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .mc-work-box{width:100%;aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.2s ease;}
@@ -248,7 +294,7 @@ nav.framer-FygNn{display:none!important}
 .mc-folder-banner-scroll::-webkit-scrollbar{width:12px;}
 .mc-folder-banner-scroll::-webkit-scrollbar-track{background:black;}
 .mc-folder-banner-scroll::-webkit-scrollbar-thumb{background:rgb(255 0 0);border-radius:2px;}
-.mc-folder-banner-track{display:flex;flex-direction:column;gap:12px;width:90%;margin:0 auto;}
+.mc-folder-banner-track{display:flex;flex-direction:column;gap:12px;width:75%;margin:0 auto;}
 .mc-folder-banner-track img{width:100%;height:auto;border-radius:10px;object-fit:cover;transition:transform 0.2s ease;}
 .mc-folder-banner-track img:hover{transform:scale(1.03);}
 
@@ -258,10 +304,11 @@ html,body{background:#000;min-height:100%;scroll-behavior:smooth;}
 #mc-showcase-card{width:100%;max-width:1200px;height:675px;border-radius:18px;background:url('./assets/backgrounds/bg-2.png') center/cover no-repeat;}
 /* Coco-sit character — adjust offsets and scale below */
 #mc-take-one{position:absolute;top:var(--take-y,0%);left:var(--take-x,8.33%);width:100%;transform-origin:top left;z-index:10;pointer-events:none;}
-#mc-take-one img{display:block;width:calc(var(--take-scale,0.6) * 28.33%);height:auto;filter:drop-shadow(0 9px 0px rgba(0,0,0,1));animation:take-float 7s ease-in-out infinite;}
+#mc-take-one img{display:block;width:calc(var(--take-scale,0.6) * 28.33%);height:auto;animation:take-float 7s ease-in-out infinite;}
 #mc-coco{position:absolute;top:var(--coco-y,0px);right:var(--coco-x,0px);transform:scale(var(--coco-scale,1));transform-origin:top right;z-index:10;pointer-events:none;}
 #mc-coco-sit{display:block;width:320px;height:auto;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.4));}
-#mc-coco-crown{position:absolute;top:-6px;left:19%;transform:rotate(-20deg);width:70px;height:auto;filter:drop-shadow(0 4px 3px rgba(0,0,0,0.5));animation:crown-float 4.5s ease-in-out infinite;}
+#mc-coco-sit{position:relative;z-index:1;}
+#mc-coco-crown{position:absolute;top:-6px;left:19%;transform:rotate(-20deg);width:70px;height:auto;filter:drop-shadow(0 4px 3px rgba(0,0,0,0.5));animation:crown-float 4.5s ease-in-out infinite;z-index:2;}
 </style>
 </head>
 <body>
@@ -291,6 +338,7 @@ document.addEventListener("DOMContentLoaded",function(){
   function zForY(y){ return Math.round(y/STEP)+1; }
 
   layers.forEach(function(l,i){ homeMap.set(l, i*STEP); });
+  restack();
 
   function updateHeight(){
     var al=document.querySelector(".mc-folder-layer.active");
@@ -324,11 +372,7 @@ document.addEventListener("DOMContentLoaded",function(){
     restack();
     layers.forEach(function(l){
       var tab=l.querySelector(".mc-folder-tab");
-      var img=tab&&tab.querySelector(".mc-tab-img");
       tab.classList.toggle("active",l===newLayer);
-      if(img) img.src=l===newLayer
-        ?"./assets/folder-menu/folder-tab-selected.png"
-        :"./assets/folder-menu/folder-tab-unselected.png";
     });
     setTimeout(updateHeight,370);
   }
@@ -343,9 +387,56 @@ document.addEventListener("DOMContentLoaded",function(){
     setTimeout(updateHeight,400);
   });
   window.addEventListener("resize",updateHeight);
+  // Poster lightbox factory
+  var lbZTop=10000;
+  function createLightbox(src){
+    var lb=document.createElement("div");
+    lb.className="mc-poster-lightbox";
+    lb.innerHTML='<div class="mc-lightbox-handle"><div class="mc-folder-tab"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Poster</span><button class="mc-lightbox-close"><img src="./assets/symbols/close.svg" alt="Close"></button></div></div><div class="mc-lightbox-body"><img class="mc-lightbox-img" src="" alt=""></div>';
+    var lbImg=lb.querySelector(".mc-lightbox-img");
+    lbImg.src=src;
+    var off=document.querySelectorAll(".mc-poster-lightbox").length*24;
+    lb.style.left=Math.round((window.innerWidth-600)/2+off)+"px";
+    lb.style.top=(80+off)+"px";
+    lb.style.zIndex=++lbZTop;
+    document.body.appendChild(lb);
+    lb.addEventListener("mousedown",function(){ lb.style.zIndex=++lbZTop; });
+    lb.querySelector(".mc-lightbox-close").addEventListener("click",function(){ lb.remove(); });
+    var handle=lb.querySelector(".mc-lightbox-handle");
+    var drag=false,ox=0,oy=0;
+    handle.addEventListener("mousedown",function(e){
+      if(e.target.closest(".mc-lightbox-close")) return;
+      drag=true; handle.classList.add("dragging");
+      var r=lb.getBoundingClientRect();
+      ox=e.clientX-r.left; oy=e.clientY-r.top;
+      e.preventDefault(); e.stopPropagation();
+    });
+    document.addEventListener("mousemove",function(e){
+      if(!drag) return;
+      lb.style.left=(e.clientX-ox)+"px"; lb.style.top=(e.clientY-oy)+"px";
+    });
+    document.addEventListener("mouseup",function(){ drag=false; handle.classList.remove("dragging"); });
+    var scale=1;
+    var body=lb.querySelector(".mc-lightbox-body");
+    body.addEventListener("wheel",function(e){
+      e.preventDefault();
+      scale=Math.max(0.5,Math.min(4,scale+(e.deltaY<0?0.15:-0.15)));
+      lbImg.style.transform="scale("+scale+")";
+      lbImg.style.transformOrigin="center center";
+      lbImg.classList.toggle("zoomed",scale>1);
+    },{passive:false});
+    lbImg.addEventListener("dblclick",function(){
+      scale=1; lbImg.style.transform=""; lbImg.classList.remove("zoomed");
+    });
+  }
+  document.addEventListener("click",function(e){
+    var thumb=e.target.closest(".mc-poster-thumb");
+    if(thumb){ createLightbox(thumb.src); }
+  });
+
   document.addEventListener("click",function(e){
     if(e.target.closest(".mc-back-top")){
-      var scroll=e.target.closest(".mc-folder-banner-scroll,.mc-logos-scroll,.mc-bizcard-list");
+      var scroll=e.target.closest(".mc-folder-banner-scroll,.mc-logos-scroll,.mc-bizcard-list,.mc-poster-scroll,.mc-overlay-list");
       if(scroll) scroll.scrollTo({top:0,behavior:"smooth"});
     }
   });
@@ -379,7 +470,7 @@ document.addEventListener("DOMContentLoaded",function(){
       </div>
     
   <!-- take-one: adjust --take-x (left), --take-y (top), --take-scale -->
-  <div id="mc-take-one" style="--take-x:11.33%;--take-y:4.56%;--take-scale:0.4">
+  <div id="mc-take-one" style="--take-x:78%;--take-y:15%;--take-scale:0.7">
     <img src="./assets/take-one.png" alt="">
   </div>
     </div>
@@ -443,13 +534,13 @@ document.addEventListener("DOMContentLoaded",function(){
     <div id="mc-work-folder">
       <div class="mc-folder-layer" data-tab="othergraphics" data-y="0" style="top:0px;z-index:1">
         <div class="mc-folder-tab-area" style="padding-left:20px">
-          <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Other Graphics</span></button>
+          <button class="mc-folder-tab"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Other Graphics</span></button>
         </div>
         <div class="mc-folder-body" id="mc-panel-othergraphics"><p class="mc-folder-placeholder">Other Graphics — coming soon</p></div>
       </div>
       <div class="mc-folder-layer" data-tab="businesscards" data-y="62" style="top:62px;z-index:2">
         <div class="mc-folder-tab-area" style="padding-left:360px">
-          <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Business Cards</span></button>
+          <button class="mc-folder-tab"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Business Cards</span></button>
         </div>
         <div class="mc-folder-body" id="mc-panel-businesscards"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-bizcard-list">
 <img src="./assets/business-cards/card-1.png" alt="card-1" class="mc-bizcard-img">
@@ -459,35 +550,85 @@ document.addEventListener("DOMContentLoaded",function(){
 <img src="./assets/business-cards/card-5.png" alt="card-5" class="mc-bizcard-img">
 <img src="./assets/business-cards/card-6.png" alt="card-6" class="mc-bizcard-img">
 <img src="./assets/business-cards/card-7.png" alt="card-7" class="mc-bizcard-img">
-</div><div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div>
+<div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div></div>
       </div>
       <div class="mc-folder-layer" data-tab="branding" data-y="124" style="top:124px;z-index:3">
         <div class="mc-folder-tab-area" style="padding-left:130px">
-          <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Branding</span></button>
+          <button class="mc-folder-tab"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Branding</span></button>
         </div>
         <div class="mc-folder-body" id="mc-panel-branding"><p class="mc-folder-placeholder">Branding — coming soon</p></div>
       </div>
       <div class="mc-folder-layer" data-tab="uiux" data-y="186" style="top:186px;z-index:4">
         <div class="mc-folder-tab-area" style="padding-left:620px">
-          <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">UI/UX</span></button>
+          <button class="mc-folder-tab"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">UI/UX</span></button>
         </div>
-        <div class="mc-folder-body" id="mc-panel-uiux"><p class="mc-folder-placeholder">UI/UX — coming soon</p></div>
+        <div class="mc-folder-body" id="mc-panel-uiux">
+<div class="mc-uiux-grid">
+  <a href="./curiosity.html" class="mc-uiux-item">
+    <img src="./assets/preview/thumbnail-curiosity.png" alt="Curiosity Shop">
+    <span class="mc-uiux-label">Curiosity Shop</span>
+  </a>
+  <a href="./collective.html" class="mc-uiux-item">
+    <img src="./assets/preview/thumbnail-collective.png" alt="The Collective">
+    <span class="mc-uiux-label">The Collective</span>
+  </a>
+  <a href="/#mc-hero-card" class="mc-uiux-item">
+    <img src="./assets/preview/thumbnail-portfolio.png" alt="Portfolio">
+    <span class="mc-uiux-label">Portfolio</span>
+  </a>
+</div>
+</div>
       </div>
       <div class="mc-folder-layer" data-tab="overlays" data-y="248" style="top:248px;z-index:5">
         <div class="mc-folder-tab-area" style="padding-left:180px">
-          <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Overlays</span></button>
+          <button class="mc-folder-tab"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Overlays</span></button>
         </div>
-        <div class="mc-folder-body" id="mc-panel-overlays"><p class="mc-folder-placeholder">Overlays — coming soon</p></div>
+        <div class="mc-folder-body" id="mc-panel-overlays"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-bizcard-list" id="mc-overlay-list">
+<img src="./assets/overlays/overlay-cafe.png" alt="overlay-cafe" class="mc-bizcard-img">
+<img src="./assets/overlays/overlay-chris.png" alt="overlay-chris" class="mc-bizcard-img">
+<img src="./assets/overlays/overlay-chris2.png" alt="overlay-chris2" class="mc-bizcard-img">
+<img src="./assets/overlays/overlay-chris3.png" alt="overlay-chris3" class="mc-bizcard-img">
+<img src="./assets/overlays/overlay-chris4.png" alt="overlay-chris4" class="mc-bizcard-img">
+<img src="./assets/overlays/overlay-cotton.png" alt="overlay-cotton" class="mc-bizcard-img">
+<img src="./assets/overlays/overlay-cyfox.png" alt="overlay-cyfox" class="mc-bizcard-img">
+<img src="./assets/overlays/overlay-jellyfish.png" alt="overlay-jellyfish" class="mc-bizcard-img">
+<img src="./assets/overlays/overlay-tama.png" alt="overlay-tama" class="mc-bizcard-img">
+<div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div></div>
       </div>
       <div class="mc-folder-layer" data-tab="posters" data-y="310" style="top:310px;z-index:6">
         <div class="mc-folder-tab-area" style="padding-left:310px">
-          <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Posters</span></button>
+          <button class="mc-folder-tab"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Posters</span></button>
         </div>
-        <div class="mc-folder-body" id="mc-panel-posters"><p class="mc-folder-placeholder">Posters — coming soon</p></div>
+        <div class="mc-folder-body" id="mc-panel-posters"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll &amp; Click Any!</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-poster-scroll"><div class="mc-poster-grid">
+<div class="mc-poster-item"><img src="./assets/posters/bbno-poster.png" alt="bbno-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/cloudnine-poster.png" alt="cloudnine-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/cotton-poster.png" alt="cotton-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/doomgirl-poster.png" alt="doomgirl-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/esports-poster-2.png" alt="esports-poster-2" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/esports-poster.png" alt="esports-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/fream-poster-2.png" alt="fream-poster-2" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/fream-poster.png" alt="fream-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/izabel-poster-2.png" alt="izabel-poster-2" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/izabel-poster.png" alt="izabel-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/jellie-poster.png" alt="jellie-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/otk-poster.png" alt="otk-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/saint-poster.png" alt="saint-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/spotify-poster-2.png" alt="spotify-poster-2" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/spotify-poster-3.png" alt="spotify-poster-3" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/spotify-poster-4.png" alt="spotify-poster-4" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/spotify-poster-5.png" alt="spotify-poster-5" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/spotify-poster.png" alt="spotify-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/tens-poster.png" alt="tens-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/toasty-poster-2.png" alt="toasty-poster-2" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/toasty-poster.png" alt="toasty-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/widow-poster.png" alt="widow-poster" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/yard-poster-2.png" alt="yard-poster-2" class="mc-poster-thumb" loading="lazy"></div>
+<div class="mc-poster-item"><img src="./assets/posters/yard-poster.png" alt="yard-poster" class="mc-poster-thumb" loading="lazy"></div>
+</div><div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div></div>
       </div>
       <div class="mc-folder-layer" data-tab="banners" data-y="372" style="top:372px;z-index:7">
         <div class="mc-folder-tab-area" style="padding-left:60px">
-          <button class="mc-folder-tab"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-unselected.png" alt=""><span class="mc-tab-label">Banners</span></button>
+          <button class="mc-folder-tab"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Banners</span></button>
         </div>
         <div class="mc-folder-body" id="mc-panel-banners"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-folder-banner-scroll">
             <div class="mc-folder-banner-track"><img src="./assets/banners/akiroko.png" alt="akiroko"><img src="./assets/banners/ardolf.png" alt="ardolf"><img src="./assets/banners/cloud9.png" alt="cloud9"><img src="./assets/banners/cottontail.png" alt="cottontail"><img src="./assets/banners/fefe.png" alt="fefe"><img src="./assets/banners/fillian.png" alt="fillian"><img src="./assets/banners/fream.png" alt="fream"><img src="./assets/banners/grim.png" alt="grim"><img src="./assets/banners/hia.png" alt="hia"><img src="./assets/banners/iridium.png" alt="iridium"><img src="./assets/banners/jessellum.png" alt="jessellum"><img src="./assets/banners/jollz.png" alt="jollz"><img src="./assets/banners/keeoh.png" alt="keeoh"><img src="./assets/banners/kuro.png" alt="kuro"><img src="./assets/banners/kwobus.png" alt="kwobus"><img src="./assets/banners/limealicious.png" alt="limealicious"><img src="./assets/banners/mari.png" alt="mari"><img src="./assets/banners/mero.png" alt="mero"><img src="./assets/banners/mystic.png" alt="mystic"><img src="./assets/banners/nishi.png" alt="nishi"><img src="./assets/banners/nyxi.png" alt="nyxi"><img src="./assets/banners/obey.png" alt="obey"><img src="./assets/banners/obnoctious.png" alt="obnoctious"><img src="./assets/banners/ohyaholla.png" alt="ohyaholla"><img src="./assets/banners/otto.png" alt="otto"><img src="./assets/banners/pedro.png" alt="pedro"><img src="./assets/banners/rebecca.png" alt="rebecca"><img src="./assets/banners/shiro.png" alt="shiro"><img src="./assets/banners/sinder.png" alt="sinder"><img src="./assets/banners/sylvee.png" alt="sylvee"><img src="./assets/banners/traid.png" alt="traid"><img src="./assets/banners/woops.png" alt="woops"></div>
@@ -496,7 +637,7 @@ document.addEventListener("DOMContentLoaded",function(){
       </div>
       <div class="mc-folder-layer active" data-tab="logos" data-y="434" style="top:434px;z-index:8">
         <div class="mc-folder-tab-area" style="padding-left:140px">
-          <button class="mc-folder-tab active"><img class="mc-tab-img" src="./assets/folder-menu/folder-tab-selected.png" alt=""><span class="mc-tab-label">Logos</span></button>
+          <button class="mc-folder-tab active"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Logos</span></button>
         </div>
         <div class="mc-folder-body" id="mc-panel-logos"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-logos-scroll"><div class="mc-work-grid"><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20akiroko.png" alt="akiroko"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20ardolf.png" alt="ardolf"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20bam.png" alt="bam"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20bluskys.png" alt="bluskys"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20eggwick.png" alt="eggwick"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20femtanyl.png" alt="femtanyl"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20filian.png" alt="filian"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20fream.png" alt="fream"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20frizk.png" alt="frizk"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20grim.png" alt="grim"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20hexloom.png" alt="hexloom"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20jadey.png" alt="jadey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20kuro.png" alt="kuro"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20kwobus.png" alt="kwobus"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20limealicious.png" alt="limealicious"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20mikki.png" alt="mikki"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20natt.png" alt="natt"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20nishi.png" alt="nishi"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20nyxifox.png" alt="nyxifox"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20obey.png" alt="obey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20obnoctious.png" alt="obnoctious"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20rebecca.png" alt="rebecca"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20shiro.png" alt="shiro"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20signalvortex.png" alt="signalvortex"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20sylvee.png" alt="sylvee"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20traid.png" alt="traid"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20voidtag.png" alt="voidtag"></div></div><div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div></div>
       </div>
@@ -889,7 +1030,8 @@ document.addEventListener("DOMContentLoaded",function(){
 </section>
 
 <footer id="mc-footer">
-  <div id="mc-footer-inner">
+  <div id="mc-footer-inner" style="position:relative;overflow:visible;">
+  <div id="mc-cinnabuns" style="--cin-x:91px;--cin-y:59px;--cin-scale:1.4;"><img src="./assets/cinnabuns.png" alt="Cinnabuns" id="mc-cinnabuns-img"></div>
     <div class="mc-footer-left">
       <span class="mc-footer-follow">Follow me</span>
       <a class="mc-footer-social" href="https://x.com/morningcawfee" target="_blank" rel="noopener" aria-label="X / Twitter">
