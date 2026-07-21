@@ -76,14 +76,31 @@ nav.framer-FygNn{display:none!important}
 
 /* Our nav */
 #mc-nav{position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:flex-start;height:60px;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'BricolageGrotesque',sans-serif;}
-#mc-header-contents{display:flex;align-items:center;justify-content:space-between;width:calc(100% - 140px);margin:0 auto;}
+#mc-header-contents{display:flex;align-items:center;justify-content:space-between;width:min(1200px,calc(100% - 140px));margin:0 auto;}
 #mc-nav .mc-logo img{height:50px;width:auto;display:block;transition:transform 0.3s ease;}
 .mc-logo:hover img{transform:scale(1.08) rotate(-5deg);}
 #mc-sublinks{display:flex;gap:2rem;list-style:none;margin:0;padding:0;}
-#mc-sublinks li a{color:#fff;text-decoration:none;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;transition:color 0.2s ease;position:relative;}
-#mc-sublinks li a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#E81215;transition:width 0.25s ease;}
-#mc-sublinks li a:hover{color:#E81215;}
-#mc-sublinks li a:hover::after{width:100%;}
+#mc-sublinks>li>a{color:#fff;text-decoration:none;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;transition:color 0.2s ease;position:relative;}
+#mc-sublinks>li>a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#E81215;transition:width 0.25s ease;}
+#mc-sublinks>li>a:hover{color:#E81215;}
+#mc-sublinks>li>a:hover::after{width:100%;}
+.mc-has-dropdown{position:relative;}
+.mc-has-dropdown>a{display:inline-flex;align-items:center;gap:6px;}
+.mc-dropdown-icon{width:22px;height:22px;display:block;filter:brightness(0) invert(1);opacity:1;flex-shrink:0;position:relative;top:1px;transition:filter 0.2s;}
+#mc-sublinks .mc-has-dropdown:hover .mc-dropdown-icon{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg);}
+#mc-sublinks .mc-has-dropdown:hover>a{color:#E81215;}
+#mc-sublinks .mc-has-dropdown:hover>a::after{width:100%;}
+.mc-nav-dropdown{position:absolute;top:calc(100% + 10px);left:-15px;background:#0a0a0a;border-radius:8px;padding:6px 0;min-width:160px;display:none;flex-direction:column;z-index:10000;backdrop-filter:blur(12px);}
+.mc-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px;}
+.mc-has-dropdown:hover .mc-nav-dropdown,.mc-has-dropdown.mc-dropdown-open .mc-nav-dropdown{display:flex;}
+.mc-nav-dropdown a{color:rgba(255,255,255,0.8);text-decoration:none;font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;white-space:nowrap;transition:color 0.15s;letter-spacing:-0.01em;text-align:left;}
+#mc-sublinks .mc-nav-dropdown a:hover{color:#E81215;}
+.mc-nav-dropdown a span{position:relative;}
+.mc-nav-dropdown a span::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#E81215;transition:width 0.25s ease;}
+#mc-sublinks .mc-nav-dropdown a:hover span::after{width:100%;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open>a{color:#E81215;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open>a::after{width:100%;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open .mc-dropdown-icon{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg);}
 #main{padding-top:60px;}
 
 /* Hero */
@@ -133,14 +150,14 @@ nav.framer-FygNn{display:none!important}
 #mc-sublinks li a.active::after{width:100%;}
 .mc-contact-group{display:flex;align-items:center;gap:10px;justify-content:flex-start;}
 .mc-contact-label{color:#fff;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;white-space:nowrap;}
-.mc-contact-btn{display:flex;align-items:center;height:36px;border-radius:18px;background:#0248aa;padding:0 30px;gap:0;text-decoration:none;flex:1;min-width:0;transition:padding 0.3s ease;}
+.mc-contact-btn{display:flex;align-items:center;height:36px;border-radius:18px;background:#0248aa;padding:0 10px;gap:0;text-decoration:none;flex:1;min-width:0;transition:padding 0.3s ease;position:relative;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.1));}
 .mc-contact-btn:hover{padding:0 60px;}
 .mc-contact-btn:hover .mc-contact-name{color:#fff;}
 .mc-contact-btn img{width:18px;height:18px;display:block;filter:invert(1);flex-shrink:0;transition:width 0.3s ease,height 0.3s ease;}
 .mc-contact-btn[href*="github.com"] img,.mc-contact-btn[href*="behance.net"] img,.mc-contact-btn[href*="vgen.co"] img{width:21px;height:21px;}
 .mc-contact-btn:hover img{width:22px;height:22px;}
 .mc-contact-btn[href*="github.com"]:hover img,.mc-contact-btn[href*="behance.net"]:hover img,.mc-contact-btn[href*="vgen.co"]:hover img{width:24px;height:24px;}
-.mc-contact-name{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:bold;letter-spacing:0.08em;color:#fff;white-space:nowrap;flex:1;text-align:center;transition:opacity 0.3s ease;}
+.mc-contact-name{position:absolute;left:0;right:0;text-align:center;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:bold;letter-spacing:0.08em;color:#fff;white-space:nowrap;pointer-events:none;transition:opacity 0.3s ease;}
 @media(max-width:1200px){.mc-contact-name{display:none;}.mc-contact-btn{justify-content:center;padding:0 20px;}.mc-contact-btn:hover{padding:0 28px;}}
 @media(max-width:480px){
   .mc-hero-title h1{font-size:20px!important;}
@@ -272,7 +289,7 @@ nav.framer-FygNn{display:none!important}
 .mc-folder-tab.active .mc-tab-stroke{stroke:rgba(255,255,255,0.2);}
 .mc-folder-layer:not(.active):hover .mc-tab-fill{filter:brightness(1.18);}
 
-.mc-tab-label{position:absolute;left:calc(35px * var(--folder-scale,1));top:50%;transform:translateY(-50%);font-family:'BricolageGrotesque',sans-serif;font-size:max(11px, calc(20px * var(--folder-scale,1)));font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fff;white-space:nowrap;pointer-events:none;z-index:3;transition:color 0.2s;}
+.mc-tab-label{position:absolute;left:calc(35px * var(--folder-scale,1));top:50%;transform:translateY(-50%);font-family:'BricolageGrotesque',sans-serif;font-size:max(11px, calc(20px * var(--folder-scale,1)));font-weight:800;letter-spacing:0.1em;color:#fff;white-space:nowrap;pointer-events:none;z-index:3;transition:color 0.2s;}
 .mc-folder-tab.active .mc-tab-label{color:#fff;}
 .mc-folder-layer:not(.active):hover .mc-tab-label{color:#000;}
 .mc-folder-tab:hover .mc-tab-label{color:rgba(255,255,255,0.65);}
@@ -294,7 +311,7 @@ nav.framer-FygNn{display:none!important}
 
 #mc-work-desc{font-family:'BricolageGrotesque',sans-serif;font-size:18px;color:rgba(255,255,255,0.55);margin:0;line-height:1.6;}
 .mc-logos-hint{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:16px;}
-.mc-logos-hint-text{font-family:'BricolageGrotesque',sans-serif;font-size:16px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#ffc557;}
+.mc-logos-hint-text{font-family:'BricolageGrotesque',sans-serif;font-size:16px;font-weight:700;letter-spacing:0.08em;color:#ffc557;}
 .mc-logos-hint-arrow{width:30px;height:30px;filter:invert(1);}
 .mc-back-top{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:16px;cursor:pointer;padding:8px 0;}
 .mc-arrow-up{transform:rotate(180deg);}
@@ -360,7 +377,7 @@ html,body{background:#000;min-height:100%;scroll-behavior:smooth;overflow-x:hidd
 @keyframes mc-grid-scroll{from{background-position:0 0;}to{background-position:40px 40px;}}
 #mc-work-inner{position:relative;z-index:1;}
 
-#mc-hero-contact{display:flex;align-items:center;gap:10px;padding:0 0 10px;width:min(1200px,calc(100% - 140px));margin:0 auto;justify-content:flex-start;}
+#mc-hero-contact{display:flex;align-items:center;gap:10px;padding:0 0 50px;width:min(1200px,calc(100% - 140px));margin:0 auto;justify-content:flex-start;}
 </style>
 </head>
 <body>
@@ -373,8 +390,20 @@ html,body{background:#000;min-height:100%;scroll-behavior:smooth;overflow-x:hidd
     <a class="mc-logo" href="/"><img src="./assets/icons/icon-red.png" alt="MorningCawfee"></a>
     <ul id="mc-sublinks">
       <li><a href="#mc-about" data-section="about" class="mc-scroll-link">About</a></li>
-      <li><a href="#mc-work" data-section="mywork" class="mc-scroll-link">My Work</a></li>
+      <li class="mc-has-dropdown"><a href="#mc-work" data-section="mywork" class="mc-scroll-link">My Work<img src="./assets/symbols/three-lines.svg" class="mc-dropdown-icon" alt=""></a>
+        <div class="mc-nav-dropdown">
+          <a href="#mc-work" data-folder="othergraphics"><span>Other Graphics</span></a>
+          <a href="#mc-work" data-folder="businesscards"><span>Business Cards</span></a>
+          <a href="#mc-work" data-folder="branding"><span>Branding</span></a>
+          <a href="#mc-work" data-folder="uiux"><span>UI/UX</span></a>
+          <a href="#mc-work" data-folder="overlays"><span>Overlays</span></a>
+          <a href="#mc-work" data-folder="posters"><span>Posters</span></a>
+          <a href="#mc-work" data-folder="banners"><span>Banners</span></a>
+          <a href="#mc-work" data-folder="logos"><span>Logos</span></a>
+        </div>
+      </li>
       <li><a href="#mc-clients" data-section="clients" class="mc-scroll-link">Clients</a></li>
+      <li><a href="/charref/">Character Ref</a></li>
       <li><a href="#footer" data-section="contact" class="mc-scroll-link">Contact</a></li>
     </ul>
   </div>
@@ -501,6 +530,37 @@ document.addEventListener("DOMContentLoaded",function(){
       if(scroll) scroll.scrollTo({top:0,behavior:"smooth"});
     }
   });
+
+  document.querySelectorAll(".mc-nav-dropdown a[data-folder]").forEach(function(a){
+    a.addEventListener("click",function(e){
+      e.preventDefault();
+      var folderName=this.dataset.folder;
+      var targetLayer=document.querySelector(".mc-folder-layer[data-tab='"+folderName+"']");
+      if(targetLayer) targetLayer.querySelector(".mc-folder-tab").click();
+      var body=document.querySelector(".mc-folder-layer[data-tab='"+folderName+"'] .mc-folder-body");
+      if(body){
+        var top=body.getBoundingClientRect().top+window.scrollY-80;
+        window.scrollTo({top:top,behavior:"smooth"});
+      } else {
+        document.getElementById("mc-work").scrollIntoView({behavior:"smooth"});
+      }
+    });
+  });
+  // Mobile dropdown toggle
+  var dropdownParent=document.querySelector('.mc-has-dropdown');
+  if(dropdownParent){
+    dropdownParent.querySelector(':scope>a').addEventListener('click',function(e){
+      if(window.matchMedia('(max-width:480px)').matches){
+        e.preventDefault();
+        dropdownParent.classList.toggle('mc-dropdown-open');
+      }
+    });
+    document.addEventListener('click',function(e){
+      if(window.matchMedia('(max-width:480px)').matches&&!e.target.closest('.mc-has-dropdown')){
+        dropdownParent.classList.remove('mc-dropdown-open');
+      }
+    });
+  }
 });
 </script>
 <section id="mc-introduction">
@@ -508,9 +568,9 @@ document.addEventListener("DOMContentLoaded",function(){
   <div id="mc-hero-head">
     <div id="mc-hero-logo"><img src="./assets/icons/icon-logo.gif" alt="MorningCawfee"></div>
     <div id="mc-hero-contact">
-      <a class="mc-contact-btn" href="https://x.com/morningcawfee" target="_blank" rel="noopener" style="background:#219eee"><span class="mc-contact-name">Twitter</span><img src="./assets/symbols/x.svg" alt="X"></a>
+      <a class="mc-contact-btn" href="https://x.com/morningcawfee" target="_blank" rel="noopener" style="background:#219eee"><span class="mc-contact-name">Twitter</span><img src="./assets/symbols/twitter.svg" alt="Twitter"></a>
       <a class="mc-contact-btn" href="https://www.twitch.tv/immorningcawfee" target="_blank" rel="noopener" style="background:#8e21ee"><span class="mc-contact-name">Twitch</span><img src="./assets/symbols/twitch.svg" alt="Twitch"></a>
-      <a class="mc-contact-btn" href="https://github.com/CawfeeInTheMorning" target="_blank" rel="noopener" style="background:#6d7e81"><span class="mc-contact-name">Github</span><img src="./assets/symbols/github.svg" alt="GitHub"></a>
+      <a class="mc-contact-btn" href="https://github.com/CawfeeInTheMorning" target="_blank" rel="noopener" style="background:#b5b5b5"><span class="mc-contact-name">Github</span><img src="./assets/symbols/github.svg" alt="GitHub"></a>
       <a class="mc-contact-btn" href="https://www.behance.net/morningcawfee" target="_blank" rel="noopener" style="background:#2139ee"><span class="mc-contact-name">Behance</span><img src="./assets/symbols/behance.svg" alt="Behance"></a>
       <a class="mc-contact-btn" href="https://vgen.co/morningcawfee" target="_blank" rel="noopener" style="background:#ff8d00"><span class="mc-contact-name">VGen</span><img src="./assets/symbols/vgen.svg" alt="VGen"></a>
       <a class="mc-contact-btn" href="https://bsky.app/profile/bluskys.bsky.social" target="_blank" rel="noopener" style="background:#206cdc"><span class="mc-contact-name">Bluesky</span><img src="./assets/symbols/bluesky.svg" alt="Bluesky"></a>
@@ -617,7 +677,7 @@ document.addEventListener("DOMContentLoaded",function(){
 <img src="./assets/business-cards/card-5.png" alt="card-5" class="mc-bizcard-img">
 <img src="./assets/business-cards/card-6.png" alt="card-6" class="mc-bizcard-img">
 <img src="./assets/business-cards/card-7.png" alt="card-7" class="mc-bizcard-img">
-<div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div></div>
+<div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to the Top</span></div></div></div>
       </div>
       <div class="mc-folder-layer" data-tab="branding" data-y="124" style="top:124px;z-index:3">
         <div class="mc-folder-tab-area" style="--tab-pl:130px">
@@ -660,7 +720,7 @@ document.addEventListener("DOMContentLoaded",function(){
 <img src="./assets/overlays/overlay-cyfox.png" alt="overlay-cyfox" class="mc-bizcard-img">
 <img src="./assets/overlays/overlay-jellyfish.png" alt="overlay-jellyfish" class="mc-bizcard-img">
 <img src="./assets/overlays/overlay-tama.png" alt="overlay-tama" class="mc-bizcard-img">
-<div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div></div>
+<div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to the Top</span></div></div></div>
       </div>
       <div class="mc-folder-layer" data-tab="posters" data-y="310" style="top:310px;z-index:6">
         <div class="mc-folder-tab-area" style="--tab-pl:310px">
@@ -691,7 +751,7 @@ document.addEventListener("DOMContentLoaded",function(){
 <div class="mc-poster-item"><img src="./assets/posters/widow-poster.png" alt="widow-poster" class="mc-poster-thumb" loading="lazy"></div>
 <div class="mc-poster-item"><img src="./assets/posters/yard-poster-2.png" alt="yard-poster-2" class="mc-poster-thumb" loading="lazy"></div>
 <div class="mc-poster-item"><img src="./assets/posters/yard-poster.png" alt="yard-poster" class="mc-poster-thumb" loading="lazy"></div>
-</div><div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div></div>
+</div><div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to the Top</span></div></div></div>
       </div>
       <div class="mc-folder-layer" data-tab="banners" data-y="372" style="top:372px;z-index:7">
         <div class="mc-folder-tab-area" style="--tab-pl:60px">
@@ -699,14 +759,14 @@ document.addEventListener("DOMContentLoaded",function(){
         </div>
         <div class="mc-folder-body" id="mc-panel-banners"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-folder-banner-scroll">
             <div class="mc-folder-banner-track"><img src="./assets/banners/akiroko.png" alt="akiroko"><img src="./assets/banners/ardolf.png" alt="ardolf"><img src="./assets/banners/cloud9.png" alt="cloud9"><img src="./assets/banners/cottontail.png" alt="cottontail"><img src="./assets/banners/fefe.png" alt="fefe"><img src="./assets/banners/fillian.png" alt="fillian"><img src="./assets/banners/fream.png" alt="fream"><img src="./assets/banners/grim.png" alt="grim"><img src="./assets/banners/hia.png" alt="hia"><img src="./assets/banners/iridium.png" alt="iridium"><img src="./assets/banners/jessellum.png" alt="jessellum"><img src="./assets/banners/jollz.png" alt="jollz"><img src="./assets/banners/keeoh.png" alt="keeoh"><img src="./assets/banners/kuro.png" alt="kuro"><img src="./assets/banners/kwobus.png" alt="kwobus"><img src="./assets/banners/limealicious.png" alt="limealicious"><img src="./assets/banners/mari.png" alt="mari"><img src="./assets/banners/mero.png" alt="mero"><img src="./assets/banners/mystic.png" alt="mystic"><img src="./assets/banners/nishi.png" alt="nishi"><img src="./assets/banners/nyxi.png" alt="nyxi"><img src="./assets/banners/obey.png" alt="obey"><img src="./assets/banners/obnoctious.png" alt="obnoctious"><img src="./assets/banners/ohyaholla.png" alt="ohyaholla"><img src="./assets/banners/otto.png" alt="otto"><img src="./assets/banners/pedro.png" alt="pedro"><img src="./assets/banners/rebecca.png" alt="rebecca"><img src="./assets/banners/shiro.png" alt="shiro"><img src="./assets/banners/sinder.png" alt="sinder"><img src="./assets/banners/sylvee.png" alt="sylvee"><img src="./assets/banners/traid.png" alt="traid"><img src="./assets/banners/woops.png" alt="woops"></div>
-          <div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div>
+          <div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to the Top</span></div>
           </div></div>
       </div>
       <div class="mc-folder-layer active" data-tab="logos" data-y="434" style="top:434px;z-index:8">
         <div class="mc-folder-tab-area" style="--tab-pl:140px">
           <button class="mc-folder-tab active"><svg class="mc-tab-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.71 27.81" preserveAspectRatio="none"><path class="mc-tab-fill" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81H0Z"/><path class="mc-tab-stroke" d="M0,27.81L20.72.14l329.19-.14c16.13,1.69,10.74,16.5,11.6,27.81"/></svg><span class="mc-tab-label">Logos</span></button>
         </div>
-        <div class="mc-folder-body" id="mc-panel-logos"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-logos-scroll"><div class="mc-work-grid"><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20akiroko.png" alt="akiroko"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20ardolf.png" alt="ardolf"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20bam.png" alt="bam"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20bluskys.png" alt="bluskys"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20eggwick.png" alt="eggwick"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20femtanyl.png" alt="femtanyl"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20filian.png" alt="filian"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20fream.png" alt="fream"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20frizk.png" alt="frizk"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20grim.png" alt="grim"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20hexloom.png" alt="hexloom"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20jadey.png" alt="jadey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20kuro.png" alt="kuro"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20kwobus.png" alt="kwobus"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20limealicious.png" alt="limealicious"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20mikki.png" alt="mikki"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20natt.png" alt="natt"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20nishi.png" alt="nishi"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20nyxifox.png" alt="nyxifox"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20obey.png" alt="obey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20obnoctious.png" alt="obnoctious"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20rebecca.png" alt="rebecca"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20shiro.png" alt="shiro"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20signalvortex.png" alt="signalvortex"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20sylvee.png" alt="sylvee"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20traid.png" alt="traid"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20voidtag.png" alt="voidtag"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20dalueart.png" alt="dalueart"></div></div><div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to top</span></div></div></div>
+        <div class="mc-folder-body" id="mc-panel-logos"><div class="mc-logos-hint"><span class="mc-logos-hint-text">Scroll</span><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow" alt=""></div><div class="mc-logos-scroll"><div class="mc-work-grid"><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20akiroko.png" alt="akiroko"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20ardolf.png" alt="ardolf"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20bam.png" alt="bam"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20bluskys.png" alt="bluskys"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20eggwick.png" alt="eggwick"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20femtanyl.png" alt="femtanyl"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20filian.png" alt="filian"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20fream.png" alt="fream"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20frizk.png" alt="frizk"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20grim.png" alt="grim"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20hexloom.png" alt="hexloom"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20jadey.png" alt="jadey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20kuro.png" alt="kuro"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20kwobus.png" alt="kwobus"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20limealicious.png" alt="limealicious"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20mikki.png" alt="mikki"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20natt.png" alt="natt"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20nishi.png" alt="nishi"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20nyxifox.png" alt="nyxifox"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20obey.png" alt="obey"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20obnoctious.png" alt="obnoctious"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20rebecca.png" alt="rebecca"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20shiro.png" alt="shiro"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20signalvortex.png" alt="signalvortex"></div><div class="mc-work-box" style="background:#F97C94"><img src="./assets/logos/logo%20-%20sylvee.png" alt="sylvee"></div><div class="mc-work-box" style="background:#FC211B"><img src="./assets/logos/logo%20-%20traid.png" alt="traid"></div><div class="mc-work-box" style="background:#F19541"><img src="./assets/logos/logo%20-%20voidtag.png" alt="voidtag"></div><div class="mc-work-box" style="background:#0F5AF2"><img src="./assets/logos/logo%20-%20dalueart.png" alt="dalueart"></div></div><div class="mc-back-top"><img src="./assets/symbols/arrow-down.svg" class="mc-logos-hint-arrow mc-arrow-up" alt=""><span class="mc-logos-hint-text">Back to the Top</span></div></div></div>
       </div>
     </div>
   </div>

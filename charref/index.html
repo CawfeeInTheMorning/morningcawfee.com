@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Character Ref — MorningCawfee</title>
+  <link rel="icon" href="../assets/icons/icon-red.png" type="image/png">
+  <style>
+@font-face{font-family:"BricolageGrotesque";src:url("../fonts/BricolageGrotesque.ttf") format("truetype");font-display:swap;font-style:normal;font-weight:100 900;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif;min-height:100%;scroll-behavior:smooth;overflow-x:hidden;overflow-anchor:none;}
+/* Nav */
+#mc-nav{position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:flex-start;height:60px;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'BricolageGrotesque',sans-serif;}
+#mc-header-contents{display:flex;align-items:center;justify-content:space-between;width:min(1200px,calc(100% - 140px));margin:0 auto;}
+#mc-nav .mc-logo img{height:50px;width:auto;display:block;transition:transform 0.3s ease;}
+.mc-logo:hover img{transform:scale(1.08) rotate(-5deg);}
+#mc-sublinks{display:flex;gap:2rem;list-style:none;margin:0;padding:0;}
+#mc-sublinks>li>a{color:#fff;text-decoration:none;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;transition:color 0.2s ease;position:relative;}
+#mc-sublinks>li>a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#E81215;transition:width 0.25s ease;}
+#mc-sublinks>li>a:hover{color:#E81215;}
+#mc-sublinks>li>a:hover::after{width:100%;}
+.mc-has-dropdown{position:relative;}
+.mc-has-dropdown>a{display:inline-flex;align-items:center;gap:6px;}
+.mc-dropdown-icon{width:22px;height:22px;display:block;filter:brightness(0) invert(1);opacity:1;flex-shrink:0;position:relative;top:1px;transition:filter 0.2s;}
+#mc-sublinks .mc-has-dropdown:hover .mc-dropdown-icon{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg);}
+#mc-sublinks .mc-has-dropdown:hover>a{color:#E81215;}
+#mc-sublinks .mc-has-dropdown:hover>a::after{width:100%;}
+.mc-nav-dropdown{position:absolute;top:calc(100% + 10px);left:-15px;background:#0a0a0a;border-radius:8px;padding:6px 0;min-width:160px;display:none;flex-direction:column;z-index:10000;backdrop-filter:blur(12px);}
+.mc-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px;}
+.mc-has-dropdown:hover .mc-nav-dropdown,.mc-has-dropdown.mc-dropdown-open .mc-nav-dropdown{display:flex;}
+.mc-nav-dropdown a{color:rgba(255,255,255,0.8);text-decoration:none;font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;white-space:nowrap;transition:color 0.15s;letter-spacing:-0.01em;text-align:left;}
+#mc-sublinks .mc-nav-dropdown a:hover{color:#E81215;}
+.mc-nav-dropdown a span{position:relative;}
+.mc-nav-dropdown a span::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#E81215;transition:width 0.25s ease;}
+#mc-sublinks .mc-nav-dropdown a:hover span::after{width:100%;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open>a{color:#E81215;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open>a::after{width:100%;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open .mc-dropdown-icon{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg);}
+/* Main */
+#mc-main{padding-top:60px;}
+@keyframes mc-grid-scroll{from{background-position:0 0;}to{background-position:40px 40px;}}
+#cr-intro{width:min(1200px,calc(100% - 160px));margin:40px auto;height:675px;border-radius:18px;padding:20px;display:flex;overflow:hidden;background:#d7d7d7;position:relative;}
+#cr-intro-grid-clip{position:absolute;inset:0;overflow:clip;pointer-events:none;z-index:0;border-radius:18px;}
+#cr-intro-grid{position:absolute;inset:-100%;overflow:hidden;pointer-events:none;z-index:0;}
+#cr-intro-grid::before{content:'';position:absolute;inset:-60%;background-image:linear-gradient(rgb(203 203 203) 1px,transparent 1px),linear-gradient(90deg,rgb(203 203 203) 1px,#00000000 1px);background-size:40px 40px;transform:rotate(20deg);animation:mc-grid-scroll 6s linear infinite;}
+#cr-portrait{width:50%;height:100%;border-radius:10px;overflow:hidden;flex-shrink:0;position:relative;z-index:1;}
+#cr-portrait img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform;transition:transform 0.1s ease-out;}
+#cr-title{width:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;position:relative;z-index:1;padding:0 24px;}
+#cr-title h1{font-family:'BricolageGrotesque',sans-serif;font-size:40px;font-weight:800;color:#0c5685;}
+#cr-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px 20px;align-items:center;width:100%;}
+.cr-stat-row{display:contents;}
+.cr-stat-badge{background:#679CBC;color:#d7d7d7;font-family:'BricolageGrotesque',sans-serif;font-size:18px;font-weight:700;justify-self:end;padding:5px 12px;border-radius:6px;white-space:nowrap;text-align:center;}
+.cr-stat-desc{color:#0c5685;font-family:'BricolageGrotesque',sans-serif;font-size:18px;font-weight:700;}
+/* Palette */
+#mc-palette{width:min(1200px,calc(100% - 160px));margin:40px auto;}
+.cr-palette-inner{display:flex;align-items:flex-start;gap:32px;}
+.cr-ref-images{display:flex;gap:12px;align-items:flex-start;flex-shrink:0;}
+.cr-palette-group-title{font-family:'BricolageGrotesque',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:40px;}
+.cr-ref-images img{width:240px;height:auto;display:block;border-radius:8px;}
+.cr-swatches{display:flex;flex-direction:column;gap:10px;flex:1;}
+.cr-swatch{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:47px;border-radius:8px;cursor:pointer;flex-shrink:0;position:relative;transition:height 0.2s ease;}
+.cr-swatch:hover{height:58px;}
+.cr-swatch-hex{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.05em;}
+.cr-swatch-title{position:absolute;left:50%;transform:translateX(-50%);font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:600;white-space:nowrap;pointer-events:none;}
+.cr-swatch-copy-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.cr-swatch-copy{width:22px;height:22px;display:block;opacity:0.7;transition:opacity 0.2s,width 0.2s ease,height 0.2s ease;flex-shrink:0;}
+.cr-swatch:hover .cr-swatch-copy{opacity:1;width:28px;height:28px;}
+.cr-swatch-copy-label{font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:600;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width 0.5s ease,opacity 0.5s ease;}
+.cr-swatch:hover .cr-swatch-copy-label{max-width:60px;opacity:1;}
+@media(max-width:480px){
+  #cr-intro{width:min(1200px,calc(100% - 60px))!important;}
+  #mc-palette{width:min(1200px,calc(100% - 60px))!important;}
+  .cr-palette-inner{flex-direction:column!important;}
+  .cr-ref-images img{height:110px!important;}
+}
+/* Footer */
+#mc-cinnabuns{position:absolute;left:var(--cin-x,0px);bottom:var(--cin-y,0px);transform:scale(var(--cin-scale,1));transform-origin:bottom right;pointer-events:none;z-index:10;}
+#mc-cinnabuns-img{display:block;width:120px;height:auto;}
+#footer{width:100%;background:#000;border-top:1px solid rgba(255,255,255,0.1);font-family:'BricolageGrotesque',sans-serif;}
+#mc-footer-inner{display:flex;align-items:center;justify-content:space-between;width:min(1200px,calc(100% - 140px));margin:0 auto;padding:0;height:58px;}
+.mc-footer-left{display:flex;align-items:center;gap:12px;}
+.mc-footer-follow{font-size:13px;color:rgba(255,255,255,0.4);white-space:nowrap;}
+.mc-footer-social{display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);transition:color 0.2s,transform 0.2s;}
+.mc-footer-social svg,.mc-footer-social img{width:20px;height:20px;display:block;transition:transform 0.2s;}
+.mc-footer-social img{filter:brightness(0) invert(1);opacity:0.4;}
+.mc-footer-social:hover img{opacity:1;}
+.mc-footer-social:hover{color:#E81215;}
+.mc-footer-social:hover svg{transform:scale(1.2);}.mc-footer-social:hover img{transform:scale(1.2);filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg);}
+.mc-footer-center{position:absolute;left:50%;transform:translateX(-50%);}
+.mc-footer-center a{font-size:13px;color:#0248aa;text-decoration:none;transition:color 0.2s;}
+.mc-footer-center a:hover{color:#fff;}
+.mc-footer-right{font-size:13px;color:rgba(255,255,255,0.4);white-space:nowrap;}
+@media(max-width:480px){
+  #mc-header-contents{width:calc(100% - 60px)!important;}
+  #mc-sublinks{gap:1rem!important;}
+  #mc-sublinks li a{font-size:11px!important;}
+  .mc-footer-left,.mc-footer-right{display:none!important;}
+  #mc-footer-inner{justify-content:center!important;}
+  #mc-cinnabuns{left:50%!important;right:auto!important;transform:translateX(-50%) scale(var(--cin-scale,1))!important;transform-origin:bottom center!important;}
+}
+  </style>
+</head>
+<body>
+<nav id="mc-nav">
+  <div id="mc-header-contents">
+    <a class="mc-logo" href="/"><img src="../assets/icons/icon-red.png" alt="MorningCawfee"></a>
+    <ul id="mc-sublinks">
+      <li><a href="/#mc-about">About</a></li>
+      <li class="mc-has-dropdown"><a href="/#mc-work">My Work<img src="../assets/symbols/three-lines.svg" class="mc-dropdown-icon" alt=""></a>
+        <div class="mc-nav-dropdown">
+          <a href="/#mc-work"><span>Other Graphics</span></a>
+          <a href="/#mc-work"><span>Business Cards</span></a>
+          <a href="/#mc-work"><span>Branding</span></a>
+          <a href="/#mc-work"><span>UI/UX</span></a>
+          <a href="/#mc-work"><span>Overlays</span></a>
+          <a href="/#mc-work"><span>Posters</span></a>
+          <a href="/#mc-work"><span>Banners</span></a>
+          <a href="/#mc-work"><span>Logos</span></a>
+        </div>
+      </li>
+      <li><a href="/#mc-clients">Clients</a></li>
+      <li><a href="/charref/">Character Ref</a></li>
+      <li><a href="/#footer">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="mc-main">
+  <div id="cr-intro">
+    <div id="cr-intro-grid-clip"><div id="cr-intro-grid"></div></div>
+    <div id="cr-portrait">
+      <img src="portrait/portrait-1.png" alt="Coco" id="cr-portrait-img">
+    </div>
+    <div id="cr-title">
+      <h1>This is <span style="color:#219eee;">Coco</span>!</h1>
+      <div id="cr-stats">
+        <div class="cr-stat-row">
+          <span class="cr-stat-badge">Age</span>
+          <span class="cr-stat-desc" id="cr-age"></span>
+        </div>
+        <div class="cr-stat-row">
+          <span class="cr-stat-badge">Height</span>
+          <span class="cr-stat-desc">5'9"</span>
+        </div>
+        <div class="cr-stat-row">
+          <span class="cr-stat-badge">Weight</span>
+          <span class="cr-stat-desc">170lbs / 77kg</span>
+        </div>
+        <div class="cr-stat-row">
+          <span class="cr-stat-badge">Pronouns</span>
+          <span class="cr-stat-desc">He / Him</span>
+        </div>
+        <div class="cr-stat-row">
+          <span class="cr-stat-badge">Sexuality</span>
+          <span class="cr-stat-desc">Pansexual</span>
+        </div>
+        <div class="cr-stat-row">
+          <span class="cr-stat-badge">Species</span>
+          <span class="cr-stat-desc">North American Bluejay</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="mc-palette">
+    <div class="cr-palette-group">
+      <div class="cr-palette-group-title">Desaturated</div>
+      <div class="cr-palette-inner">
+        <div class="cr-ref-images">
+          <img src="reference/cr-desat-white.png" alt="Coco reference white">
+          <img src="reference/cr-desat-black.png" alt="Coco reference black">
+        </div>
+        <div class="cr-swatches">
+          <div class="cr-swatch" data-hex="#679CBC" style="background:#679CBC;">
+            <span class="cr-swatch-hex" style="color:#fff;">#679CBC</span>
+            <span class="cr-swatch-title" style="color:#fff;">Fur</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+          </div>
+          <div class="cr-swatch" data-hex="#FEF2D6" style="background:#FEF2D6;">
+            <span class="cr-swatch-hex" style="color:#123F59;">#FEF2D6</span>
+            <span class="cr-swatch-title" style="color:#123F59;">Cheeks / Chest / Inner Thighs</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+          </div>
+          <div class="cr-swatch" data-hex="#123F59" style="background:#123F59;">
+            <span class="cr-swatch-hex" style="color:#fff;">#123F59</span>
+            <span class="cr-swatch-title" style="color:#fff;">Ears / Beak</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+          </div>
+          <div class="cr-swatch" data-hex="#C11020" style="background:#C11020;">
+            <span class="cr-swatch-hex" style="color:#fff;">#C11020</span>
+            <span class="cr-swatch-title" style="color:#fff;">Accents</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+          </div>
+          <div class="cr-swatch" data-hex="#FFBC42" style="background:#FFBC42;">
+            <span class="cr-swatch-hex" style="color:#123F59;">#FFBC42</span>
+            <span class="cr-swatch-title" style="color:#123F59;">Eyes</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cr-palette-group" style="margin-top:32px;">
+      <div class="cr-palette-group-title">Vibrant</div>
+      <div class="cr-palette-inner">
+        <div class="cr-ref-images">
+          <img src="reference/cr-sat-white.png" alt="Coco saturated reference white">
+          <img src="reference/cr-sat-black.png" alt="Coco saturated reference black">
+        </div>
+        <div class="cr-swatches">
+          <div class="cr-swatch" data-hex="#3492DD" style="background:#3492DD;">
+            <span class="cr-swatch-hex" style="color:#fff;">#3492DD</span>
+            <span class="cr-swatch-title" style="color:#fff;">Fur</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+          </div>
+          <div class="cr-swatch" data-hex="#F9F9D7" style="background:#F9F9D7;">
+            <span class="cr-swatch-hex" style="color:#001D52;">#F9F9D7</span>
+            <span class="cr-swatch-title" style="color:#001D52;">Cheeks / Chest / Inner Thighs</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+          </div>
+          <div class="cr-swatch" data-hex="#001D52" style="background:#001D52;">
+            <span class="cr-swatch-hex" style="color:#fff;">#001D52</span>
+            <span class="cr-swatch-title" style="color:#fff;">Ears / Beak</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+          </div>
+          <div class="cr-swatch" data-hex="#DB0000" style="background:#DB0000;">
+            <span class="cr-swatch-hex" style="color:#fff;">#DB0000</span>
+            <span class="cr-swatch-title" style="color:#fff;">Accents</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+          </div>
+          <div class="cr-swatch" data-hex="#FFE510" style="background:#FFE510;">
+            <span class="cr-swatch-hex" style="color:#001D52;">#FFE510</span>
+            <span class="cr-swatch-title" style="color:#001D52;">Eyes</span>
+            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="footer">
+  <div id="mc-footer-inner" style="position:relative;overflow:visible;">
+    <div id="mc-cinnabuns" style="--cin-x:91px;--cin-y:59px;--cin-scale:1.4;"><img src="../assets/accents/cinnabuns.png" alt="Cinnabuns" id="mc-cinnabuns-img"></div>
+    <div class="mc-footer-left">
+      <span class="mc-footer-follow">Follow me</span>
+      <a class="mc-footer-social" href="https://x.com/morningcawfee" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a class="mc-footer-social" href="https://www.twitch.tv/immorningcawfee" target="_blank" rel="noopener" aria-label="Twitch">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      </a>
+      <a class="mc-footer-social" href="https://github.com/CawfeeInTheMorning" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <a class="mc-footer-social" href="https://www.behance.net/morningcawfee" target="_blank" rel="noopener" aria-label="Behance">
+        <img src="../assets/symbols/behance.svg" alt="Behance" width="20" height="20">
+      </a>
+    </div>
+    <div class="mc-footer-center">
+      <a href="mailto:morningcawfee@gmail.com">morningcawfee@gmail.com</a>
+    </div>
+    <div class="mc-footer-right">
+      &copy; 2026 MorningCawfee
+    </div>
+  </div>
+</footer>
+<script>
+var dropdownParent=document.querySelector('.mc-has-dropdown');
+if(dropdownParent){
+  dropdownParent.querySelector(':scope>a').addEventListener('click',function(e){
+    if(window.matchMedia('(max-width:480px)').matches){
+      e.preventDefault();
+      dropdownParent.classList.toggle('mc-dropdown-open');
+    }
+  });
+  document.addEventListener('click',function(e){
+    if(window.matchMedia('(max-width:480px)').matches&&!e.target.closest('.mc-has-dropdown')){
+      dropdownParent.classList.remove('mc-dropdown-open');
+    }
+  });
+}
+// Dynamic age
+(function(){
+  var dob=new Date(2001,11,24);
+  var now=new Date();
+  var age=now.getFullYear()-dob.getFullYear();
+  if(now<new Date(now.getFullYear(),11,24)) age--;
+  var el=document.getElementById('cr-age');
+  if(el) el.textContent=age;
+})();
+// Parallax portrait
+(function(){
+  var img=document.getElementById('cr-portrait-img');
+  if(!img) return;
+  var tx=0,ty=0,cx=0,cy=0;
+  document.addEventListener('mousemove',function(e){
+    var nx=(e.clientX/window.innerWidth-0.5);
+    var ny=(e.clientY/window.innerHeight-0.5);
+    tx=nx*14;
+    ty=ny*10;
+  });
+  function tick(){
+    cx+=(tx-cx)*0.08;
+    cy+=(ty-cy)*0.08;
+    img.style.transform='translate('+cx+'px,'+cy+'px) scale(1.05)';
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+// Copy swatches
+(function(){
+  document.querySelectorAll('.cr-swatch').forEach(function(s){
+    var label=s.querySelector('.cr-swatch-copy-label');
+    var timer;
+    s.addEventListener('click',function(){
+      var hex=s.dataset.hex;
+      navigator.clipboard.writeText(hex).then(function(){
+        if(label){
+          label.textContent='Copied!';
+          clearTimeout(timer);
+          timer=setTimeout(function(){label.textContent='Copy';},1800);
+        }
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

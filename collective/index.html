@@ -11,21 +11,35 @@
 html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif;min-height:100%;scroll-behavior:smooth;overflow-x:hidden;overflow-anchor:none;}
 /* Nav */
 #mc-nav{position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:flex-start;height:60px;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'BricolageGrotesque',sans-serif;}
-#header{display:flex;align-items:center;justify-content:space-between;width:min(1200px,calc(100% - 140px));margin:0 auto;}
+#mc-header-contents{display:flex;align-items:center;justify-content:space-between;width:min(1200px,calc(100% - 140px));margin:0 auto;}
 #mc-nav .mc-logo img{height:50px;width:auto;display:block;transition:transform 0.3s ease;}
 .mc-logo:hover img{transform:scale(1.08) rotate(-5deg);}
-#mc-nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0;}
-#mc-nav ul li a{color:#fff;text-decoration:none;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;transition:color 0.2s ease;position:relative;}
-#mc-nav ul li a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#E81215;transition:width 0.25s ease;}
-#mc-nav ul li a:hover{color:#E81215;}
-#mc-nav ul li a:hover::after{width:100%;}
+#mc-sublinks{display:flex;gap:2rem;list-style:none;margin:0;padding:0;}
+#mc-sublinks>li>a{color:#fff;text-decoration:none;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:500;letter-spacing:-0.01em;transition:color 0.2s ease;position:relative;}
+#mc-sublinks>li>a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#E81215;transition:width 0.25s ease;}
+#mc-sublinks>li>a:hover{color:#E81215;}
+#mc-sublinks>li>a:hover::after{width:100%;}
+.mc-has-dropdown{position:relative;}
+.mc-has-dropdown>a{display:inline-flex;align-items:center;gap:6px;}
+.mc-dropdown-icon{width:22px;height:22px;display:block;filter:brightness(0) invert(1);opacity:1;flex-shrink:0;position:relative;top:1px;transition:filter 0.2s;}
+#mc-sublinks .mc-has-dropdown:hover .mc-dropdown-icon{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg);}
+#mc-sublinks .mc-has-dropdown:hover>a{color:#E81215;}
+#mc-sublinks .mc-has-dropdown:hover>a::after{width:100%;}
+.mc-nav-dropdown{position:absolute;top:calc(100% + 10px);left:-15px;background:#0a0a0a;border-radius:8px;padding:6px 0;min-width:160px;display:none;flex-direction:column;z-index:10000;backdrop-filter:blur(12px);}
+.mc-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px;}
+.mc-has-dropdown:hover .mc-nav-dropdown,.mc-has-dropdown.mc-dropdown-open .mc-nav-dropdown{display:flex;}
+.mc-nav-dropdown a{color:rgba(255,255,255,0.8);text-decoration:none;font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;white-space:nowrap;transition:color 0.15s;letter-spacing:-0.01em;text-align:left;}
+#mc-sublinks .mc-nav-dropdown a:hover{color:#E81215;}
+.mc-nav-dropdown a span{position:relative;}
+.mc-nav-dropdown a span::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#E81215;transition:width 0.25s ease;}
+#mc-sublinks .mc-nav-dropdown a:hover span::after{width:100%;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open>a{color:#E81215;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open>a::after{width:100%;}
+#mc-sublinks .mc-has-dropdown.mc-dropdown-open .mc-dropdown-icon{filter:invert(20%) sepia(100%) saturate(5000%) hue-rotate(340deg);}
 /* Main */
-#mc-main{padding-top:60px;min-height:calc(100vh - 58px);display:flex;align-items:center;justify-content:center;}
-.mc-page-placeholder{text-align:center;padding:80px 20px;}
-.mc-page-placeholder h1{font-family:'BricolageGrotesque',sans-serif;font-size:48px;font-weight:700;color:#fff;margin-bottom:16px;}
-.mc-page-placeholder p{font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:32px;}
-.mc-page-back{display:inline-block;padding:12px 28px;background:#4641a5;color:#fff;text-decoration:none;border-radius:8px;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:background 0.2s,transform 0.2s;}
-.mc-page-back:hover{background:#332f7e;transform:scale(1.04);}
+#mc-main{padding-top:60px;}
+#mc-collective-images{display:flex;flex-direction:column;gap:10px;width:min(1200px,calc(100% - 140px));margin:0 auto;}
+#mc-collective-images img{width:100%;display:block;}
 /* Footer */
 #mc-cinnabuns{position:absolute;left:var(--cin-x,0px);bottom:var(--cin-y,0px);transform:scale(var(--cin-scale,1));transform-origin:bottom right;pointer-events:none;z-index:10;}
 #mc-cinnabuns-img{display:block;width:120px;height:auto;}
@@ -44,8 +58,9 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 .mc-footer-center a:hover{color:#fff;}
 .mc-footer-right{font-size:13px;color:rgba(255,255,255,0.4);white-space:nowrap;}
 @media(max-width:480px){
-  #mc-nav ul{gap:1rem!important;}
-  #mc-nav ul li a{font-size:11px!important;}
+  #mc-header-contents{width:calc(100% - 60px)!important;}
+  #mc-sublinks{gap:1rem!important;}
+  #mc-sublinks li a{font-size:11px!important;}
   .mc-footer-left,.mc-footer-right{display:none!important;}
   #mc-footer-inner{justify-content:center!important;}
   #mc-cinnabuns{left:50%!important;right:auto!important;transform:translateX(-50%) scale(var(--cin-scale,1))!important;transform-origin:bottom center!important;}
@@ -54,22 +69,49 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 </head>
 <body>
 <nav id="mc-nav">
-  <div id="header">
+  <div id="mc-header-contents">
     <a class="mc-logo" href="/"><img src="../assets/icons/icon-red.png" alt="MorningCawfee"></a>
-    <ul>
+    <ul id="mc-sublinks">
       <li><a href="/#mc-about">About</a></li>
-      <li><a href="/#mc-work">My Work</a></li>
+      <li class="mc-has-dropdown"><a href="/#mc-work">My Work<img src="../assets/symbols/three-lines.svg" class="mc-dropdown-icon" alt=""></a>
+        <div class="mc-nav-dropdown">
+          <a href="/#mc-work"><span>Other Graphics</span></a>
+          <a href="/#mc-work"><span>Business Cards</span></a>
+          <a href="/#mc-work"><span>Branding</span></a>
+          <a href="/#mc-work"><span>UI/UX</span></a>
+          <a href="/#mc-work"><span>Overlays</span></a>
+          <a href="/#mc-work"><span>Posters</span></a>
+          <a href="/#mc-work"><span>Banners</span></a>
+          <a href="/#mc-work"><span>Logos</span></a>
+        </div>
+      </li>
       <li><a href="/#mc-clients">Clients</a></li>
+      <li><a href="/charref/">Character Ref</a></li>
       <li><a href="/#footer">Contact</a></li>
     </ul>
   </div>
 </nav>
 
 <main id="mc-main">
-  <div class="mc-page-placeholder">
-    <h1>The Collective</h1>
-    <p>This page is coming soon.</p>
-    <a class="mc-page-back" href="/">← Back to Portfolio</a>
+  <div id="mc-collective-images">
+    <img src="collective-1.png" alt="Collective 1">
+    <img src="collective-2.png" alt="Collective 2">
+    <img src="collective-3.png" alt="Collective 3">
+    <img src="collective-4.png" alt="Collective 4">
+    <img src="collective-5.png" alt="Collective 5">
+    <img src="collective-6.png" alt="Collective 6">
+    <img src="collective-7.png" alt="Collective 7">
+    <img src="collective-8.png" alt="Collective 8">
+    <img src="collective-9.png" alt="Collective 9">
+    <img src="collective-10.png" alt="Collective 10">
+    <img src="collective-11.png" alt="Collective 11">
+    <img src="collective-12.png" alt="Collective 12">
+    <img src="collective-13.png" alt="Collective 13">
+    <img src="collective-14.png" alt="Collective 14">
+    <img src="collective-15.png" alt="Collective 15">
+    <img src="collective-16.png" alt="Collective 16">
+    <img src="collective-17.png" alt="Collective 17">
+    <img src="collective-18.png" alt="Collective 18">
   </div>
 </main>
 
@@ -99,5 +141,21 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
     </div>
   </div>
 </footer>
+<script>
+var dropdownParent=document.querySelector('.mc-has-dropdown');
+if(dropdownParent){
+  dropdownParent.querySelector(':scope>a').addEventListener('click',function(e){
+    if(window.matchMedia('(max-width:480px)').matches){
+      e.preventDefault();
+      dropdownParent.classList.toggle('mc-dropdown-open');
+    }
+  });
+  document.addEventListener('click',function(e){
+    if(window.matchMedia('(max-width:480px)').matches&&!e.target.closest('.mc-has-dropdown')){
+      dropdownParent.classList.remove('mc-dropdown-open');
+    }
+  });
+}
+</script>
 </body>
 </html>
