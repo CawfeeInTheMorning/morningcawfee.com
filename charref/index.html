@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Character Ref — MorningCawfee</title>
+  <title>Coco Reference</title>
   <link rel="icon" href="../assets/icons/icon-red.png" type="image/png">
   <style>
 @font-face{font-family:"BricolageGrotesque";src:url("../fonts/BricolageGrotesque.ttf") format("truetype");font-display:swap;font-style:normal;font-weight:100 900;}
@@ -56,7 +56,7 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 .cr-palette-inner{display:flex;align-items:flex-start;gap:32px;}
 .cr-ref-images{display:flex;gap:12px;align-items:flex-start;flex-shrink:0;}
 .cr-palette-group-title{font-family:'BricolageGrotesque',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:40px;}
-.cr-ref-images img{width:240px;height:auto;display:block;border-radius:8px;}
+.cr-ref-images img{width:280px;height:auto;display:block;border-radius:8px;}
 .cr-swatches{display:flex;flex-direction:column;gap:10px;flex:1;}
 .cr-swatch{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:47px;border-radius:8px;cursor:pointer;flex-shrink:0;position:relative;transition:height 0.2s ease;}
 .cr-swatch:hover{height:58px;}
@@ -67,11 +67,25 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 .cr-swatch:hover .cr-swatch-copy{opacity:1;width:28px;height:28px;}
 .cr-swatch-copy-label{font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:600;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width 0.5s ease,opacity 0.5s ease;}
 .cr-swatch:hover .cr-swatch-copy-label{max-width:60px;opacity:1;}
+/* Refs */
+#mc-refs{width:100%;margin:40px 0 60px;}
+#mc-refs-inner{width:min(1200px,calc(100% - 160px));margin:0 auto;}
+#cr-ref-filters{display:flex;gap:10px;margin-bottom:24px;}
+.cr-ref-btn{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;padding:8px 20px;border-radius:8px;border:none;cursor:pointer;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);transition:background 0.2s,color 0.2s;}
+.cr-ref-btn:hover{background:rgba(255,255,255,0.14);color:#fff;}
+.cr-ref-btn.active{background:#679CBC;color:#fff;}
+#cr-ref-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.cr-ref-item{overflow:hidden;border-radius:10px;cursor:pointer;aspect-ratio:1;}
+.cr-ref-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;}
+.cr-ref-item:hover img{transform:scale(1.1) rotate(-8deg);}
+.cr-ref-item.hidden{display:none;}
 @media(max-width:480px){
   #cr-intro{width:min(1200px,calc(100% - 60px))!important;}
   #mc-palette{width:min(1200px,calc(100% - 60px))!important;}
+  #mc-refs-inner{width:min(1200px,calc(100% - 60px))!important;}
   .cr-palette-inner{flex-direction:column!important;}
   .cr-ref-images img{height:110px!important;}
+  #cr-ref-grid{grid-template-columns:repeat(2,1fr)!important;}
 }
 /* Footer */
 #mc-cinnabuns{position:absolute;left:var(--cin-x,0px);bottom:var(--cin-y,0px);transform:scale(var(--cin-scale,1));transform-origin:bottom right;pointer-events:none;z-index:10;}
@@ -237,6 +251,122 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
   </div>
 </main>
 
+<section id="mc-refs">
+  <div id="mc-refs-inner">
+    <div id="cr-ref-filters">
+      <button class="cr-ref-btn active" data-filter="all">All</button>
+      <button class="cr-ref-btn" data-filter="pfp">PFPs</button>
+      <button class="cr-ref-btn" data-filter="fullbody">Fullbody</button>
+      <button class="cr-ref-btn" data-filter="sketch">Sketches</button>
+    </div>
+    <div id="cr-ref-grid">
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-1.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-2.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-3.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-4.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-5.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-6.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-7.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-8.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-9.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-10.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-11.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-12.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-13.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-14.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-15.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-16.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-17.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-18.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-19.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-20.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-23.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-24.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-25.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-26.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-27.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-28.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-29.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-30.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-31.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-32.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-34.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-35.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-36.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-37.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-38.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-39.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-40.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-41.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-42.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-43.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-44.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-45.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-46.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-47.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-48.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-49.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-50.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-51.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-52.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-53.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-54.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-55.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-56.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-57.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-58.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-59.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-60.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-61.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-62.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-63.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-64.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-65.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-66.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-67.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-68.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-69.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-70.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-71.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-72.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-73.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-74.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-75.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-76.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-77.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-78.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-79.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-80.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-81.png" alt=""></div>
+      <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-82.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-1.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-2.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-3.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-4.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-5.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-6.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-7.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-8.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-9.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-10.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-11.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-12.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-13.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-14.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-15.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-16.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-17.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-18.png" alt=""></div>
+      <div class="cr-ref-item" data-category="pfp"><img src="images/pfp/pfp-19.png" alt=""></div>
+      <div class="cr-ref-item" data-category="sketch"><img src="images/sketch/sketch-1.png" alt=""></div>
+      <div class="cr-ref-item" data-category="sketch"><img src="images/sketch/sketch-2.png" alt=""></div>
+      <div class="cr-ref-item" data-category="sketch"><img src="images/sketch/sketch-3.png" alt=""></div>
+      <div class="cr-ref-item" data-category="sketch"><img src="images/sketch/sketch-4.png" alt=""></div>
+      <div class="cr-ref-item" data-category="sketch"><img src="images/sketch/sketch-5.png" alt=""></div>
+    </div>
+  </div>
+</section>
+
 <footer id="footer">
   <div id="mc-footer-inner" style="position:relative;overflow:visible;">
     <div id="mc-cinnabuns" style="--cin-x:91px;--cin-y:59px;--cin-scale:1.4;"><img src="../assets/accents/cinnabuns.png" alt="Cinnabuns" id="mc-cinnabuns-img"></div>
@@ -305,6 +435,32 @@ if(dropdownParent){
     requestAnimationFrame(tick);
   }
   tick();
+})();
+// Ref grid filters and expand
+(function(){
+  var btns=document.querySelectorAll('.cr-ref-btn');
+  var items=document.querySelectorAll('.cr-ref-item');
+  btns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      btns.forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var filter=btn.dataset.filter;
+      items.forEach(function(item){
+        if(filter==='all'||item.dataset.category===filter){
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+          item.classList.remove('expanded');
+        }
+      });
+    });
+  });
+  items.forEach(function(item){
+    item.addEventListener('click',function(){
+      var src=item.querySelector('img').src;
+      window.open(src,'_blank');
+    });
+  });
 })();
 // Copy swatches
 (function(){
