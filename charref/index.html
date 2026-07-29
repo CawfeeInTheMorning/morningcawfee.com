@@ -44,6 +44,8 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 #cr-intro-grid{position:absolute;inset:-100%;overflow:hidden;pointer-events:none;z-index:0;}
 #cr-intro-grid::before{content:'';position:absolute;inset:-60%;background-image:linear-gradient(rgb(203 203 203) 1px,transparent 1px),linear-gradient(90deg,rgb(203 203 203) 1px,#00000000 1px);background-size:40px 40px;transform:rotate(20deg);animation:mc-grid-scroll 6s linear infinite;}
 #cr-portrait{width:50%;height:100%;border-radius:10px;overflow:hidden;flex-shrink:0;position:relative;z-index:1;}
+#cr-see-refs{position:absolute;bottom:0px;left:0px;background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;transition:background 0.2s;}
+#cr-see-refs:hover{background:#222;}
 #cr-portrait img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform;transition:transform 0.1s ease-out;}
 #cr-title{width:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;position:relative;z-index:1;padding:0 24px;}
 #cr-title h1{font-family:'BricolageGrotesque',sans-serif;font-size:40px;font-weight:800;color:#0c5685;}
@@ -53,31 +55,48 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 .cr-stat-desc{color:#0c5685;font-family:'BricolageGrotesque',sans-serif;font-size:18px;font-weight:700;}
 /* Palette */
 #mc-palette{width:min(1200px,calc(100% - 160px));margin:40px auto;}
-.cr-palette-inner{display:flex;align-items:flex-start;gap:32px;}
-.cr-ref-images{display:flex;gap:12px;align-items:flex-start;flex-shrink:0;}
+.cr-palette-inner{display:flex;align-items:flex-start;gap:10px;}
+.cr-ref-images{display:flex;gap:10px;align-items:flex-start;flex-shrink:0;}
 .cr-palette-group-title{font-family:'BricolageGrotesque',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:40px;}
-.cr-ref-images img{width:280px;height:auto;display:block;border-radius:8px;}
-.cr-swatches{display:flex;flex-direction:column;gap:10px;flex:1;}
-.cr-swatch{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:47px;border-radius:8px;cursor:pointer;flex-shrink:0;position:relative;transition:height 0.2s ease;}
-.cr-swatch:hover{height:58px;}
-.cr-swatch-hex{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.05em;}
-.cr-swatch-title{position:absolute;left:50%;transform:translateX(-50%);font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:600;white-space:nowrap;pointer-events:none;}
-.cr-swatch-copy-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0;}
-.cr-swatch-copy{width:22px;height:22px;display:block;opacity:0.7;transition:opacity 0.2s,width 0.2s ease,height 0.2s ease;flex-shrink:0;}
-.cr-swatch:hover .cr-swatch-copy{opacity:1;width:28px;height:28px;}
-.cr-swatch-copy-label{font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:600;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width 0.5s ease,opacity 0.5s ease;}
+.cr-ref-images img{width:180px;height:auto;display:block;border-radius:8px;transition:transform 0.5s ease;}
+.cr-ref-images img:hover{transform:scale(1.05) rotate(-8deg);}
+.cr-swatches{display:flex;flex-direction:row;gap:10px;flex:1;}
+.cr-swatch{display:flex;flex-direction:column;justify-content:space-between;padding:10px 12px;flex-grow:1;flex-basis:0;min-width:0;height:180px;border-radius:18px;cursor:pointer;transition:flex-grow 0.3s ease;}
+.cr-swatch:hover{flex-grow:1.6;}
+.cr-swatch-top{display:flex;align-items:center;justify-content:space-between;gap:4px;}
+.cr-swatch-hex{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.05em;white-space:nowrap;}
+.cr-swatch-title{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cr-swatch-copy-wrap{display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.cr-swatch-copy{width:16px;height:16px;display:block;opacity:0.7;transition:opacity 0.2s;flex-shrink:0;}
+.cr-swatch:hover .cr-swatch-copy{opacity:1;}
+.cr-swatch-copy-label{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:600;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width 0.5s ease,opacity 0.5s ease;}
 .cr-swatch:hover .cr-swatch-copy-label{max-width:60px;opacity:1;}
+/* Moodboard */
+#mc-moodboard{width:100%;margin:40px 0;overflow:hidden;}
+#mc-moodboard-inner{width:min(1200px,calc(100% - 160px));margin:0 auto;display:flex;justify-content:center;}
+#mc-board-wrap{position:relative;display:inline-block;line-height:0;}
+#mc-board-wrap>img{max-width:100%;height:auto;display:block;}
+#mc-moodboard-title{width:min(1200px,calc(100% - 160px));margin:0 auto 20px;font-family:'BricolageGrotesque',sans-serif;font-size:20px;font-weight:700;color:#fff;}
+#mc-board-grid-overlay{
+  --board-top:33px;--board-left:90px;--board-width:1040px;--board-height:500px;
+  position:absolute;top:var(--board-top);left:var(--board-left);width:var(--board-width);height:var(--board-height);
+  overflow-y:auto;overflow-x:hidden;
+}
+#mc-board-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:6px;}
+#mc-board-grid img{width:100%;height:auto;display:block;border-radius:18px;box-shadow:4px 4px 0 #DB0000;}
 /* Refs */
-#mc-refs{width:100%;margin:40px 0 60px;}
-#mc-refs-inner{width:min(1200px,calc(100% - 160px));margin:0 auto;}
+@keyframes mc-refs-grid-scroll{from{background-position:0 0;}to{background-position:40px 40px;}}
+#mc-refs{width:100%;margin:40px 0 0;padding:40px 0 60px;position:relative;overflow:hidden;background:#0d1b2a;}
+#mc-refs::before{content:'';position:absolute;inset:-100%;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;transform:rotate(20deg);animation:mc-refs-grid-scroll 6s linear infinite;pointer-events:none;z-index:0;}
+#mc-refs-inner{position:relative;z-index:1;width:min(1200px,calc(100% - 160px));margin:0 auto;}
 #cr-ref-filters{display:flex;gap:10px;margin-bottom:24px;}
-.cr-ref-btn{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;padding:8px 20px;border-radius:8px;border:none;cursor:pointer;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);transition:background 0.2s,color 0.2s;}
-.cr-ref-btn:hover{background:rgba(255,255,255,0.14);color:#fff;}
+.cr-ref-btn{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;padding:8px 20px;border-radius:8px;border:none;cursor:pointer;background:#000;color:rgba(255,255,255,0.5);transition:background 0.2s,color 0.2s;}
+.cr-ref-btn:hover{background:#111;color:#fff;}
 .cr-ref-btn.active{background:#679CBC;color:#fff;}
 #cr-ref-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .cr-ref-item{overflow:hidden;border-radius:10px;cursor:pointer;aspect-ratio:1;}
 .cr-ref-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;}
-.cr-ref-item:hover img{transform:scale(1.1) rotate(-8deg);}
+.cr-ref-item:hover img{transform:scale(1.05);}
 .cr-ref-item.hidden{display:none;}
 @media(max-width:480px){
   #cr-intro{width:min(1200px,calc(100% - 60px))!important;}
@@ -144,6 +163,7 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
     <div id="cr-intro-grid-clip"><div id="cr-intro-grid"></div></div>
     <div id="cr-portrait">
       <img src="portrait/portrait-1.png" alt="Coco" id="cr-portrait-img">
+      <button id="cr-see-refs">See References</button>
     </div>
     <div id="cr-title">
       <h1>This is <span style="color:#219eee;">Coco</span>!</h1>
@@ -172,6 +192,10 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
           <span class="cr-stat-badge">Species</span>
           <span class="cr-stat-desc">North American Bluejay</span>
         </div>
+        <div class="cr-stat-row">
+          <span class="cr-stat-badge">Personality</span>
+          <span class="cr-stat-desc">An assured, confident yet bratty blue-jay with a tendency to get much less sleep than needed. Coco is smug and dominant, as he knows his way around a flirt or two, but he is a soft-hearted bird whom is overly protective of his friends and emotionally open.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -185,29 +209,39 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
         </div>
         <div class="cr-swatches">
           <div class="cr-swatch" data-hex="#679CBC" style="background:#679CBC;">
-            <span class="cr-swatch-hex" style="color:#fff;">#679CBC</span>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#fff;">#679CBC</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+            </div>
             <span class="cr-swatch-title" style="color:#fff;">Fur</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
           </div>
           <div class="cr-swatch" data-hex="#FEF2D6" style="background:#FEF2D6;">
-            <span class="cr-swatch-hex" style="color:#123F59;">#FEF2D6</span>
-            <span class="cr-swatch-title" style="color:#123F59;">Cheeks / Chest / Inner Thighs</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#123F59;">#FEF2D6</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+            </div>
+            <span class="cr-swatch-title" style="color:#123F59;">Fluff</span>
           </div>
           <div class="cr-swatch" data-hex="#123F59" style="background:#123F59;">
-            <span class="cr-swatch-hex" style="color:#fff;">#123F59</span>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#fff;">#123F59</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+            </div>
             <span class="cr-swatch-title" style="color:#fff;">Ears / Beak</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
           </div>
           <div class="cr-swatch" data-hex="#C11020" style="background:#C11020;">
-            <span class="cr-swatch-hex" style="color:#fff;">#C11020</span>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#fff;">#C11020</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+            </div>
             <span class="cr-swatch-title" style="color:#fff;">Accents</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
           </div>
           <div class="cr-swatch" data-hex="#FFBC42" style="background:#FFBC42;">
-            <span class="cr-swatch-hex" style="color:#123F59;">#FFBC42</span>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#123F59;">#FFBC42</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+            </div>
             <span class="cr-swatch-title" style="color:#123F59;">Eyes</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
           </div>
         </div>
       </div>
@@ -221,35 +255,89 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
         </div>
         <div class="cr-swatches">
           <div class="cr-swatch" data-hex="#3492DD" style="background:#3492DD;">
-            <span class="cr-swatch-hex" style="color:#fff;">#3492DD</span>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#fff;">#3492DD</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+            </div>
             <span class="cr-swatch-title" style="color:#fff;">Fur</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
           </div>
           <div class="cr-swatch" data-hex="#F9F9D7" style="background:#F9F9D7;">
-            <span class="cr-swatch-hex" style="color:#001D52;">#F9F9D7</span>
-            <span class="cr-swatch-title" style="color:#001D52;">Cheeks / Chest / Inner Thighs</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#001D52;">#F9F9D7</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+            </div>
+            <span class="cr-swatch-title" style="color:#001D52;">Fluff</span>
           </div>
           <div class="cr-swatch" data-hex="#001D52" style="background:#001D52;">
-            <span class="cr-swatch-hex" style="color:#fff;">#001D52</span>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#fff;">#001D52</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+            </div>
             <span class="cr-swatch-title" style="color:#fff;">Ears / Beak</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
           </div>
           <div class="cr-swatch" data-hex="#DB0000" style="background:#DB0000;">
-            <span class="cr-swatch-hex" style="color:#fff;">#DB0000</span>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#fff;">#DB0000</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
+            </div>
             <span class="cr-swatch-title" style="color:#fff;">Accents</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(1);"><span class="cr-swatch-copy-label" style="color:#fff;">Copy</span></div>
           </div>
           <div class="cr-swatch" data-hex="#FFE510" style="background:#FFE510;">
-            <span class="cr-swatch-hex" style="color:#001D52;">#FFE510</span>
+            <div class="cr-swatch-top">
+              <span class="cr-swatch-hex" style="color:#001D52;">#FFE510</span>
+              <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
+            </div>
             <span class="cr-swatch-title" style="color:#001D52;">Eyes</span>
-            <div class="cr-swatch-copy-wrap"><img class="cr-swatch-copy" src="../assets/symbols/copy-dotted.svg" alt="Copy" style="filter:brightness(0) invert(0);"><span class="cr-swatch-copy-label" style="color:#000;">Copy</span></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </main>
+
+<section id="mc-moodboard">
+  <div id="mc-moodboard-title">Moodboard</div>
+  <div id="mc-moodboard-inner">
+    <div id="mc-board-wrap">
+      <img src="images/mc-whiteboard.png" alt="Moodboard">
+      <div id="mc-board-grid-overlay">
+        <div id="mc-board-grid">
+          <img src="images/moodboard/moodboard%20-%201.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%202.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%203.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%204.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%205.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%206.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%207.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%208.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%209.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2010.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2011.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2012.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2013.png" alt="">
+          <img src="images/moodboard/moodboard%20-%2014.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2015.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2016.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2017.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2018.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2019.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2020.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2021.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2022.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2023.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2024.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2025.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2026.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2027.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2028.webp" alt="">
+          <img src="images/moodboard/moodboard%20-%2029.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2030.jpg" alt="">
+          <img src="images/moodboard/moodboard%20-%2031.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="mc-refs">
   <div id="mc-refs-inner">
@@ -436,6 +524,41 @@ if(dropdownParent){
   }
   tick();
 })();
+// Moodboard scroll-driven slide
+(function(){
+  var speed=0.025; // lerp factor: lower = slower/smoother
+  var section=document.getElementById('mc-moodboard');
+  var inner=document.getElementById('mc-moodboard-inner');
+  function sectionTop(){
+    var el=section,top=0;
+    while(el){top+=el.offsetTop;el=el.offsetParent;}
+    return top;
+  }
+  function target(){
+    var vh=window.innerHeight;
+    var st=sectionTop();
+    var slideStart=st-vh;
+    var slideEnd=st-vh*0.35;
+    var p=Math.max(0,Math.min(1,(window.scrollY-slideStart)/(slideEnd-slideStart)));
+    return (-window.innerWidth*1.1)*(1-p);
+  }
+  var cur=target();
+  function tick(){
+    cur+=(target()-cur)*speed;
+    inner.style.transform='translateX('+cur.toFixed(1)+'px)';
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+// Moodboard grid image open
+document.querySelectorAll('#mc-board-grid img').forEach(function(img){
+  img.style.cursor='pointer';
+  img.addEventListener('click',function(){window.open(img.src,'_blank');});
+});
+// See References button
+document.getElementById('cr-see-refs').addEventListener('click',function(){
+  document.getElementById('mc-refs').scrollIntoView({behavior:'smooth'});
+});
 // Ref grid filters and expand
 (function(){
   var btns=document.querySelectorAll('.cr-ref-btn');
@@ -478,6 +601,37 @@ if(dropdownParent){
       });
     });
   });
+})();
+</script>
+<style>
+#cr-gate-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99999;display:none;align-items:center;justify-content:center;}
+#cr-gate-overlay.active{display:flex;}
+#cr-gate-popup{background:#111;border-radius:14px;padding:36px 40px;max-width:420px;width:calc(100% - 40px);text-align:center;font-family:'BricolageGrotesque',sans-serif;}
+#cr-gate-popup p{font-size:22px;font-weight:700;color:#fff;margin-bottom:28px;line-height:1.3;}
+#cr-gate-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+#cr-gate-yes{background:#679CBC;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-family:'BricolageGrotesque',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background 0.2s;}
+#cr-gate-yes:hover{background:#5288aa;}
+#cr-gate-no{background:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:10px 24px;font-family:'BricolageGrotesque',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:color 0.2s,border-color 0.2s;}
+#cr-gate-no:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+</style>
+<div id="cr-gate-overlay">
+  <div id="cr-gate-popup">
+    <p>Are you a furry, or an artist?</p>
+    <div id="cr-gate-btns">
+      <button id="cr-gate-yes">Yep :3</button>
+      <button id="cr-gate-no">No, send me back</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var overlay=document.getElementById('cr-gate-overlay');
+  document.querySelectorAll('a[href="/charref/"]').forEach(function(a){
+    a.addEventListener('click',function(e){e.preventDefault();overlay.classList.add('active');});
+  });
+  document.getElementById('cr-gate-yes').addEventListener('click',function(){window.location.href='/charref/';});
+  document.getElementById('cr-gate-no').addEventListener('click',function(){overlay.classList.remove('active');});
+  overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.classList.remove('active');});
 })();
 </script>
 </body>
