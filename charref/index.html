@@ -78,21 +78,27 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 #mc-board-wrap>img{max-width:100%;height:auto;display:block;}
 #mc-moodboard-title{width:min(1200px,calc(100% - 160px));margin:0 auto 20px;font-family:'BricolageGrotesque',sans-serif;font-size:20px;font-weight:700;color:#fff;}
 #mc-board-grid-overlay{
-  --board-top:33px;--board-left:90px;--board-width:1040px;--board-height:500px;
+  --board-top:5%;--board-left:7.8%;--board-width:86%;--board-height:61.7%;
   position:absolute;top:var(--board-top);left:var(--board-left);width:var(--board-width);height:var(--board-height);
   overflow-y:auto;overflow-x:hidden;
 }
 #mc-board-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:6px;}
-#mc-board-grid img{width:100%;height:auto;display:block;border-radius:18px;box-shadow:4px 4px 0 #DB0000;}
+#mc-board-grid img{width:100%;height:auto;display:block;border-radius:18px;box-shadow:4px 4px 0 #DB0000;transition:zoom 0.3s ease;cursor:pointer;}
+#mc-board-grid img:hover{zoom:1.08;}
 /* Refs */
 @keyframes mc-refs-grid-scroll{from{background-position:0 0;}to{background-position:40px 40px;}}
 #mc-refs{width:100%;margin:40px 0 0;padding:40px 0 60px;position:relative;overflow:hidden;background:#0d1b2a;}
 #mc-refs::before{content:'';position:absolute;inset:-100%;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;transform:rotate(20deg);animation:mc-refs-grid-scroll 6s linear infinite;pointer-events:none;z-index:0;}
 #mc-refs-inner{position:relative;z-index:1;width:min(1200px,calc(100% - 160px));margin:0 auto;}
-#cr-ref-filters{display:flex;gap:10px;margin-bottom:24px;}
+#cr-ref-filters{display:flex;gap:10px;margin-bottom:24px;align-items:center;}
 .cr-ref-btn{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;padding:8px 20px;border-radius:8px;border:none;cursor:pointer;background:#000;color:rgba(255,255,255,0.5);transition:background 0.2s,color 0.2s;}
 .cr-ref-btn:hover{background:#111;color:#fff;}
 .cr-ref-btn.active{background:#679CBC;color:#fff;}
+#cr-toyhouse-btn{display:flex;align-items:center;height:36px;border-radius:18px;background:#535cae;padding:0 12px;gap:8px;text-decoration:none;margin-left:auto;transition:padding 0.3s ease;flex-shrink:0;}
+#cr-toyhouse-btn:hover{padding:0 28px;}
+#cr-toyhouse-btn span{font-family:'BricolageGrotesque',sans-serif;font-size:14px;font-weight:700;color:#fff;white-space:nowrap;}
+#cr-toyhouse-btn img{width:18px;height:18px;display:block;filter:invert(1);flex-shrink:0;transition:width 0.3s ease,height 0.3s ease;}
+#cr-toyhouse-btn:hover img{width:22px;height:22px;}
 #cr-ref-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .cr-ref-item{overflow:hidden;border-radius:10px;cursor:pointer;aspect-ratio:1;}
 .cr-ref-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;}
@@ -101,9 +107,13 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 @media(max-width:480px){
   #cr-intro{width:min(1200px,calc(100% - 60px))!important;}
   #mc-palette{width:min(1200px,calc(100% - 60px))!important;}
+  #mc-moodboard-title{width:min(1200px,calc(100% - 60px))!important;}
+  #mc-moodboard-inner{width:min(1200px,calc(100% - 60px))!important;}
   #mc-refs-inner{width:min(1200px,calc(100% - 60px))!important;}
   .cr-palette-inner{flex-direction:column!important;}
-  .cr-ref-images img{height:110px!important;}
+  .cr-ref-images{width:100%!important;flex-shrink:1!important;}
+  .cr-ref-images img{width:calc(50% - 5px)!important;height:auto!important;}
+  #cr-ref-filters{flex-wrap:wrap!important;}
   #cr-ref-grid{grid-template-columns:repeat(2,1fr)!important;}
 }
 /* Footer */
@@ -346,6 +356,7 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
       <button class="cr-ref-btn" data-filter="pfp">PFPs</button>
       <button class="cr-ref-btn" data-filter="fullbody">Fullbody</button>
       <button class="cr-ref-btn" data-filter="sketch">Sketches</button>
+      <a id="cr-toyhouse-btn" href="https://toyhou.se/10140919.coco/gallery" target="_blank" rel="noopener"><span>toyhou.se</span><img src="../assets/symbols/toyhouse.svg" alt="Toyhouse"></a>
     </div>
     <div id="cr-ref-grid">
       <div class="cr-ref-item" data-category="fullbody"><img src="images/fullbody/fb-1.png" alt=""></div>
