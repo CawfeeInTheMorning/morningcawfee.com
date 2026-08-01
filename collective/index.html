@@ -10,7 +10,11 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif;min-height:100%;scroll-behavior:smooth;overflow-x:hidden;overflow-anchor:none;}
 /* Nav */
-#mc-nav{position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:flex-start;height:60px;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'BricolageGrotesque',sans-serif;}
+@keyframes mc-dot-drift{from{background-position:0 0;}to{background-position:10px 10px;}}
+#mc-margin-left,#mc-margin-right{position:fixed;top:0;bottom:0;width:60px;background-color:#C3BEC4;background-image:radial-gradient(circle,#a3a1a3 1.5px,transparent 1.5px);background-size:10px 10px;animation:mc-dot-drift 3s linear infinite;z-index:99998;pointer-events:none;}
+#mc-margin-left{left:0;box-shadow:inset -8px 0 12px -4px rgba(0,0,0,0.3);}
+#mc-margin-right{right:0;box-shadow:inset 8px 0 12px -4px rgba(0,0,0,0.3);}
+#mc-nav{position:fixed;top:0;left:0;width:100%;z-index:100000;background:rgba(0,0,0,0.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:flex-start;height:60px;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'BricolageGrotesque',sans-serif;}
 #mc-header-contents{display:flex;align-items:center;justify-content:space-between;width:min(1200px,calc(100% - 140px));margin:0 auto;}
 #mc-nav .mc-logo img{height:50px;width:auto;display:block;transition:transform 0.3s ease;}
 .mc-logo:hover img{transform:scale(1.08) rotate(-5deg);}
@@ -58,6 +62,8 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 .mc-footer-center a:hover{color:#fff;}
 .mc-footer-right{font-size:13px;color:rgba(255,255,255,0.4);white-space:nowrap;}
 @media(max-width:480px){
+  #mc-margin-left,#mc-margin-right{display:none!important;}
+  li:has(a[href="/#mc-about"]),li:has(a[href="/#mc-clients"]){display:none!important;}
   #mc-header-contents{width:calc(100% - 60px)!important;}
   #mc-sublinks{gap:1rem!important;}
   #mc-sublinks li a{font-size:11px!important;}
@@ -68,6 +74,8 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
   </style>
 </head>
 <body>
+<div id="mc-margin-left"></div>
+<div id="mc-margin-right"></div>
 <nav id="mc-nav">
   <div id="mc-header-contents">
     <a class="mc-logo" href="/"><img src="../assets/icons/icon-red.png" alt="MorningCawfee"></a>
