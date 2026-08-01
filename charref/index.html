@@ -54,7 +54,10 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
 .cr-stat-badge{background:#679CBC;color:#d7d7d7;font-family:'BricolageGrotesque',sans-serif;font-size:18px;font-weight:700;justify-self:end;padding:5px 12px;border-radius:6px;white-space:nowrap;text-align:center;}
 .cr-stat-desc{color:#0c5685;font-family:'BricolageGrotesque',sans-serif;font-size:18px;font-weight:700;}
 /* Palette */
-#mc-palette{width:min(1200px,calc(100% - 160px));margin:40px auto;}
+#mc-palette-bg{width:100%;background:#0b1018;position:relative;overflow:hidden;padding:40px 0;}
+#mc-palette-bg-grid{position:absolute;inset:-100%;pointer-events:none;z-index:0;}
+#mc-palette-bg-grid::before{content:'';position:absolute;inset:-60%;background-image:linear-gradient(rgb(255 255 255 / 3%) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255 / 3%) 1px,transparent 1px);background-size:40px 40px;transform:rotate(20deg);animation:mc-grid-scroll 6s linear infinite;}
+#mc-palette{width:min(1200px,calc(100% - 160px));margin:0 auto;position:relative;z-index:1;}
 .cr-palette-inner{display:flex;align-items:flex-start;gap:10px;}
 .cr-ref-images{display:flex;gap:10px;align-items:flex-start;flex-shrink:0;}
 .cr-palette-group-title{font-family:'BricolageGrotesque',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:40px;}
@@ -209,6 +212,7 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
       </div>
     </div>
   </div>
+  <div id="mc-palette-bg"><div id="mc-palette-bg-grid"></div>
   <div id="mc-palette">
     <div class="cr-palette-group">
       <div class="cr-palette-group-title">Desaturated</div>
@@ -303,6 +307,7 @@ html,body{background:#000;color:#fff;font-family:'BricolageGrotesque',sans-serif
       </div>
     </div>
   </div>
+  </div></div>
 </main>
 
 <section id="mc-moodboard">
