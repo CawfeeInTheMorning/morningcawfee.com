@@ -49,9 +49,16 @@
 #mc-introduction{width:100%;background:#0c24a5;position:relative;padding:80px 0 60px;}
 #mc-header-coco{position:absolute;left:var(--hcoco-x,0px);top:var(--hcoco-y,0px);transform:scale(var(--hcoco-scale,1));transform-origin:bottom left;pointer-events:none;z-index:99999;display:none;}
 #mc-header-coco img{display:block;width:auto;height:auto;filter:drop-shadow(0 20px 0px #000);}
-#mc-intro-grid-clip{position:absolute;inset:0;overflow:clip;pointer-events:none;z-index:0;background-image:url('./assets/backgrounds/texture-halftone.jpg');background-size:auto;background-repeat:repeat;mix-blend-mode:darken;}
+#mc-halftone{position:absolute;inset:0;overflow:clip;pointer-events:none;z-index:0;background-image:url('./assets/backgrounds/texture-halftone.jpg');background-size:auto;background-repeat:repeat;mix-blend-mode:darken;}
 #mc-hero{background-color:#000;width:100%;}
 #mc-intro-bg3{position:relative;width:calc(100% - 140px);max-width:1200px;margin:0 auto;border-radius:12px;overflow:hidden;}
+#mc-recent-work{width:calc(100% - 140px);max-width:1200px;margin:24px auto 0;position:relative;z-index:1;}
+#mc-recent-work-title{font-family:'BricolageGrotesque',sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+#mc-recent-work-cards{display:flex;gap:12px;}
+.mc-recent-card{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;text-decoration:none;flex:1;max-width:290px;background:#000;transition:transform 0.2s ease,filter 0.2s ease;filter:brightness(0.85);}
+.mc-recent-card:hover{transform:translateY(-3px);filter:brightness(1);}
+.mc-recent-card img{width:100%;height:120px;object-fit:cover;display:block;}
+.mc-recent-card span{font-family:'BricolageGrotesque',sans-serif;font-size:13px;font-weight:700;color:#fff;padding:8px 10px;display:block;}
 #mc-intro-bg3>img{width:100%;height:auto;display:block;}
 #mc-hero-logo{position:absolute;top:50%;left:50%;transform:translate(calc(-50% + var(--logo-x,0px)),calc(-50% + var(--logo-y,0px))) rotate(-5deg);z-index:2;pointer-events:none;}
 #mc-hero-logo img{height:200px;width:auto;}
@@ -162,6 +169,7 @@ nav.framer-FygNn{display:none!important}
 @media(max-width:480px){
   #mc-checker{height:20px!important;background:repeating-conic-gradient(#2d2d2d 0% 25%,#000 0% 50%) 0 0 / 40px 20px!important;margin:40px 0!important;}
   #mc-margin-left,#mc-margin-right{display:none!important;}
+  #mc-hero-contact{display:none!important;}
   .hero-card-pile{width:64vw!important;}
   a[data-section="about"],a[data-section="clients"]{display:none!important;}
   a[data-section="about"]+*,a[data-section="clients"]+*{display:none!important;}
@@ -543,7 +551,7 @@ document.addEventListener("DOMContentLoaded",function(){
     }
   });
 
-  document.querySelectorAll(".mc-nav-dropdown a[data-folder]").forEach(function(a){
+  document.querySelectorAll(".mc-nav-dropdown a[data-folder],.mc-recent-card[data-folder]").forEach(function(a){
     a.addEventListener("click",function(e){
       e.preventDefault();
       var folderName=this.dataset.folder;
@@ -576,7 +584,7 @@ document.addEventListener("DOMContentLoaded",function(){
 });
 </script>
 <section id="mc-introduction">
-  <div id="mc-intro-grid-clip"><div id="mc-intro-grid"></div></div>
+  <div id="mc-halftone"></div>
   <div id="mc-intro-bg3">
     <img src="./assets/backgrounds/bg-3.png" alt="">
     <div id="mc-hero-logo"><img src="./assets/icons/icon-logo.gif" alt="MorningCawfee"></div>
@@ -587,6 +595,19 @@ document.addEventListener("DOMContentLoaded",function(){
       <a class="mc-contact-btn" href="https://www.behance.net/morningcawfee" target="_blank" rel="noopener" style="background:#081155"><span class="mc-contact-name">Behance</span><img src="./assets/symbols/behance.svg" alt="Behance"></a>
       <a class="mc-contact-btn" href="https://vgen.co/morningcawfee" target="_blank" rel="noopener" style="background:#ff8d00"><span class="mc-contact-name">VGen</span><img src="./assets/symbols/vgen.svg" alt="VGen"></a>
       <a class="mc-contact-btn" href="https://bsky.app/profile/bluskys.bsky.social" target="_blank" rel="noopener" style="background:#206cdc"><span class="mc-contact-name">Bluesky</span><img src="./assets/symbols/bluesky.svg" alt="Bluesky"></a>
+    </div>
+  </div>
+  <div id="mc-recent-work">
+    <div id="mc-recent-work-title">Recent Work</div>
+    <div id="mc-recent-work-cards">
+      <a class="mc-recent-card" href="./curiosity/">
+        <img src="./assets/preview/thumbnail-curiosity.png" alt="Curiosity Shop">
+        <span>Curiosity Shop</span>
+      </a>
+      <a class="mc-recent-card" href="#mc-work" data-folder="posters">
+        <img src="./assets/posters/cotton-poster.png" alt="Posters">
+        <span>Posters</span>
+      </a>
     </div>
   </div>
   <div id="mc-header-coco" style="--hcoco-x:11px;--hcoco-y:-2593px;--hcoco-scale:0.15;"><img src="./assets/accents/mc-header-coco.png" alt=""></div>
